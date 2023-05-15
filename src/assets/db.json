@@ -5,12 +5,20 @@
       "firstName": "Michael",
       "lastName": "Loomis",
       "id": 1,
-      "favoriteTracks": [],
+      "favoriteTracks": [
+        "3yelVZf4p9wDpWjPav5mOn",
+        "2NyWdxhlqyrt91PE6Yzf9u",
+        "2nugajeEf9KNKXrpnzamLl"
+      ],
       "favoriteArtists": [],
       "following": [],
       "followedBy": [],
       "avatar": "../src/assets/avatar1.jpg",
-      "favoriteAlbums": ["0lZQagJ5r0crB35zphSD4A"],
+      "favoriteAlbums": [
+        "0XcHdI2ZyNADjfvo5Ubs39",
+        "4JbJCZWuB0iuCZZt8ZISih",
+        "4LPQ70q8ZU6RxDauc4ZPzC"
+      ],
       "friends": []
     },
     {
@@ -81,12 +89,22 @@
     "username": "",
     "firstName": "",
     "lastName": "",
-    "favoriteTracks": [],
-    "favoriteArtists": [],
+    "favoriteTracks": [
+      "3yelVZf4p9wDpWjPav5mOn",
+      "2NyWdxhlqyrt91PE6Yzf9u",
+      "2nugajeEf9KNKXrpnzamLl"
+    ],
+    "favoriteArtists": [
+      "0RqtSIYZmd4fiBKVFqyIqD"
+    ],
     "following": [],
     "followedBy": [],
     "avatar": "../src/assets/avatar4.jpg",
-    "favoriteAlbums": [],
+    "favoriteAlbums": [
+      "0XcHdI2ZyNADjfvo5Ubs39",
+      "4JbJCZWuB0iuCZZt8ZISih",
+      "4LPQ70q8ZU6RxDauc4ZPzC"
+    ],
     "loggedIn": false,
     "id": 9999
   }

@@ -12,6 +12,7 @@ export const reducer = (state, action) => {
       return {...state, profiles: action.payload};
     case "GETCURRENT":
       console.log("GETCURRENT");
+
       return {...state, currentProfile: action.payload};
     // POST
     case "CREATE":
@@ -25,7 +26,7 @@ export const reducer = (state, action) => {
       console.log("SETCURRENTPROFILE");
       return {
         ...state,
-        currentProfile: [action.payload],
+        currentProfile: action.payload,
       };
     // PATCH
     case "UPDATE":

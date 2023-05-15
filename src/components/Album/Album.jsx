@@ -1,19 +1,30 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import {Link, useLoaderData} from "react-router-dom";
 import Tracks from "../Track/Tracks";
 import {getOne} from "../spotify";
 
 import {Users as Followers} from "@styled-icons/fa-solid/Users";
 import {Spotify} from "@styled-icons/fa-brands/Spotify";
+import {ProfileContext} from "../../context/profileContext";
+import {getCurrentProfile} from "../Rover";
 export async function loader({params}) {
   const albumInfo = await getOne("albums", params.id, "?market=US");
-  return {albumInfo};
+  const current = await getCurrentProfile();
+  return {albumInfo, current};
 }
+
 function Album() {
-  const {albumInfo} = useLoaderData();
+  const {state, dispatch} = useContext(ProfileContext);
+  const {albumInfo, current} = useLoaderData();
   let {description, images, name, tracks, external_urls} = albumInfo;
+  let {favoriteTracks, favoriteAlbums, favoriteArtists} = current;
+
   const trackListing = tracks.items.map(track => (
-    <Tracks key={track.id} track={track} />
+    <Tracks
+      key={track.id}
+      track={track}
+      favoriteTracks={favoriteTracks}
+    />
   ));
   return (
     <article className="container mx-auto max-w-3xl">
