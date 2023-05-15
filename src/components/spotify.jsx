@@ -12,6 +12,7 @@ const endpoints = {
   analysis: "/audio-analysis",
   features: "/audio-features",
   recommend: "/recommendations",
+  albums:"/albums"
 };
 
 export function getAll(endpoint) {

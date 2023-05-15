@@ -23,6 +23,8 @@ import Categories, {
 import Playlists from "./components/Playlist/Playlists";
 import Playlist, {loader as tracksLoader} from "./components/Playlist/Playlist";
 import Track, {loader as trackLoader} from "./components/Track/Track";
+import Artist, {loader as artistLoader} from "./components/Artist/Artist";
+import Album, {loader as albumLoader} from "./components/Album/Album";
 // create the router
 
 const router = createBrowserRouter([
