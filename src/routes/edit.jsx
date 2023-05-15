@@ -5,8 +5,8 @@ export async function action({request, params}) {
   const formData = await request.formData();
   const updates = Object.fromEntries(formData);
   await updateProfile(params.id, updates);
-  // return redirect(`/profile/${params.id}`);
-  return redirect(`/home`);
+  return redirect(`/profile/${params.id}`);
+  // return redirect(`/home`);
 }
 
 export default function EditProfile({currentProfile}) {

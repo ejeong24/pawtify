@@ -8,6 +8,7 @@ export async function loader({params}) {
 }
 function Profile() {
   const {profile} = useLoaderData();
+  let {favoriteAlbums, favoriteArtists, favoriteTracks} = profile;
 
   return (
     <div className="flex flex-col justify-center items-center mt-10">
