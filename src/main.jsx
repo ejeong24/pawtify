@@ -20,10 +20,9 @@ import {
 import Categories, {
   loader as categoryLoader,
 } from "./components/Category/Categories";
-import Playlists, {
-  loader as tracksLoader,
-} from "./components/Playlist/Playlists";
-import Playlist, {loader as trackLoader} from "./components/Playlist/Playlist";
+import Playlists from "./components/Playlist/Playlists";
+import Playlist, {loader as tracksLoader} from "./components/Playlist/Playlist";
+import Track, {loader as trackLoader} from "./components/Track/Track";
 // create the router
 
 const router = createBrowserRouter([
@@ -72,8 +71,8 @@ const router = createBrowserRouter([
           },
           {
             path: "artists/:id",
-            element: <Artists />,
-            loader: artistsLoader,
+            element: <Artist />,
+            loader: artistLoader,
             errorElement: <div>Oops! There must be an error somewhere.</div>,
           },
           {
@@ -89,7 +88,17 @@ const router = createBrowserRouter([
           {
             path: "playlists/:id",
             element: <Playlist />,
+            loader: tracksLoader,
+          },
+          {
+            path: "tracks/:id",
+            element: <Track />,
             loader: trackLoader,
+          },
+          {
+            path: "albums/:id",
+            element: <Album />,
+            loader: albumLoader,
           },
         ],
       },

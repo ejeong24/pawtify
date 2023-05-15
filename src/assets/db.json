@@ -10,9 +10,8 @@
       "following": [],
       "followedBy": [],
       "avatar": "../src/assets/avatar1.jpg",
-      "favoriteAlbums": [
-        "0lZQagJ5r0crB35zphSD4A"
-      ]
+      "favoriteAlbums": ["0lZQagJ5r0crB35zphSD4A"],
+      "friends": []
     },
     {
       "username": "ScoobyDoo",
@@ -24,7 +23,8 @@
       "favoriteArtists": [],
       "following": [],
       "followedBy": [],
-      "avatar": "../src/assets/avatar2.jpg"
+      "avatar": "../src/assets/avatar2.jpg",
+      "friends": []
     },
     {
       "username": "Snoopy",
@@ -36,7 +36,8 @@
       "favoriteArtists": [],
       "following": [],
       "followedBy": [],
-      "avatar": "../src/assets/avatar3.jpg"
+      "avatar": "../src/assets/avatar3.jpg",
+      "friends": []
     },
     {
       "username": "Astro",
@@ -48,7 +49,8 @@
       "favoriteArtists": [],
       "following": [],
       "followedBy": [],
-      "avatar": "../src/assets/avatar4.jpg"
+      "avatar": "../src/assets/avatar4.jpg",
+      "friends": []
     },
     {
       "username": "Pluto",
@@ -60,7 +62,8 @@
       "favoriteArtists": [],
       "following": [],
       "followedBy": [],
-      "avatar": "../src/assets/avatar5.jpg"
+      "avatar": "../src/assets/avatar5.jpg",
+      "friends": []
     },
     {
       "username": "browniecake",
@@ -70,7 +73,8 @@
       "favoriteTracks": [],
       "favoriteArtists": [],
       "avatar": "../assets/avatar6.jpg",
-      "id": 6
+      "id": 6,
+      "friends": []
     }
   ],
   "currentProfile": {

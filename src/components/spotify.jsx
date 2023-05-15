@@ -8,6 +8,10 @@ const endpoints = {
   category: "/browse/categories",
   playlists: `/playlists`,
   featured: "/browse/featured-playlists?country=US&locale=en_US",
+  tracks: "/tracks",
+  analysis: "/audio-analysis",
+  features: "/audio-features",
+  recommend: "/recommendations",
 };
 
 export function getAll(endpoint) {
@@ -30,6 +34,22 @@ export function getAll(endpoint) {
 export function getOne(endpoint, id, extension = "") {
   let access_token = localStorage.getItem("access_token");
   return fetch(`${spotifyAPI}${endpoints[endpoint]}/${id}${extension}`, {
+    method: "GET",
+    headers: {Authorization: `Bearer ${access_token}`},
+  })
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw response.statusText;
+      }
+    })
+    .catch(error => console.log(error.message));
+}
+
+export function getRecommendations(endpoint, extension = "") {
+  let access_token = localStorage.getItem("access_token");
+  return fetch(`${spotifyAPI}${endpoints[endpoint]}${extension}`, {
     method: "GET",
     headers: {Authorization: `Bearer ${access_token}`},
   })
