@@ -1,0 +1,89 @@
+{
+  "profiles": [
+    {
+      "username": "lazybluefrog",
+      "firstName": "Michael",
+      "lastName": "Loomis",
+      "id": 1,
+      "favoriteTracks": [],
+      "favoriteArtists": [],
+      "following": [],
+      "followedBy": [],
+      "avatar": "../src/assets/avatar1.jpg",
+      "favoriteAlbums": [
+        "0lZQagJ5r0crB35zphSD4A"
+      ]
+    },
+    {
+      "username": "ScoobyDoo",
+      "firstName": "Ty",
+      "lastName": "Blackwell",
+      "id": 2,
+      "favoriteAlbums": [],
+      "favoriteTracks": [],
+      "favoriteArtists": [],
+      "following": [],
+      "followedBy": [],
+      "avatar": "../src/assets/avatar2.jpg"
+    },
+    {
+      "username": "Snoopy",
+      "firstName": "Cody",
+      "lastName": "Delzer",
+      "id": 3,
+      "favoriteAlbums": [],
+      "favoriteTracks": [],
+      "favoriteArtists": [],
+      "following": [],
+      "followedBy": [],
+      "avatar": "../src/assets/avatar3.jpg"
+    },
+    {
+      "username": "Astro",
+      "firstName": "Eugene",
+      "lastName": "Jeong",
+      "id": 4,
+      "favoriteAlbums": [],
+      "favoriteTracks": [],
+      "favoriteArtists": [],
+      "following": [],
+      "followedBy": [],
+      "avatar": "../src/assets/avatar4.jpg"
+    },
+    {
+      "username": "Pluto",
+      "firstName": "Jimmy",
+      "lastName": "Bond",
+      "id": 5,
+      "favoriteAlbums": [],
+      "favoriteTracks": [],
+      "favoriteArtists": [],
+      "following": [],
+      "followedBy": [],
+      "avatar": "../src/assets/avatar5.jpg"
+    },
+    {
+      "username": "browniecake",
+      "firstName": "James",
+      "lastName": "Brown",
+      "favoriteAlbums": [],
+      "favoriteTracks": [],
+      "favoriteArtists": [],
+      "avatar": "../assets/avatar6.jpg",
+      "id": 6
+    }
+  ],
+  "currentProfile": {
+    "username": "",
+    "firstName": "",
+    "lastName": "",
+    "favoriteTracks": [],
+    "favoriteArtists": [],
+    "following": [],
+    "followedBy": [],
+    "avatar": "../src/assets/avatar4.jpg",
+    "favoriteAlbums": [],
+    "loggedIn": false,
+    "id": 9999
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "endpoints": [
+    {
+      "urlString": "/search?q=kanye%20west",
+      "method": "GET",
+      "name": "Search",
+      "category": "Search",
+      "id": 1
+    },
+    {
+      "urlString": "/recommendations/available-genre-seeds",
+      "method": "GET",
+      "name": "Get Available Genres",
+      "category": "Genres",
+      "id": 2
+    },
+    {
+      "urlString": "/me/player/recently-played",
+      "method": "GET",
+      "name": "Recently Played Tracks",
+      "category": "Player",
+      "id": 3
+    },
+    {
+      "urlString": "/me/top/tracks",
+      "method": "GET",
+      "name": "My most listened",
+      "category": "User",
+      "id": 4
+    }
+  ]
+}

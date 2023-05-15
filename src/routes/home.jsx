@@ -1,0 +1,31 @@
+import React, {useState, useContext} from "react";
+import {useLoaderData} from "react-router-dom";
+import {getAll, getOne} from "../components/spotify";
+// import {getAccessToken, redirectToAuthCodeFlow} from "../components/auth";
+import Card from "../components/Card";
+import {getProfile, getProfiles} from "../components/Rover";
+import {ProfileContext} from "../context/profileContext";
+import Category from "../components/Category/Category";
+export async function loader({params}) {
+  const categories = await getAll("browse");
+
+  return {categories};
+}
+export default function Home({onHandleFavoriteClick}) {
+  const {categories} = useLoaderData();
+  const {state, dispatch} = useContext(ProfileContext);
+  console.log(categories);
+
+  return (
+    <div className="flex flex-col flex-wrap w-full border-opacity-50">
+      <div className="grid card bg-base-300 rounded-box place-items-center">
+        <span id="categoriesText">The newest hits for your party</span>
+        <section id="categories" className="grid grid-cols-4 gap-10">
+          {categories.categories.items.map(category => (
+            <Category key={category.id} category={category} />
+          ))}
+        </section>
+      </div>
+    </div>
+  );
+}

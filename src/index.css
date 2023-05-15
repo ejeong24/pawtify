@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#root {
+  @apply flex flex-col;
+}
+#hero {
+  @apply bg-base-100 flex justify-center items-center;
+}
+
+#hero > img {
+  @apply rounded-md shadow-md shadow-slate-950;
+}
+
+#heroImage {
+  @apply bg-[url('./assets/dog.jpg')] max-h-60;
+}
+
+#callToAction {
+  @apply w-full flex justify-between;
+}
+#newReleaseText {
+  @apply text-5xl m-8 text-center;
+}
+#newReleases {
+  @apply grid grid-cols-3 gap-8 mx-2 my-2;
+}

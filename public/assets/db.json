@@ -1,0 +1,32 @@
+{
+  "profiles": [
+    {
+      "username": "Bolt",
+      "firstName": "Michael",
+      "lastName": "Loomis",
+      "id": 1,
+      "favorites": {"genres": [], "tracks": [], "artists": []},
+      "following": true,
+      "followedBy": [],
+      "avatar": "../src/assets/avatar1.jpg"
+    },
+    {
+      "username": "Snoopy",
+      "name": "Ty",
+      "id": 2,
+      "favorites": {"genres": [], "tracks": [], "artists": []}
+    },
+    {
+      "username": "Astro",
+      "name": "Eugene",
+      "id": 3,
+      "favorites": {"genres": [], "tracks": [], "artists": []}
+    },
+    {
+      "username": "Scooby",
+      "name": "Cody",
+      "id": 4,
+      "favorites": {"genres": [], "tracks": [], "artists": []}
+    }
+  ]
+}
