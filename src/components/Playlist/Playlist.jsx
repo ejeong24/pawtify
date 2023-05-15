@@ -5,12 +5,14 @@ import {getOne} from "../spotify";
 
 import {Users as Followers} from "@styled-icons/fa-solid/Users";
 import {Spotify} from "@styled-icons/fa-brands/Spotify";
+import {getCurrentProfile} from "../Rover";
 export async function loader({params}) {
   const playlistInfo = await getOne("playlists", params.id, "?market=US");
-  return {playlistInfo};
+  const current = await getCurrentProfile();
+  return {playlistInfo, current};
 }
 function Playlist() {
-  const {playlistInfo} = useLoaderData();
+  const {playlistInfo, current} = useLoaderData();
   let {description, images, name, followers, tracks, external_urls} =
     playlistInfo;
   const trackListing = tracks.items.map(track => (
@@ -26,7 +28,17 @@ function Playlist() {
           <h2 className="text-5xl">{name}</h2>
           <p>{description}</p>
           <div>
-            <Followers className="w-4" /> {followers.total.toLocaleString()}
+            <div className="stats shadow">
+              <div className="stat">
+                <div className="stat-figure text-primary">
+                  <Followers className="w-4" />
+                </div>
+                <div className="stat-title">Followers</div>
+                <div className="stat-value text-primary">
+                  {followers.total.toLocaleString()}
+                </div>
+              </div>
+            </div>
             <a href={external_urls.spotify}>
               <Spotify className="w-8 ml-10" /> See on Spotify
             </a>
@@ -35,7 +47,7 @@ function Playlist() {
       </header>
       <article className="mt-6 pt-6 border-t-[1px] border-opacity-30 border-solid border-slate-600">
         <div className="flex w-full">
-          <div className="text-[18px] mr-6" >Like</div>
+          <div className="text-[18px] mr-6">Like</div>
           <div className="ml-6 border-b-[1px] border-solid border-slate-500 border-opacity-40 pb-2 flex w-full">
             <span className="w-1/2 text-[18px]">Track</span>
             <span className="w-1/3 text-[18px]">Artist</span>

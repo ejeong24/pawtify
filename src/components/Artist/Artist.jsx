@@ -108,7 +108,7 @@ function Artist() {
       <article className="mt-6 pt-6 border-t-[1px] border-opacity-30 border-solid border-slate-600">
         <div className="flex justify-center items-center gap-4">
           <h1 className="text-center text-3xl">Album Title</h1>
-          <span>Released on:</span>
+          <span>Released on: </span>
         </div>
         <div className="flex w-full">
           <div className="text-[18px] mr-6">Like</div>

@@ -21,10 +21,11 @@ import Categories, {
   loader as categoryLoader,
 } from "./components/Category/Categories";
 import Playlists from "./components/Playlist/Playlists";
-import Playlist, {loader as tracksLoader} from "./components/Playlist/Playlist";
+import Playlist, {loader as playlistLoader} from "./components/Playlist/Playlist";
 import Track, {loader as trackLoader} from "./components/Track/Track";
 import Artist, {loader as artistLoader} from "./components/Artist/Artist";
 import Album, {loader as albumLoader} from "./components/Album/Album";
+import Tracks, {loader as tracksLoader} from "./components/Track/Tracks";
 // create the router
 
 const router = createBrowserRouter([
@@ -90,7 +91,7 @@ const router = createBrowserRouter([
           {
             path: "playlists/:id",
             element: <Playlist />,
-            loader: tracksLoader,
+            loader: playlistLoader,
           },
           {
             path: "tracks/:id",

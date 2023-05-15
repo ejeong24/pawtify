@@ -12,7 +12,7 @@ const endpoints = {
   analysis: "/audio-analysis",
   features: "/audio-features",
   recommend: "/recommendations",
-  albums:"/albums"
+  albums: "/albums",
 };
 
 export function getAll(endpoint) {
@@ -47,7 +47,22 @@ export function getOne(endpoint, id, extension = "") {
     })
     .catch(error => console.log(error.message));
 }
-
+export function getAllItems(endpoint, extension = "") {
+  // console.log(endpoints[endpoint]);
+  let access_token = localStorage.getItem("access_token");
+  return fetch(`${spotifyAPI}${endpoints[endpoint]}${extension}`, {
+    method: "GET",
+    headers: {Authorization: `Bearer ${access_token}`},
+  })
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw response.statusText;
+      }
+    })
+    .catch(error => console.log(error.message));
+}
 export function getRecommendations(endpoint, extension = "") {
   let access_token = localStorage.getItem("access_token");
   return fetch(`${spotifyAPI}${endpoints[endpoint]}${extension}`, {

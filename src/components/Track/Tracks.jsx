@@ -1,15 +1,29 @@
 import React, {useState, useContext} from "react";
-import {Link} from "react-router-dom";
+import {Link, useLoaderData, useParams} from "react-router-dom";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import PlaylistRemoveIcon from "@mui/icons-material/PlaylistRemove";
 import StarIcon from "@mui/icons-material/Star";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import {ProfileContext} from "../../context/profileContext";
-
+import {getCurrentProfile} from "../Rover";
+export async function loader() {
+  const current = await getCurrentProfile();
+  return {current};
+}
 function Tracks({track, skipArtist, favoriteTracks}) {
+  const current = useLoaderData();
   const {state, dispatch} = useContext(ProfileContext);
+  const lookForFavHere = favoriteTracks
+    ? favoriteTracks
+    : state.currentProfile
+    ? state.currentProfile.favoriteTracks
+    : current
+    ? current.favoriteTracks
+    : false;
+  const idParams = useParams();
+  let idLocation = track ? track.id : idParams.id;
   const [isTrackFavorite, setIsTrackFavorite] = useState(
-    favoriteTracks.includes(track.id),
+    lookForFavHere.includes(idLocation),
   );
 
   //   {
