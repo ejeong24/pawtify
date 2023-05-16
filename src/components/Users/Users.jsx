@@ -34,9 +34,13 @@ export function UserCard({profile, loggedInUser}) {
       <div className="card-body">
         <h2 className="card-title">
           {profile.username}
-          {profile.id===loggedInUser?(<div className="badge badge-secondary">LOGGED IN</div>):(<div></div>)}
+          {profile.id === loggedInUser ? (
+            <div className="badge badge-secondary">LOGGED IN</div>
+          ) : (
+            <div></div>
+          )}
         </h2>
-        <p>If a dog chews shoes whose shoes does he choose?</p>
+        <p>{`${profile.firstName} ${profile.lastName}`}</p>
         <div className="card-actions justify-end">
           <div className="badge badge-outline">Fashion</div>
           <div className="badge badge-outline">Products</div>
