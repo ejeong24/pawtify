@@ -63,6 +63,9 @@ export const reducer = (state, action) => {
     case "USERLOGIN":
       console.log("USERLOGGEDIN");
       return {...state, userLoggedIn: parseInt(action.payload)};
+    case "USERLOGOUT":
+      console.log("USERLOGOUT");
+      return {...state, userLoggedIn: parseInt(action.payload)};
     case "CHANGEPROFILE":
       console.log("profile changing");
 

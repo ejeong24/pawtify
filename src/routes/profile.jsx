@@ -2,7 +2,7 @@ import React from "react";
 import {Form, useLoaderData} from "react-router-dom";
 import {getProfile} from "../components/Rover";
 import {getAllItems, getOne} from "../components/spotify";
-
+import NavButtons from "../components/NavButtons";
 export async function loader({params}) {
   const profile = await getProfile(params.id);
   const albumList =
@@ -53,64 +53,67 @@ function Profile() {
       : "No Track Favorites";
 
   return (
-    <div className="flex flex-col justify-center items-center mt-10">
-      <section className="flex justify-center">
-        <div className="card lg:card-side bg-base-100 shadow-xl">
-          <figure>
-            <img src={profile.avatar} alt="Avatar" />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title">{profile.username}</h2>
-            <p>Hello {`${profile.firstName} ${profile.lastName}`}</p>
-            <div className="card-actions justify-end md:justify-start">
-              <button className="btn btn-primary">Follow</button>
+    <>
+      <NavButtons />
+      <div className="flex flex-col justify-center items-center mt-10">
+        <section className="flex justify-center">
+          <div className="card lg:card-side bg-base-100 shadow-xl">
+            <figure>
+              <img src={profile.avatar} alt="Avatar" />
+            </figure>
+            <div className="card-body">
+              <h2 className="card-title">{profile.username}</h2>
+              <p>Hello {`${profile.firstName} ${profile.lastName}`}</p>
+              <div className="card-actions justify-end md:justify-start">
+                <button className="btn btn-primary">Follow</button>
+              </div>
+            </div>{" "}
+            <div className="flex justify-end gap-4">
+              <Form action="edit">
+                <button type="submit" className="btn btn-secondary">
+                  Edit
+                </button>
+              </Form>
+              <Form
+                method="post"
+                action="destroy"
+                onSubmit={event => {
+                  if (
+                    !confirm("Please confirm you want to delete this record.")
+                  ) {
+                    event.preventDefault();
+                  }
+                }}>
+                <button type="submit" className="btn btn-secondary">
+                  Delete
+                </button>
+              </Form>
             </div>
-          </div>{" "}
-          <div className="flex justify-end gap-4">
-            <Form action="edit">
-              <button type="submit" className="btn btn-secondary">
-                Edit
-              </button>
-            </Form>
-            <Form
-              method="post"
-              action="destroy"
-              onSubmit={event => {
-                if (
-                  !confirm("Please confirm you want to delete this record.")
-                ) {
-                  event.preventDefault();
-                }
-              }}>
-              <button type="submit" className="btn btn-secondary">
-                Delete
-              </button>
-            </Form>
           </div>
-        </div>
-      </section>
-      <section className="grid lg:grid-cols-3 md:grid-cols-1 gap-8 mt-8 px-10 mx-4 w-full">
-        <article>
-          <span className="text-center text-bold text-3xl">Tracks</span>
-          <ul className="max-w-lg divide-y divide-gray-200 dark:divide-gray-700 mt-4">
-            {" "}
-            {displayFavoriteTracks}
-          </ul>
-        </article>
-        <article>
-          <span className="text-center text-bold text-3xl">Artists</span>
-          <ul className="max-w-lg divide-y divide-gray-200 dark:divide-gray-700 mt-4">
-            {displayFavoriteArtists}
-          </ul>
-        </article>
-        <article>
-          <span className="text-center text-bold text-3xl">Albums</span>
-          <ul className="max-w-lg divide-y divide-gray-200 dark:divide-gray-700 mt-4">
-            {displayFavoriteAlbums}
-          </ul>
-        </article>
-      </section>
-    </div>
+        </section>
+        <section className="grid lg:grid-cols-3 md:grid-cols-1 gap-8 mt-8 px-10 mx-4 max-w-full">
+          <article>
+            <span className="text-center text-bold text-3xl">Tracks</span>
+            <ul className="max-w-lg divide-y divide-gray-200 dark:divide-gray-700 mt-4">
+              {" "}
+              {displayFavoriteTracks}
+            </ul>
+          </article>
+          <article>
+            <span className="text-center text-bold text-3xl">Artists</span>
+            <ul className="max-w-lg divide-y divide-gray-200 dark:divide-gray-700 mt-4">
+              {displayFavoriteArtists}
+            </ul>
+          </article>
+          <article>
+            <span className="text-center text-bold text-3xl">Albums</span>
+            <ul className="max-w-lg divide-y divide-gray-200 dark:divide-gray-700 mt-4">
+              {displayFavoriteAlbums}
+            </ul>
+          </article>
+        </section>
+      </div>
+    </>
   );
 }
 

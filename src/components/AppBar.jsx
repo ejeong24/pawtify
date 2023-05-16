@@ -14,7 +14,11 @@ export async function loader() {
 function AppBar({onHandleUserChange}) {
   const {state, dispatch} = useContext(ProfileContext);
   function handleChange(event) {
-    dispatch({type: "CHANGEPROFILE", payload: event.target.value});
+    if (event.target.value === 0) {
+      dispatch({type: "USERLOGOUT", payload: 0});
+    } else {
+      dispatch({type: "USERLOGIN", payload: event.target.value});
+    }
   }
 
   return (
@@ -73,14 +77,22 @@ function AppBar({onHandleUserChange}) {
           </ul>
         </div>
         <div className="navbar-end">
-          <Link to={`../login`}>
-            <button type="button" className="btn">
-              Log In
-            </button>
-          </Link>
+          {state.userLoggedIn !== 0 ? (
+            <Link to={`../login`}>
+              <button type="button" className="btn btn-secondary">
+                Log Out
+              </button>
+            </Link>
+          ) : (
+            <Link to={`../login`}>
+              <button type="button" className="btn">
+                Log In
+              </button>
+            </Link>
+          )}
           <select
             id="currentUser"
-            defaultValue={state.currentProfile.id || 1}
+            defaultValue={state.userLoggedIn || 0}
             onChange={handleChange}>
             <option value="">Choose a user</option>
             {state.profiles.map(profile => (

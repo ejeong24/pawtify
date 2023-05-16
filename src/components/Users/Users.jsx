@@ -1,7 +1,8 @@
 import React, {useContext, useState} from "react";
 import {getProfiles} from "../Rover";
-import {useLoaderData} from "react-router-dom";
+import {useLoaderData, Link} from "react-router-dom";
 import {ProfileContext} from "../../context/profileContext";
+import NavButtons from "../NavButtons";
 export async function loader() {
   const profiles = await getProfiles();
   return {profiles};
@@ -19,21 +20,30 @@ function Users() {
     />
   ));
   return (
-    <div className="grid grid-cols-4 gap-4 mx-auto">{displayProfiles}</div>
+    <>
+      <NavButtons />
+      <div className="grid grid-cols-3 gap-4 mx-auto">{displayProfiles}</div>
+    </>
   );
 }
 
 export default Users;
 
 export function UserCard({profile, loggedInUser}) {
+  const {state, dispatch} = useContext(ProfileContext);
+  function handleClick(event) {
+    profile.id === loggedInUser
+      ? dispatch({type: "USERLOGOUT", payload: 0})
+      : dispatch({type: "USERLOGIN", payload: profile.id});
+  }
   return (
-    <div className="card w-72 bg-base-100 shadow-xl">
+    <div className="card w-96 bg-base-100 shadow-xl">
       <figure>
         <img src={profile.avatar} alt="Shoes" />
       </figure>
       <div className="card-body">
         <h2 className="card-title">
-          {profile.username}
+          <Link to={`../profile/${profile.id}`}>{profile.username}</Link>
           {profile.id === loggedInUser ? (
             <div className="badge badge-secondary">LOGGED IN</div>
           ) : (
@@ -42,8 +52,15 @@ export function UserCard({profile, loggedInUser}) {
         </h2>
         <p>{`${profile.firstName} ${profile.lastName}`}</p>
         <div className="card-actions justify-end">
-          <div className="badge badge-outline">Fashion</div>
-          <div className="badge badge-outline">Products</div>
+          {profile.id === loggedInUser ? (
+            <button className="btn" onClick={handleClick}>
+              Logout
+            </button>
+          ) : (
+            <button className="btn btn-primary" onClick={handleClick}>
+              Login
+            </button>
+          )}
         </div>
       </div>
     </div>
