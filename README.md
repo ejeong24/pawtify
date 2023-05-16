@@ -33,7 +33,7 @@ Playlist-Album-View
 
 1. View available music beginning with a category view
 2. View single category/playlist/track/album/artist
-3. Like a track/artist/genre
+3. Like a track/artist/album
 4. Create a profile
 5. Edit their profile
 6. Save the liked items to their profile
