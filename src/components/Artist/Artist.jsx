@@ -9,7 +9,7 @@ import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import {Spotify} from "@styled-icons/fa-brands/Spotify";
 import {getCurrentProfile} from "../Rover";
 import {ProfileContext} from "../../context/profileContext";
-
+import NavButtons from "../NavButtons";
 export async function loader({params}) {
   const artistInfo = await getOne("artists", params.id, "?market=US");
   const artistAlbums = await getOne("artists", params.id, "/albums?market=US");
@@ -77,38 +77,41 @@ function Artist() {
     setIsFavoriteArtist(prevFavorite => !prevFavorite);
   }
   return (
-    <article className="container mx-auto max-w-3xl">
-      <header className="flex">
-        <figure>
-          <img src={images[0].url} alt="Movie" className="w-48" />
-        </figure>
-        <div className="card-body">
-          <h2 className="text-3xl flex items-center">
-            {name}{" "}
-            {isFavoriteArtist ? (
-              <StarIcon
-                onClick={handleFavoriteButtonClick}
-                sx={{fontSize: 40}}
-              />
-            ) : (
-              <StarOutlineIcon
-                onClick={handleFavoriteButtonClick}
-                sx={{fontSize: 40}}
-              />
-            )}
-          </h2>
-          <p>Popularity: {popularity}</p>
-          <div>
-            <a href={external_urls.spotify}>
-              <Spotify className="w-8" /> See on Spotify
-            </a>
+    <React.Fragment>
+      <NavButtons />
+      <article className="container mx-auto max-w-3xl">
+        <header className="flex">
+          <figure>
+            <img src={images[0].url} alt="Movie" className="w-48" />
+          </figure>
+          <div className="card-body">
+            <h2 className="text-3xl flex items-center">
+              {name}{" "}
+              {isFavoriteArtist ? (
+                <StarIcon
+                  onClick={handleFavoriteButtonClick}
+                  sx={{fontSize: 40}}
+                />
+              ) : (
+                <StarOutlineIcon
+                  onClick={handleFavoriteButtonClick}
+                  sx={{fontSize: 40}}
+                />
+              )}
+            </h2>
+            <p>Popularity: {popularity}</p>
+            <div>
+              <a href={external_urls.spotify}>
+                <Spotify className="w-8" /> See on Spotify
+              </a>
+            </div>
           </div>
-        </div>
-      </header>
-      <article className="mt-6 pt-2 border-solid border-slate-600">
-        {albumsAndTracksList}
+        </header>
+        <article className="mt-6 pt-2 border-solid border-slate-600">
+          {albumsAndTracksList}
+        </article>
       </article>
-    </article>
+    </React.Fragment>
   );
 }
 

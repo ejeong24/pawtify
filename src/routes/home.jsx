@@ -6,6 +6,7 @@ import Card from "../components/Card";
 import {getProfile, getProfiles} from "../components/Rover";
 import {ProfileContext} from "../context/profileContext";
 import Category from "../components/Category/Category";
+import NavButtons from "../components/NavButtons";
 export async function loader({params}) {
   const categories = await getAll("browse");
 
@@ -17,15 +18,20 @@ export default function Home({onHandleFavoriteClick}) {
   console.log(categories);
 
   return (
-    <div className="flex flex-col flex-wrap w-full border-opacity-50">
-      <div className="grid card bg-base-300 rounded-box place-items-center">
-        <span id="categoriesText">The newest hits for your party</span>
-        <section id="categories" className="grid grid-cols-4 gap-10">
-          {categories.categories.items.map(category => (
-            <Category key={category.id} category={category} />
-          ))}
-        </section>
+    <React.Fragment>
+      <NavButtons />
+      <div className="flex flex-col flex-wrap w-full border-opacity-50">
+        <div className="grid card bg-base-300 rounded-box place-items-center">
+          <span id="categoriesText" className="text-4xl">
+            Which category are we starting with?
+          </span>
+          <section id="categories" className="grid grid-cols-4 gap-10">
+            {categories.categories.items.map(category => (
+              <Category key={category.id} category={category} />
+            ))}
+          </section>
+        </div>
       </div>
-    </div>
+    </React.Fragment>
   );
 }

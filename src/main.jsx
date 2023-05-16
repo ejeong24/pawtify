@@ -26,6 +26,7 @@ import Track, {loader as trackLoader} from "./components/Track/Track";
 import Artist, {loader as artistLoader} from "./components/Artist/Artist";
 import Album, {loader as albumLoader} from "./components/Album/Album";
 import Tracks, {loader as tracksLoader} from "./components/Track/Tracks";
+import NewReleases from "./components/NewReleases";
 // create the router
 
 const router = createBrowserRouter([
@@ -47,6 +48,12 @@ const router = createBrowserRouter([
           {
             path: "home",
             element: <Home />,
+            loader: homeLoader,
+            errorElement: <div>Oops! There must be an error somewhere.</div>,
+          },
+          {
+            path: "new",
+            element: <NewReleases />,
             loader: homeLoader,
             errorElement: <div>Oops! There must be an error somewhere.</div>,
           },

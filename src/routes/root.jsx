@@ -19,6 +19,7 @@ import {
 } from "../components/Rover";
 import {getANewToken} from "../components/auth";
 import AppBar from "../components/AppBar";
+import NavButtons from "../components/NavButtons";
 import {ProfileContext} from "../context/profileContext";
 const access_token = localStorage.getItem("access_token");
 let profile = {};

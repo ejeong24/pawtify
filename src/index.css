@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 #root {
-  @apply flex flex-col;
+  @apply flex flex-col bg-base-300;
 }
 #hero {
   @apply bg-base-100 flex justify-center items-center;
@@ -25,4 +25,8 @@
 }
 #newReleases {
   @apply grid grid-cols-3 gap-8 mx-2 my-2;
+}
+
+#categoriesText {
+  @apply text-5xl m-8 mt-2 text-center;
 }
