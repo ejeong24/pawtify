@@ -73,20 +73,22 @@ function AppBar({onHandleUserChange}) {
           </ul>
         </div>
         <div className="navbar-end">
-          <button type="button" className="btn">
-            Log In
-          </button>
+          <Link to={`../login`}>
+            <button type="button" className="btn">
+              Log In
+            </button>
+          </Link>
           <select
-          id="currentUser"
-          defaultValue={state.currentProfile.id || 1}
-          onChange={handleChange}>
-          <option value="">Choose a user</option>
-          {state.profiles.map(profile => (
-            <option key={profile.id} value={profile.id}>
-              {profile.firstName}
-            </option>
-          ))}
-        </select>
+            id="currentUser"
+            defaultValue={state.currentProfile.id || 1}
+            onChange={handleChange}>
+            <option value="">Choose a user</option>
+            {state.profiles.map(profile => (
+              <option key={profile.id} value={profile.id}>
+                {profile.firstName}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
     </>

@@ -60,6 +60,9 @@ export const reducer = (state, action) => {
         ...state,
         currentProfile: currentUser,
       };
+    case "USERLOGIN":
+      console.log("USERLOGGEDIN");
+      return {...state, userLoggedIn: parseInt(action.payload)};
     case "CHANGEPROFILE":
       console.log("profile changing");
 
@@ -106,6 +109,7 @@ export const ProfilesContextProvider = ({children}) => {
       loggedIn: false,
       id: "",
     },
+    userLoggedIn: 0,
   });
 
   if (!initialized) {

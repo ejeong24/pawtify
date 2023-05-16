@@ -21,11 +21,17 @@ import Categories, {
   loader as categoryLoader,
 } from "./components/Category/Categories";
 import Playlists from "./components/Playlist/Playlists";
-import Playlist, {loader as playlistLoader} from "./components/Playlist/Playlist";
+import Playlist, {
+  loader as playlistLoader,
+} from "./components/Playlist/Playlist";
 import Track, {loader as trackLoader} from "./components/Track/Track";
 import Artist, {loader as artistLoader} from "./components/Artist/Artist";
 import Album, {loader as albumLoader} from "./components/Album/Album";
 import Tracks, {loader as tracksLoader} from "./components/Track/Tracks";
+import Users, {
+  loader as userLoader,
+  action as loginAction,
+} from "./components/Users/Users";
 import NewReleases from "./components/NewReleases";
 // create the router
 
@@ -50,6 +56,12 @@ const router = createBrowserRouter([
             element: <Home />,
             loader: homeLoader,
             errorElement: <div>Oops! There must be an error somewhere.</div>,
+          },
+          {
+            path: "/login",
+            element: <Users />,
+            loader: userLoader,
+            action: loginAction,
           },
           {
             path: "new",
