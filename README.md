@@ -60,6 +60,16 @@ Playlist-Album-View
 
 ---
 
+| API Route(Internal) | Requested Method | Body                             | Response            |
+| ------------------- | ---------------- | -------------------------------- | ------------------- |
+| /profiles           | GET              |                                  | [{...},{...},{...}] |
+| /profiles           | POST             | {username,firstName,lastName,favoriteTracks:[],favoriteArtists: [],following: [],followedBy: [],avatar,favoriteAlbums:[]]}| [{id,...}] |
+| /profiles/:id       | GET              |  | [{...}]                       |
+| /profiles/:id       | PATCH            | {...profile,updatedThing}        | [{...}]             |
+| /profiles/:id       | DELETE           |  | [{}]                       |
+| /currentProfile     | GET              |  | [{...}]             |
+| /currentProfile     | PATCH            |{...currentProfile,updated}  | [{...}] |
+
 ## Client Side Routes
 
 | Client Route         | Component           |
