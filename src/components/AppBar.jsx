@@ -76,7 +76,7 @@ function AppBar({onHandleUserChange}) {
           <button type="button" className="btn">
             Log In
           </button>
-          {/* <select
+          <select
           id="currentUser"
           defaultValue={state.currentProfile.id || 1}
           onChange={handleChange}>
@@ -86,7 +86,7 @@ function AppBar({onHandleUserChange}) {
               {profile.firstName}
             </option>
           ))}
-        </select> */}
+        </select>
         </div>
       </div>
     </>
