@@ -15,7 +15,7 @@ import ".././index.css";
 import {useContext} from "react";
 import {ProfileContext} from "../context/profileContext";
 import {Formik, useFormik} from "formik";
-import {SignupForm} from "../components/Form/Form";
+import {ProfileForm} from "../components/Form/Form";
 export async function loader({params}) {
   // console.log("loader called");
   // const newReleases = await getAll("newReleases");
@@ -190,7 +190,7 @@ export default function Index() {
             //     </button>
             //   </div>
             // </form>
-            <SignupForm toggleForm={toggleForm} />
+            <ProfileForm toggleForm={toggleForm} />
           )}
         </div>
       </section>

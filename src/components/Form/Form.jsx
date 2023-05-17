@@ -1,32 +1,54 @@
 import React from "react";
-import {useFormik} from "formik";
+import {Formik, useFormik} from "formik";
+import * as Yup from "yup";
 
 // A custom validation function. This must return an object
 // which keys are symmetrical to our values/initialValues
-const validate = values => {
-  const errors = {};
-  if (!values.firstName) {
-    errors.firstName = "Required";
-  } else if (values.firstName.length < 2) {
-    errors.firstName = "Must be at least 2 characters";
-  }
+// const validate = values => {
+//   const errors = {};
+//   if (!values.firstName) {
+//     errors.firstName = "Required";
+//   } else if (values.firstName.length < 2) {
+//     errors.firstName = "Must be at least 2 characters";
+//   }
 
-  if (!values.lastName) {
-    errors.lastName = "Required";
-  } else if (values.lastName.length < 2) {
-    errors.lastName = "Must be at least 2 characters";
-  }
+//   if (!values.lastName) {
+//     errors.lastName = "Required";
+//   } else if (values.lastName.length < 2) {
+//     errors.lastName = "Must be at least 2 characters";
+//   }
 
-  if (!values.username) {
-    errors.username = "Required";
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]$/i.test(values.username)) {
-    errors.username = "Invalid username";
-  }
+//   if (!values.username) {
+//     errors.username = "Required";
+//   } else if (!/^[A-Za-z][A-Za-z0-9_]{5,29}$/i.test(values.username)) {
+//     errors.username = "Invalid username";
+//   }
 
-  return errors;
+//   return errors;
+// };
+const ProfileSchema = Yup.object().shape({
+  firstName: Yup.string()
+    .min(2, "Too Short!")
+    .max(50, "Too Long!")
+    .required("Required"),
+  lastName: Yup.string()
+    .min(2, "Too Short!")
+    .max(50, "Too Long!")
+    .required("Required"),
+  username: Yup.string()
+    .test("username", "This username is already taken.", function (username) {
+      return checkUsername(username);
+    })
+    .required("Required"),
+});
+const checkUsername = username => {
+  return fetch(`http://localhost:4000/username/${username}/available`)
+    .then(response => response.json())
+    .then(data => {
+      return data.length === 0;
+    });
 };
-
-export const SignupForm = ({toggleForm}) => {
+export const ProfileForm = ({toggleForm}) => {
   // Pass the useFormik() hook initial form values, a validate function that will be called when
   // form values change or fields are blurred, and a submit function that will
   // be called when the form is submitted
@@ -36,7 +58,7 @@ export const SignupForm = ({toggleForm}) => {
       lastName: "",
       username: "",
     },
-    validate,
+    validationSchema: ProfileSchema,
     onSubmit: values => {
       alert(JSON.stringify(values, null, 2));
     },

@@ -9,7 +9,7 @@
     "build": "vite build",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "server": "json-server --watch src/assets/db.json -p 4000"
+    "server": "json-server --watch src/assets/db.json --routes src/assets/routes.json -p 4000"
   },
   "dependencies": {
     "@emotion/react": "^11.10.8",
@@ -26,7 +26,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.11.1",
-    "styled-icons": "^10.47.0"
+    "styled-icons": "^10.47.0",
+    "yup": "^1.1.1"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
