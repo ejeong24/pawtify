@@ -52,8 +52,11 @@ function AppBar({onHandleUserChange}) {
                 <NavLink to={`../home`}>Categories</NavLink>
               </li>
               <li>
-                <NavLink to={`../new`}>New Releases [WIP]</NavLink>
+                <NavLink to={`../new`}></NavLink>
               </li>
+              {/* <li>
+                <NavLink to={`../search`}>Search [WIP]</NavLink>
+              </li> */}
             </ul>
           </div>
 
@@ -72,8 +75,11 @@ function AppBar({onHandleUserChange}) {
               <NavLink to={`../home`}>Categories</NavLink>
             </li>
             <li>
-              <NavLink to={`../new`}>New Releases[WIP]</NavLink>
+              <NavLink to={`../new`}>New Releases</NavLink>
             </li>
+            {/* <li>
+              <NavLink to={`../search`}>Search [WIP]</NavLink>
+            </li> */}
           </ul>
         </div>
         <div className="navbar-end">
@@ -93,7 +99,7 @@ function AppBar({onHandleUserChange}) {
               </button>
             </Link>
           )}
-          <select
+          {/* <select
             id="currentUser"
             defaultValue={state.userLoggedIn || 0}
             onChange={handleChange}>
@@ -103,7 +109,7 @@ function AppBar({onHandleUserChange}) {
                 {profile.firstName}
               </option>
             ))}
-          </select>
+          </select> */}
         </div>
       </div>
     </>

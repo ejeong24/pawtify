@@ -87,7 +87,24 @@ export default function Index() {
   function toggleForm() {
     setShowForm(prevShowForm => !prevShowForm);
   }
-  function handleNewProfileSubmit() {}
+  function handleNewProfileSubmit(event) {
+    event.preventDefault();
+    // POST fetch to dispatch
+    fetch(`http://localhost:4000/profiles`, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(formData),
+    })
+      .then(resp => resp.json())
+      .then(newProfile => {
+        console.log(newProfile.id);
+        localStorage.setItem("currentUser", newProfile.id);
+        dispatch({type: "CREATE", payload: newProfile});
+        navigate(`../profile/${newProfile.id}`);
+      })
+
+      .catch(error => console.log("error", error.message));
+  }
   return (
     <main>
       {/* HERO in a GRId XS={12}*/}

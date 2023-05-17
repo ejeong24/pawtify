@@ -35,7 +35,7 @@ import Users, {
 import NewReleases, {
   loader as newReleaseLoader,
 } from "./components/NewReleases";
-
+import Search, {loader as searchLoader} from "./components/Search/Search";
 // create the router
 
 const router = createBrowserRouter([
@@ -65,6 +65,11 @@ const router = createBrowserRouter([
             element: <Users />,
             loader: userLoader,
             action: loginAction,
+          },
+          {
+            path: "/search",
+            element: <Search />,
+            loader: searchLoader,
           },
           {
             path: "new",

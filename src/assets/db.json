@@ -15,12 +15,11 @@
         "6gnjE8oBkosBIEZroEjq4I",
         "0JmnkIqdlnUzPaf8sqBRs3",
         "1YLJVmuzeM2YSUkCCaTNUB",
-        "0h3dJV8JA5oxPzSF4tkz2t"
+        "0h3dJV8JA5oxPzSF4tkz2t",
+        "3dnP0JxCgygwQH9Gm7q7nb",
+        "5w40ZYhbBMAlHYNDaVJIUu"
       ],
-      "favoriteArtists": [
-        "1YRqgFNXqRyMDRr8ClS1NL",
-        "1Cs0zKBU1kc0i8ypK3B9ai"
-      ],
+      "favoriteArtists": ["1YRqgFNXqRyMDRr8ClS1NL", "1Cs0zKBU1kc0i8ypK3B9ai"],
       "following": [],
       "followedBy": [],
       "avatar": "../src/assets/avatar1.jpg",
@@ -36,12 +35,8 @@
       "firstName": "Ty",
       "lastName": "Blackwell",
       "id": 2,
-      "favoriteAlbums": [
-        "0pMuKNqI4VOoLESF5wExWY"
-      ],
-      "favoriteTracks": [
-        "7sliFe6W30tPBPh6dvZsIH"
-      ],
+      "favoriteAlbums": ["0pMuKNqI4VOoLESF5wExWY"],
+      "favoriteTracks": ["7sliFe6W30tPBPh6dvZsIH"],
       "favoriteArtists": [],
       "following": [],
       "followedBy": [],
@@ -53,17 +48,13 @@
       "firstName": "Cody",
       "lastName": "Delzer",
       "id": 3,
-      "favoriteAlbums": [
-        "0pMuKNqI4VOoLESF5wExWY"
-      ],
+      "favoriteAlbums": ["0pMuKNqI4VOoLESF5wExWY"],
       "favoriteTracks": [
-        "5hq7feH89FieadyB13oo5p",
-        "4Y43nu7MxbFOBJnZNfuruc",
-        "5nGITHcYH3Tt5WolBVEcrJ"
+        "6uL6HCOsEwvnmCX4cDf65g",
+        "10eBRyImhfqVvkiVEGf0N0",
+        "6gnjE8oBkosBIEZroEjq4I"
       ],
-      "favoriteArtists": [
-        "220xv2aB3dsGxaJI1gGs7l"
-      ],
+      "favoriteArtists": ["220xv2aB3dsGxaJI1gGs7l"],
       "following": [],
       "followedBy": [],
       "avatar": "../src/assets/avatar3.jpg",
@@ -74,9 +65,7 @@
       "firstName": "Eugene",
       "lastName": "Jeong",
       "id": 4,
-      "favoriteAlbums": [
-        "0pMuKNqI4VOoLESF5wExWY"
-      ],
+      "favoriteAlbums": ["0pMuKNqI4VOoLESF5wExWY"],
       "favoriteTracks": [],
       "favoriteArtists": [],
       "following": [],
@@ -95,17 +84,6 @@
       "following": [],
       "followedBy": [],
       "avatar": "../src/assets/avatar5.jpg",
-      "friends": []
-    },
-    {
-      "username": "browniecake",
-      "firstName": "James",
-      "lastName": "Brown",
-      "favoriteAlbums": [],
-      "favoriteTracks": [],
-      "favoriteArtists": [],
-      "avatar": "../assets/avatar6.jpg",
-      "id": 6,
       "friends": []
     }
   ]

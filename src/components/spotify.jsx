@@ -33,9 +33,9 @@ export function getAll(endpoint) {
 }
 
 /**
- * 
+ *
  * @param {'https://api.spotify.com/v1/recommendations?limit=10&market=US&seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_tracks=0c6xIDDpzE81m2q797ordA' }
- * @returns 
+ * @returns
  */
 export function getOne(endpoint, id, extension = "") {
   let access_token = localStorage.getItem("access_token");
@@ -52,6 +52,25 @@ export function getOne(endpoint, id, extension = "") {
     })
     .catch(error => console.log(error.message));
 }
+export function searchSpotify(q) {
+  let access_token = localStorage.getItem("access_token");
+  return fetch(
+    `https://api.spotify.com/v1/search?q=${q}&type=album%2Ctrack%2Cplaylist%2Cartist&market=US&offset=0'`,
+    {
+      method: "GET",
+      headers: {Authorization: `Bearer ${access_token}`},
+    },
+  )
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw response.statusText;
+      }
+    })
+    .catch(error => console.log(error.message));
+}
+
 export function getAllItems(endpoint, extension = "") {
   // console.log(endpoints[endpoint]);
   let access_token = localStorage.getItem("access_token");

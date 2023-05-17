@@ -100,7 +100,8 @@ export const ProfilesContextProvider = ({children}) => {
   // };
   const [state, dispatch] = useReducer(reducer, {
     profiles: [],
-    userLoggedIn: 1,
+    userLoggedIn: 0,
+    currentProfile:[],
     partyMix: {tracks: [], artists: [], genres: []},
   });
   // localStorage.setItem("currentUser", state.userLoggedIn);
@@ -121,6 +122,13 @@ export const ProfilesContextProvider = ({children}) => {
     fetch(`http://localhost:4000/profiles/${state.userLoggedIn}`)
       .then(resp => resp.json())
       .then(profile => dispatch({type: "GETCURRENT", payload: profile}))
+      .catch(error => console.log("error", error.message));
+  }, [state.userLoggedIn]);
+  useEffect(() => {
+    // GET fetch to dispatch
+    fetch(`http://localhost:4000/profiles/${state.userLoggedIn}`)
+      .then(resp => resp.json())
+      .then(profile => dispatch({type: "SETCURRENTPROFILE", payload: profile}))
       .catch(error => console.log("error", error.message));
   }, [state.userLoggedIn]);
   return (
