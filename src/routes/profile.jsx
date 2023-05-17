@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
-import {Form, useLoaderData} from "react-router-dom";
+import {Form, redirect, useLoaderData} from "react-router-dom";
 import {getProfile} from "../components/Rover";
 import {getAllItems, getOne, getRecommendations} from "../components/spotify";
 import NavButtons from "../components/NavButtons";
@@ -10,7 +10,12 @@ import FavoriteAlbumList from "../components/Users/FavoriteAlbumList";
 import Drawer from "../components/Drawer/Drawer";
 import Recommendations from "../components/Recommendations/Recommendations";
 import PartyMix from "../components/Users/PartyMix";
+
 export async function loader({params}) {
+  if (parseInt(localStorage.getItem("currentUser")) !== parseInt(params.id)) {
+    console.log("not matching user");
+    return redirect("../login");
+  }
   const profile = await getProfile(params.id);
   const albumList =
     profile.favoriteAlbums.length > 0
@@ -35,6 +40,7 @@ export async function loader({params}) {
       : [];
   return {profile, albumList, artistList, tracksList};
 }
+
 function Profile() {
   const [partyMix, setPartyMix] = useState([]);
   const [showRecommendations, setShowRecommendations] = useState(false);
@@ -47,7 +53,7 @@ function Profile() {
   )[0];
 
   const displayFavoriteTracks =
-    userProfile.favoriteTracks.length > 0
+    profile.favoriteTracks.length > 0
       ? tracksList.tracks.map(track => (
           <FavoriteTrackList
             key={track.id}
@@ -60,14 +66,14 @@ function Profile() {
   let {favoriteAlbums, favoriteArtists, favoriteTracks} = profile;
 
   const displayFavoriteAlbums =
-    userProfile.favoriteAlbums.length > 0
+    profile.favoriteAlbums.length > 0
       ? albumList.albums.map(album => (
           <FavoriteAlbumList key={album.id} album={album} />
         ))
       : "No Album Favorites";
 
   const displayFavoriteArtists =
-    userProfile.favoriteArtists.length > 0
+    profile.favoriteArtists.length > 0
       ? artistList.artists.map(artist => (
           <FavoriteArtistList
             key={artist.id}
@@ -76,6 +82,7 @@ function Profile() {
           />
         ))
       : "No Artist Favorites";
+
   let displayPartyMix = "Nothing Selected";
   if (partyMix.length > 0) {
     displayPartyMix = partyMix.map(track => {
@@ -205,7 +212,11 @@ function Profile() {
         </section>
 
         <section className="flex flex-col mx-auto mt-10">
-          <p className="text-2xl text-center mb-4">Here's your party mix!</p>
+          {recommendations.length > 0 ? (
+            <p className="text-2xl text-center mb-4">Here's your party mix!</p>
+          ) : (
+            <p></p>
+          )}
           {displayRecommendations}
         </section>
       </div>
