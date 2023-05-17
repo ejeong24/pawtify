@@ -13,6 +13,7 @@ export async function loader() {
 
 function AppBar({onHandleUserChange}) {
   const {state, dispatch} = useContext(ProfileContext);
+
   function handleChange(event) {
     if (event.target.value === 0) {
       dispatch({type: "USERLOGOUT", payload: 0});
@@ -88,7 +89,8 @@ function AppBar({onHandleUserChange}) {
               <Link to={`../profile/${state.userLoggedIn}`}>
                 <button className="btn btn-accent">My Profile</button>
               </Link>
-              <Link to={`../login`}>
+
+              <Link to={`../`}>
                 <button
                   type="button"
                   className="btn btn-secondary"

@@ -14,33 +14,13 @@ import {createProfile, getProfiles} from "../components/Rover";
 import ".././index.css";
 import {useContext} from "react";
 import {ProfileContext} from "../context/profileContext";
-
+import {Formik, useFormik} from "formik";
+import {SignupForm} from "../components/Form/Form";
 export async function loader({params}) {
   // console.log("loader called");
   // const newReleases = await getAll("newReleases");
   // return {newReleases};
 }
-
-// export async function action() {
-//   const {state, dispatch} = useContext(ProfileContext);
-//   const data = {
-//     username: "",
-//     firstName: "",
-//     lastName: "",
-//     favoriteAlbums: [],
-//     favoriteTracks: [],
-//     favoriteArtists: [],
-//     avatar: `../assets/avatar${Math.ceil(Math.random()) * 6}.jpg`,
-//   };
-//   const profile = await createProfile(data).then(
-//     newProfile =>
-//       function () {
-//         dispatch({type: "CREATE", payload: newProfile});
-//       },
-//   );
-
-//   return redirect(`/profile/${profile.id}/edit`);
-// }
 
 export default function Index() {
   const {state, dispatch} = useContext(ProfileContext);
@@ -58,22 +38,6 @@ export default function Index() {
     friends: [],
     avatar: `../assets/avatar${Math.ceil(Math.random()) * 6}.jpg`,
   });
-  // async function handleNewUserSubmit(event) {
-  //   event.preventDefault();
-  //   const data = {
-  //     username: "",
-  //     firstName: "",
-  //     lastName: "",
-  //     favoriteAlbums: [],
-  //     favoriteTracks: [],
-  //     favoriteArtists: [],
-  //     avatar: `../assets/avatar${Math.ceil(Math.random()) * 6}.jpg`,
-  //   };
-  //   const profile = await createProfile(data);
-
-  //   dispatch({type: "CREATE", payload: profile});
-  //   navigate(`/profile/${profile.id}/edit`);
-  // }
 
   function handleChange(event) {
     const name = event.target.name;
@@ -84,11 +48,16 @@ export default function Index() {
 
     setFormData({...formData, [name]: value});
   }
+
+  // show the create user form
   function toggleForm() {
     setShowForm(prevShowForm => !prevShowForm);
   }
+
+  // manage new user creation
   function handleNewProfileSubmit(event) {
     event.preventDefault();
+
     // POST fetch to dispatch
     fetch(`http://localhost:4000/profiles`, {
       method: "POST",
@@ -98,6 +67,7 @@ export default function Index() {
       .then(resp => resp.json())
       .then(newProfile => {
         console.log(newProfile.id);
+        // ensure we update the local cookie before sending off other data
         localStorage.setItem("currentUser", newProfile.id);
         dispatch({type: "CREATE", payload: newProfile});
         navigate(`../profile/${newProfile.id}`);
@@ -122,82 +92,105 @@ export default function Index() {
                 <div
                   id="callToAction"
                   className="justify-center items-center mx-auto">
-                  <button
-                    type="button"
-                    className="btn btn-primary w-fit mx-auto"
-                    onClick={toggleForm}>
-                    Create Profile and Get Started
-                  </button>
+                  {parseInt(localStorage.getItem("currentUser")) === 0 ? (
+                    <button
+                      type="button"
+                      className="btn btn-primary w-fit mx-auto"
+                      onClick={toggleForm}>
+                      Create Profile and Get Started
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      className="btn btn-primary w-fit mx-auto"
+                      onClick={() => {
+                        navigate(
+                          `../profile/${parseInt(
+                            localStorage.getItem("currentUser"),
+                          )}`,
+                        );
+                      }}>
+                      My Profile
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
           ) : (
-            <form
-              onSubmit={handleNewProfileSubmit}
-              id="profileForm"
-              className="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md">
-              <div className="mb-4">
-                <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
-                  htmlFor="firstName">
-                  First Name
-                </label>
-                <input
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-                  type="text"
-                  id="firstName"
-                  name="firstName"
-                  placeholder="John Doe"
-                  defaultValue={formData.firstName}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="mb-4">
-                <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
-                  htmlFor="lastName">
-                  Last Name
-                </label>
-                <input
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-                  type="text"
-                  id="lastName"
-                  name="lastName"
-                  placeholder="Doe"
-                  defaultValue={formData.lastName}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="mb-4">
-                <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
-                  htmlFor="username">
-                  Username
-                </label>
-                <input
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-                  type="text"
-                  id="username"
-                  name="username"
-                  defaultValue={formData.username}
-                  onChange={handleChange}
-                />
-              </div>
+            // <form
+            //   onSubmit={handleNewProfileSubmit}
+            //   id="profileForm"
+            //   className="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md">
+            //   <div className="mb-4">
+            //     <label
+            //       className="block text-gray-700 text-sm font-bold mb-2"
+            //       htmlFor="firstName">
+            //       First Name
+            //     </label>
+            //     <input
+            //       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+            //       type="text"
+            //       id="firstName"
+            //       name="firstName"
+            //       placeholder="John"
+            //       required
+            //       minLength="2"
+            //       defaultValue={formData.firstName}
+            //       onChange={handleChange}
+            //     />
+            //   </div>
+            //   <div className="mb-4">
+            //     <label
+            //       className="block text-gray-700 text-sm font-bold mb-2"
+            //       htmlFor="lastName">
+            //       Last Name
+            //     </label>
+            //     <input
+            //       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+            //       type="text"
+            //       id="lastName"
+            //       name="lastName"
+            //       placeholder="Doe"
+            //       required
+            //       minLength="2"
+            //       defaultValue={formData.lastName}
+            //       onChange={handleChange}
+            //     />
+            //   </div>
+            //   <div className="mb-4">
+            //     <label
+            //       className="block text-gray-700 text-sm font-bold mb-2"
+            //       htmlFor="username">
+            //       Username
+            //     </label>
+            //     <input
+            //       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+            //       type="text"
+            //       id="username"
+            //       name="username"
+            //       required
+            //       minLength="6"
+            //       maxLength="25"
+            //       defaultValue={formData.username}
+            //       onChange={handleChange}
+            //     />
+            //   </div>
 
-              <div className="flex justify-around">
-                <button
-                  className="w-[125px] bg-indigo-500 text-white text-sm font-bold py-2 px-4 rounded-md hover:bg-indigo-600 transition duration-300"
-                  type="submit">
-                  Save
-                </button>
-                <button
-                  type="button"
-                  className="w-[125px] bg-indigo-500 text-white text-sm font-bold py-2 px-4 rounded-md hover:bg-indigo-600 transition duration-300"
-                  onClick={toggleForm}>
-                  Cancel
-                </button>
-              </div>
-            </form>
+            //   <div className="flex justify-around">
+            //     <button
+            //       className="w-[125px] bg-indigo-500 text-white text-sm font-bold py-2 px-4 rounded-md hover:bg-indigo-600 transition duration-300"
+            //       type="submit">
+            //       Save
+            //     </button>
+            //     <button
+            //       type="button"
+            //       className="w-[125px] bg-indigo-500 text-white text-sm font-bold py-2 px-4 rounded-md hover:bg-indigo-600 transition duration-300"
+            //       onClick={toggleForm}>
+            //       Cancel
+            //     </button>
+            //   </div>
+            // </form>
+            <SignupForm toggleForm={toggleForm} />
           )}
         </div>
       </section>
