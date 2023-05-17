@@ -115,7 +115,7 @@ export default function Index() {
             <div className="hero-content text-center text-neutral-content align-baseline">
               <div className="max-w-lg">
                 <h1 className="mt-48 mb-5 text-4xl font-bold">
-                  Music for every party animal
+                  Music's new best friend
                 </h1>
                 <p className="mb-5"></p>
 

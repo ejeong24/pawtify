@@ -7,7 +7,6 @@ import {ProfileContext} from "../context/profileContext";
 import FavoriteTrackList from "../components/Users/FavoriteTrackList";
 import FavoriteArtistList from "../components/Users/FavoriteArtistList";
 import FavoriteAlbumList from "../components/Users/FavoriteAlbumList";
-import Drawer from "../components/Drawer/Drawer";
 import Recommendations from "../components/Recommendations/Recommendations";
 import PartyMix from "../components/Users/PartyMix";
 
@@ -16,22 +15,22 @@ export async function loader({params}) {
     console.log("not matching user");
     return redirect("../login");
   }
-  const profile = await getProfile(params.id);
-  const albumList =
+  let profile = await getProfile(params.id);
+  let albumList =
     profile.favoriteAlbums.length > 0
       ? await getAllItems(
           "albums",
           `?ids=${profile.favoriteAlbums.join(",")}&market=US`,
         )
       : [];
-  const artistList =
+  let artistList =
     profile.favoriteArtists.length > 0
       ? await getAllItems(
           "artists",
           `?ids=${profile.favoriteArtists.join(",")}&market=US`,
         )
       : [];
-  const tracksList =
+  let tracksList =
     profile.favoriteTracks.length > 0
       ? await getAllItems(
           "tracks",
@@ -42,28 +41,28 @@ export async function loader({params}) {
 }
 
 function Profile() {
+  const {state, dispatch} = useContext(ProfileContext);
   const [partyMix, setPartyMix] = useState([]);
   const [showRecommendations, setShowRecommendations] = useState(false);
   const [recommendations, setRecommendations] = useState([]);
-  const {state, dispatch} = useContext(ProfileContext);
-  const {profile, albumList, tracksList, artistList} = useLoaderData();
-
+  let {profile, albumList, tracksList, artistList} = useLoaderData();
+  // let {favoriteAlbums, favoriteArtists, favoriteTracks} = profile;
   let userProfile = state.profiles.filter(
     profile => profile.id === parseInt(localStorage.getItem("currentUser")),
   )[0];
-
+  
   const displayFavoriteTracks =
     profile.favoriteTracks.length > 0
-      ? tracksList.tracks.map(track => (
+      ? userProfile.favoriteTracks.map(track => (
           <FavoriteTrackList
             key={track.id}
             track={track}
             onHandleAddToPartyMix={onHandleAddToPartyMix}
+            onRemoveFromPartyMix={onRemoveFromPartyMix}
+            onDeleteFromFavorites={onDeleteFromFavorites}
           />
         ))
       : "No Track Favorites";
-
-  let {favoriteAlbums, favoriteArtists, favoriteTracks} = profile;
 
   const displayFavoriteAlbums =
     profile.favoriteAlbums.length > 0
@@ -138,6 +137,11 @@ function Profile() {
   function onRemoveFromPartyMix(id) {
     const updatedMix = [...partyMix].filter(track => track.id !== id);
     setPartyMix(updatedMix);
+  }
+
+  function onDeleteFromFavorites(trackID) {
+    console.log(trackID);
+    return displayFavoriteTracks.filter(track => track.id !== trackID);
   }
   return (
     <>

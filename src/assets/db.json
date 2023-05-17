@@ -6,27 +6,32 @@
       "lastName": "Loomis",
       "id": 1,
       "favoriteTracks": [
-        "3yelVZf4p9wDpWjPav5mOn",
-        "2NyWdxhlqyrt91PE6Yzf9u",
-        "2nugajeEf9KNKXrpnzamLl",
-        "2Q9pJ2YJOB6jENpyqqkqZf",
-        "556awMv4WQP0h1VXMU8rSU",
-        "5BgnL6gHauuvxe4Ok6W1aC",
-        "6gnjE8oBkosBIEZroEjq4I",
-        "0JmnkIqdlnUzPaf8sqBRs3",
-        "1YLJVmuzeM2YSUkCCaTNUB",
-        "0h3dJV8JA5oxPzSF4tkz2t",
         "3dnP0JxCgygwQH9Gm7q7nb",
-        "5w40ZYhbBMAlHYNDaVJIUu"
+        "0WtM2NBVQNNJLh6scP13H8",
+        "1Qrg8KqiBpW07V7PNxwwwL",
+        "5w40ZYhbBMAlHYNDaVJIUu",
+        "0yLdNVWF3Srea0uzk55zFn",
+        "7FbrGaHYVDmfr7KoLIZnQ7",
+        "6AQbmUe0Qwf5PZnt4HmTXv",
+        "1odExI7RdWc4BT515LTAwj",
+        "6ZZf5a8oiInHDkBe9zXfLP",
+        "4LRPiXqCikLlN15c3yImP7",
+        "26b3oVLrRUaaybJulow9kz",
+        "7oDd86yk8itslrA9HRP2ki",
+        "2NbsBSshscKIPRG3kwBbfo",
+        "7uSxfwJFwtZwP7NTHxto2B"
       ],
-      "favoriteArtists": ["1YRqgFNXqRyMDRr8ClS1NL", "1Cs0zKBU1kc0i8ypK3B9ai"],
+      "favoriteArtists": [
+        "246dkjvS1zLTtiykXe5h60"
+      ],
       "following": [],
       "followedBy": [],
       "avatar": "../src/assets/avatar1.jpg",
       "favoriteAlbums": [
         "0XcHdI2ZyNADjfvo5Ubs39",
         "4JbJCZWuB0iuCZZt8ZISih",
-        "4LPQ70q8ZU6RxDauc4ZPzC"
+        "4LPQ70q8ZU6RxDauc4ZPzC",
+        "50MzJhO0pMjTsfpeOmZ1so"
       ],
       "friends": []
     },
@@ -35,8 +40,12 @@
       "firstName": "Ty",
       "lastName": "Blackwell",
       "id": 2,
-      "favoriteAlbums": ["0pMuKNqI4VOoLESF5wExWY"],
-      "favoriteTracks": ["7sliFe6W30tPBPh6dvZsIH"],
+      "favoriteAlbums": [
+        "0pMuKNqI4VOoLESF5wExWY"
+      ],
+      "favoriteTracks": [
+        "7sliFe6W30tPBPh6dvZsIH"
+      ],
       "favoriteArtists": [],
       "following": [],
       "followedBy": [],
@@ -44,17 +53,21 @@
       "friends": []
     },
     {
-      "username": "Snoopy",
+      "username": "Snoopy Dog",
       "firstName": "Cody",
       "lastName": "Delzer",
       "id": 3,
-      "favoriteAlbums": ["0pMuKNqI4VOoLESF5wExWY"],
+      "favoriteAlbums": [
+        "0pMuKNqI4VOoLESF5wExWY"
+      ],
       "favoriteTracks": [
         "6uL6HCOsEwvnmCX4cDf65g",
         "10eBRyImhfqVvkiVEGf0N0",
         "6gnjE8oBkosBIEZroEjq4I"
       ],
-      "favoriteArtists": ["220xv2aB3dsGxaJI1gGs7l"],
+      "favoriteArtists": [
+        "220xv2aB3dsGxaJI1gGs7l"
+      ],
       "following": [],
       "followedBy": [],
       "avatar": "../src/assets/avatar3.jpg",
@@ -65,25 +78,14 @@
       "firstName": "Eugene",
       "lastName": "Jeong",
       "id": 4,
-      "favoriteAlbums": ["0pMuKNqI4VOoLESF5wExWY"],
+      "favoriteAlbums": [
+        "0pMuKNqI4VOoLESF5wExWY"
+      ],
       "favoriteTracks": [],
       "favoriteArtists": [],
       "following": [],
       "followedBy": [],
       "avatar": "../src/assets/avatar4.jpg",
-      "friends": []
-    },
-    {
-      "username": "Pluto",
-      "firstName": "Jimmy",
-      "lastName": "Bond",
-      "id": 5,
-      "favoriteAlbums": [],
-      "favoriteTracks": [],
-      "favoriteArtists": [],
-      "following": [],
-      "followedBy": [],
-      "avatar": "../src/assets/avatar5.jpg",
       "friends": []
     }
   ]
