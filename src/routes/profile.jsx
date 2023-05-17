@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
-import {Form, redirect, useLoaderData} from "react-router-dom";
+import {Form, redirect, useLoaderData, useNavigate} from "react-router-dom";
 import {getProfile} from "../components/Rover";
 import {getAllItems, getOne, getRecommendations} from "../components/spotify";
 import NavButtons from "../components/NavButtons";
@@ -23,61 +23,66 @@ export async function loader({params}) {
           `?ids=${profile.favoriteAlbums.join(",")}&market=US`,
         )
       : [];
-  let artistList =
+  let artistDetails =
     profile.favoriteArtists.length > 0
       ? await getAllItems(
           "artists",
           `?ids=${profile.favoriteArtists.join(",")}&market=US`,
         )
       : [];
-  let tracksList =
+  let tracksDetails =
     profile.favoriteTracks.length > 0
       ? await getAllItems(
           "tracks",
           `?ids=${profile.favoriteTracks.join(",")}&market=US`,
         )
       : [];
-  return {profile, albumList, artistList, tracksList};
+  return {profile, artistDetails, albumList, tracksDetails};
 }
 
 function Profile() {
   const {state, dispatch} = useContext(ProfileContext);
+  let {profile, tracksDetails, artistDetails} = useLoaderData();
+  const navigate = useNavigate();
   const [partyMix, setPartyMix] = useState([]);
   const [showRecommendations, setShowRecommendations] = useState(false);
   const [recommendations, setRecommendations] = useState([]);
-  let {profile, albumList, tracksList, artistList} = useLoaderData();
+  const [tracksList, setTracksList] = useState(tracksDetails.tracks);
+  const [artistList, setArtistList] = useState(artistDetails.artists);
+
   // let {favoriteAlbums, favoriteArtists, favoriteTracks} = profile;
   let userProfile = state.profiles.filter(
     profile => profile.id === parseInt(localStorage.getItem("currentUser")),
   )[0];
-  
+
   const displayFavoriteTracks =
     profile.favoriteTracks.length > 0
-      ? userProfile.favoriteTracks.map(track => (
+      ? tracksList.map(track => (
           <FavoriteTrackList
             key={track.id}
             track={track}
             onHandleAddToPartyMix={onHandleAddToPartyMix}
             onRemoveFromPartyMix={onRemoveFromPartyMix}
-            onDeleteFromFavorites={onDeleteFromFavorites}
+            onDeleteTrackFromFavorites={onDeleteTrackFromFavorites}
           />
         ))
       : "No Track Favorites";
 
-  const displayFavoriteAlbums =
-    profile.favoriteAlbums.length > 0
-      ? albumList.albums.map(album => (
-          <FavoriteAlbumList key={album.id} album={album} />
-        ))
-      : "No Album Favorites";
+  // const displayFavoriteAlbums =
+  //   profile.favoriteAlbums.length > 0
+  //     ? albumList.albums.map(album => (
+  //         <FavoriteAlbumList key={album.id} album={album} />
+  //       ))
+  //     : "No Album Favorites";
 
   const displayFavoriteArtists =
     profile.favoriteArtists.length > 0
-      ? artistList.artists.map(artist => (
+      ? artistList.map(artist => (
           <FavoriteArtistList
             key={artist.id}
             artist={artist}
             onHandleAddToPartyMix={onHandleAddToPartyMix}
+            onDeleteArtistFromFavorites={onDeleteArtistFromFavorites}
           />
         ))
       : "No Artist Favorites";
@@ -95,10 +100,18 @@ function Profile() {
       );
     });
   }
+  // function getTrackList(tracks){
+  //   let tracksList =
+  //   profile.favoriteTracks.length > 0
+  //     ? await getAllItems(
+  //         "tracks",
+  //         `?ids=${profile.favoriteTracks.join(",")}&market=US`,
+  //       )
+  //     : [];
+  // }
 
   function onHandleAddToPartyMix(media, type) {
     setPartyMix([...partyMix, media]);
-    console.log(displayPartyMix);
   }
   let recommendedMusic;
   let displayRecommendations;
@@ -139,9 +152,30 @@ function Profile() {
     setPartyMix(updatedMix);
   }
 
-  function onDeleteFromFavorites(trackID) {
-    console.log(trackID);
-    return displayFavoriteTracks.filter(track => track.id !== trackID);
+  function onDeleteTrackFromFavorites(trackID) {
+    const updatedTracks = [...tracksList].filter(track => track.id !== trackID);
+    setTracksList(updatedTracks);
+  }
+  function onDeleteArtistFromFavorites(artistID) {
+    const updatedArtists = [...artistList].filter(
+      artist => artist.id !== artistID,
+    );
+    setArtistList(updatedArtists);
+  }
+
+  function handleDeleteProfile(event) {
+    event.preventDefault();
+    // DELETE fetch to dispatch
+    console.log(profile.id);
+    fetch(`http://localhost:4000/profiles/${profile.id}`, {
+      method: "DELETE",
+      headers: {"Content-Type": "application/json"},
+    })
+      .then(resp => resp.json())
+      .then(() => dispatch({type: "DELETE", payload: profile.id}))
+      .then(() => dispatch({type: "USERLOGOUT", payload: 0}))
+      .then(() => navigate("../"))
+      .catch(error => console.log("error", error.message));
   }
   return (
     <>
@@ -165,20 +199,14 @@ function Profile() {
                   Edit
                 </button>
               </Form>
-              <Form
-                method="post"
-                action="destroy"
-                onSubmit={event => {
-                  if (
-                    !confirm("Please confirm you want to delete this record.")
-                  ) {
-                    event.preventDefault();
-                  }
-                }}>
-                <button type="submit" className="btn btn-secondary">
+              <form onSubmit={() => handleDeleteProfile}>
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={handleDeleteProfile}>
                   Delete
                 </button>
-              </Form>
+              </form>
             </div>
           </div>
         </section>

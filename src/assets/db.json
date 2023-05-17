@@ -17,13 +17,9 @@
         "6ZZf5a8oiInHDkBe9zXfLP",
         "4LRPiXqCikLlN15c3yImP7",
         "26b3oVLrRUaaybJulow9kz",
-        "7oDd86yk8itslrA9HRP2ki",
-        "2NbsBSshscKIPRG3kwBbfo",
-        "7uSxfwJFwtZwP7NTHxto2B"
+        "7oDd86yk8itslrA9HRP2ki"
       ],
-      "favoriteArtists": [
-        "246dkjvS1zLTtiykXe5h60"
-      ],
+      "favoriteArtists": [],
       "following": [],
       "followedBy": [],
       "avatar": "../src/assets/avatar1.jpg",
@@ -81,7 +77,14 @@
       "favoriteAlbums": [
         "0pMuKNqI4VOoLESF5wExWY"
       ],
-      "favoriteTracks": [],
+      "favoriteTracks": [
+        "1Ukxccao1BlWrPhYkcXbwZ",
+        "2NbsBSshscKIPRG3kwBbfo",
+        "2Zo1PcszsT9WQ0ANntJbID",
+        "0rzaRSujxA0bKyjJl6vHYq",
+        "1rBTBbtkJlSDk78gg8Dw9F",
+        "6HgWWaMu31KdOpEG5l28BG"
+      ],
       "favoriteArtists": [],
       "following": [],
       "followedBy": [],

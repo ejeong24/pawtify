@@ -6,7 +6,8 @@ export default function FavoriteTrackList({
   track,
   onHandleAddToPartyMix,
   partyMix,
-  onRemoveFromPartyList,onDeleteFromFavorites
+  onRemoveFromPartyList,
+  onDeleteTrackFromFavorites,
 }) {
   const {state, dispatch} = useContext(ProfileContext);
   function handleDeleteTrackButton() {
@@ -32,10 +33,10 @@ export default function FavoriteTrackList({
       .then(resp => resp.json())
       .then(updatedProfile => {
         dispatch({type: "UPDATE", payload: updatedProfile});
-      }).then(()=>onDeleteFromFavorites(track.id))
+      })
+      .then(() => onDeleteTrackFromFavorites(track.id))
       .catch(error => console.log("error", error.message));
   }
-
 
   function handleAddToPartyMix() {
     console.log(track.id);

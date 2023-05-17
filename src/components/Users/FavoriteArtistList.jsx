@@ -2,7 +2,7 @@ import React, {useContext, useState} from "react";
 import {useLoaderData} from "react-router-dom";
 import {ProfileContext} from "../../context/profileContext";
 
-export default function FavoriteArtistList({artist, onHandleAddToPartyMix}) {
+export default function FavoriteArtistList({artist, onHandleAddToPartyMix, onDeleteArtistFromFavorites}) {
   const {state, dispatch} = useContext(ProfileContext);
   //   artist = artist.artist;
 
@@ -29,7 +29,7 @@ export default function FavoriteArtistList({artist, onHandleAddToPartyMix}) {
       .then(resp => resp.json())
       .then(updatedProfile => {
         dispatch({type: "UPDATE", payload: updatedProfile});
-      })
+      }).then(()=>onDeleteArtistFromFavorites(artist.id))
       .catch(error => console.log("error", error.message));
   }
   function handleAddToPartyMix() {

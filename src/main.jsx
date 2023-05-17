@@ -88,11 +88,11 @@ const router = createBrowserRouter([
             loader: profileLoader,
             action: editAction,
           },
-          {
-            path: "profile/:id/destroy",
-            action: destroyAction,
-            errorElement: <div>Oops! There must be an error somewhere.</div>,
-          },
+          // {
+          //   path: "profile/:id/destroy",
+          //   action: destroyAction,
+          //   errorElement: <div>Oops! There must be an error somewhere.</div>,
+          // },
           {
             path: "artists",
             element: <Artists />,
