@@ -82,12 +82,18 @@ function AppBar({onHandleUserChange}) {
             </li> */}
           </ul>
         </div>
-        <div className="navbar-end">
+        <div className="navbar-end gap-2">
           {state.userLoggedIn !== 0 ? (
             <>
-              <Link to={`../profile/${state.userLoggedIn}`}>My Profile</Link>
+              <Link to={`../profile/${state.userLoggedIn}`}>
+                <button className="btn btn-accent">My Profile</button>
+              </Link>
               <Link to={`../login`}>
-                <button type="button" className="btn btn-secondary">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={handleChange}
+                  value="0">
                   Log Out
                 </button>
               </Link>
