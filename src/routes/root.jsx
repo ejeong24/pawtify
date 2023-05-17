@@ -22,6 +22,7 @@ import AppBar from "../components/AppBar";
 import NavButtons from "../components/NavButtons";
 import {ProfileContext} from "../context/profileContext";
 const access_token = localStorage.getItem("access_token");
+import Drawer from "../components/Drawer/Drawer";
 let profile = {};
 const expiresAt = localStorage.getItem("expiresAt");
 

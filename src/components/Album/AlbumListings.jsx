@@ -21,9 +21,14 @@ function AlbumListings({
 }) {
   const {state, dispatch} = useContext(ProfileContext);
   //   const {current} = useLoaderData();
+  let userProfile = state.profiles.filter(
+    profile => profile.id === parseInt(localStorage.getItem("currentUser")),
+  )[0];
+
   const [isAlbumFavorite, setIsAlbumFavorite] = useState(
-    favoriteAlbums.includes(album.id),
+    userProfile.favoriteAlbums.includes(album.id),
   );
+  console.log(isAlbumFavorite);
   let {
     id,
     tracks,
@@ -50,28 +55,31 @@ function AlbumListings({
     // console.log(id);
 
     let updatedFavorite;
-    if (state.currentProfile.favoriteAlbums.includes(id)) {
-      updatedFavorite = [...state.currentProfile.favoriteAlbums].filter(
+    let userProfile = state.profiles.filter(
+      profile => profile.id === parseInt(localStorage.getItem("currentUser")),
+    )[0];
+    if (userProfile.favoriteAlbums.includes(id)) {
+      updatedFavorite = [...userProfile.favoriteAlbums].filter(
         album => album != id,
       );
     } else {
-      updatedFavorite = [...state.currentProfile.favoriteAlbums, id];
+      updatedFavorite = [...userProfile.favoriteAlbums, id];
     }
 
     setIsAlbumFavorite(prevFavorite => !prevFavorite);
 
     // regularPATCH;
-    fetch(`http://localhost:4000/currentProfile/`, {
+    fetch(`http://localhost:4000/profiles/${userProfile.id}`, {
       method: "PATCH",
       body: JSON.stringify({
-        ...state.currentProfile,
+        ...userProfile,
         favoriteAlbums: updatedFavorite,
       }),
       headers: {"content-type": "application/json"},
     })
       .then(resp => resp.json())
       .then(updatedProfile => {
-        dispatch({type: "UPDATECURRENT", payload: updatedProfile});
+        dispatch({type: "UPDATE", payload: updatedProfile});
       })
       .catch(error => console.log("error", error.message));
   }

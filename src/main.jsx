@@ -32,7 +32,10 @@ import Users, {
   loader as userLoader,
   action as loginAction,
 } from "./components/Users/Users";
-import NewReleases from "./components/NewReleases";
+import NewReleases, {
+  loader as newReleaseLoader,
+} from "./components/NewReleases";
+
 // create the router
 
 const router = createBrowserRouter([
@@ -66,7 +69,7 @@ const router = createBrowserRouter([
           {
             path: "new",
             element: <NewReleases />,
-            loader: homeLoader,
+            loader: newReleaseLoader,
             errorElement: <div>Oops! There must be an error somewhere.</div>,
           },
           {

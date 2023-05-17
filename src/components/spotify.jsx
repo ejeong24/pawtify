@@ -32,6 +32,11 @@ export function getAll(endpoint) {
     .catch(error => console.log(error.message));
 }
 
+/**
+ * 
+ * @param {'https://api.spotify.com/v1/recommendations?limit=10&market=US&seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_tracks=0c6xIDDpzE81m2q797ordA' }
+ * @returns 
+ */
 export function getOne(endpoint, id, extension = "") {
   let access_token = localStorage.getItem("access_token");
   return fetch(`${spotifyAPI}${endpoints[endpoint]}/${id}${extension}`, {

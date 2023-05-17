@@ -15,7 +15,6 @@ export async function loader({params}) {
 export default function Home({onHandleFavoriteClick}) {
   const {categories} = useLoaderData();
   const {state, dispatch} = useContext(ProfileContext);
-  console.log(categories);
 
   return (
     <React.Fragment>

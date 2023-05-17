@@ -1,8 +1,15 @@
-import React from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Form, useLoaderData} from "react-router-dom";
 import {getProfile} from "../components/Rover";
-import {getAllItems, getOne} from "../components/spotify";
+import {getAllItems, getOne, getRecommendations} from "../components/spotify";
 import NavButtons from "../components/NavButtons";
+import {ProfileContext} from "../context/profileContext";
+import FavoriteTrackList from "../components/Users/FavoriteTrackList";
+import FavoriteArtistList from "../components/Users/FavoriteArtistList";
+import FavoriteAlbumList from "../components/Users/FavoriteAlbumList";
+import Drawer from "../components/Drawer/Drawer";
+import Recommendations from "../components/Recommendations/Recommendations";
+import PartyMix from "../components/Users/PartyMix";
 export async function loader({params}) {
   const profile = await getProfile(params.id);
   const albumList =
@@ -29,29 +36,102 @@ export async function loader({params}) {
   return {profile, albumList, artistList, tracksList};
 }
 function Profile() {
+  const [partyMix, setPartyMix] = useState([]);
+  const [showRecommendations, setShowRecommendations] = useState(false);
+  const [recommendations, setRecommendations] = useState([]);
+  const {state, dispatch} = useContext(ProfileContext);
   const {profile, albumList, tracksList, artistList} = useLoaderData();
+
+  let userProfile = state.profiles.filter(
+    profile => profile.id === parseInt(localStorage.getItem("currentUser")),
+  )[0];
+
+  const displayFavoriteTracks =
+    userProfile.favoriteTracks.length > 0
+      ? tracksList.tracks.map(track => (
+          <FavoriteTrackList
+            key={track.id}
+            track={track}
+            onHandleAddToPartyMix={onHandleAddToPartyMix}
+          />
+        ))
+      : "No Track Favorites";
+
   let {favoriteAlbums, favoriteArtists, favoriteTracks} = profile;
 
   const displayFavoriteAlbums =
-    albumList.albums.length > 0
+    userProfile.favoriteAlbums.length > 0
       ? albumList.albums.map(album => (
-          <MiniFavoriteAlbumList key={album.id} album={album} />
+          <FavoriteAlbumList key={album.id} album={album} />
         ))
       : "No Album Favorites";
 
   const displayFavoriteArtists =
-    artistList.length > 0
-      ? artistList.items.map(track => (
-          <MiniFavoriteArtistList key={artist.id} artist={artist} />
+    userProfile.favoriteArtists.length > 0
+      ? artistList.artists.map(artist => (
+          <FavoriteArtistList
+            key={artist.id}
+            artist={artist}
+            onHandleAddToPartyMix={onHandleAddToPartyMix}
+          />
         ))
       : "No Artist Favorites";
-  const displayFavoriteTracks =
-    tracksList.tracks.length > 0
-      ? tracksList.tracks.map(track => (
-          <MiniFavoriteTrackList key={track.id} track={track} />
-        ))
-      : "No Track Favorites";
+  let displayPartyMix = "Nothing Selected";
+  if (partyMix.length > 0) {
+    displayPartyMix = partyMix.map(track => {
+      return (
+        <PartyMix
+          key={track.id}
+          track={track}
+          partyMix={partyMix}
+          onRemoveFromPartyMix={onRemoveFromPartyMix}
+        />
+      );
+    });
+  }
 
+  function onHandleAddToPartyMix(media, type) {
+    setPartyMix([...partyMix, media]);
+    console.log(displayPartyMix);
+  }
+  let recommendedMusic;
+  let displayRecommendations;
+  async function handleGetMusicButton() {
+    let seed_tracks = [];
+    let seed_artists = [];
+    partyMix.map(entry =>
+      entry.type === "track"
+        ? seed_tracks.push(entry.id)
+        : seed_artists.push(entry.id),
+    );
+    const extension = `?limit=10&market=US&seed_tracks=${seed_tracks.join(
+      ",",
+    )}&seed_artists=${seed_artists.join(",")}`;
+    let access_token = localStorage.getItem("access_token");
+    return fetch(`https://api.spotify.com/v1/recommendations${extension}`, {
+      method: "GET",
+      headers: {Authorization: `Bearer ${access_token}`},
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw response.statusText;
+        }
+      })
+      .then(recommendations => setRecommendations(recommendations.tracks))
+      .catch(error => console.log(error.message));
+  }
+  if (recommendations) {
+    displayRecommendations = recommendations.map(track => (
+      <Recommendations key={track.id} track={track} />
+    ));
+  }
+
+  function onRemoveFromPartyMix(id) {
+    const updatedMix = [...partyMix].filter(track => track.id !== id);
+    setPartyMix(updatedMix);
+  }
   return (
     <>
       <NavButtons />
@@ -100,17 +180,33 @@ function Profile() {
             </ul>
           </article>
           <article>
+            <span className="text-center text-bold text-3xl">
+              Party Mix <span className="text-lg">(max 5)</span>
+              {partyMix.length > 0 ? (
+                <button
+                  className="btn btn-secondary ml-4"
+                  onClick={handleGetMusicButton}>
+                  Let's Party
+                </button>
+              ) : (
+                ""
+              )}
+            </span>
+            <ul className="max-w-lg divide-y divide-gray-200 dark:divide-gray-700 mt-4">
+              {displayPartyMix}
+            </ul>
+          </article>
+          <article>
             <span className="text-center text-bold text-3xl">Artists</span>
             <ul className="max-w-lg divide-y divide-gray-200 dark:divide-gray-700 mt-4">
               {displayFavoriteArtists}
             </ul>
           </article>
-          <article>
-            <span className="text-center text-bold text-3xl">Albums</span>
-            <ul className="max-w-lg divide-y divide-gray-200 dark:divide-gray-700 mt-4">
-              {displayFavoriteAlbums}
-            </ul>
-          </article>
+        </section>
+
+        <section className="flex flex-col mx-auto mt-10">
+          <p className="text-2xl text-center mb-4">Here's your party mix!</p>
+          {displayRecommendations}
         </section>
       </div>
     </>
@@ -131,108 +227,5 @@ function FollowUser({profile}) {
         {following ? "★" : "☆"}
       </button>
     </Form>
-  );
-}
-
-export function MiniFavoriteAlbumList(album) {
-  function handleDeleteAlbumButton() {}
-  return (
-    <>
-      <li className="pb-3 sm:pb-4">
-        <div className="flex justify-between space-x-2">
-          <div className="flex-shrink-0">
-            <img
-              className="w-16 h-16"
-              src={album.album.images[2].url}
-              alt={album.album.name}
-            />
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-              {album.album.name}
-            </p>
-            <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-              {album.album.artists[0].name}
-            </p>
-          </div>
-          <div className="flex items-center gap-2 text-base font-semibold text-gray-900 dark:text-white">
-            <button className="btn btn-primary justify-end">
-              Add to party
-            </button>
-            <button
-              className="btn justify-end"
-              onClick={handleDeleteAlbumButton}>
-              Delete
-            </button>
-          </div>
-        </div>
-      </li>
-    </>
-  );
-}
-export function MiniFavoriteArtistList(artist) {
-  function handleDeleteArtistButton() {}
-  return (
-    <>
-      <li className="pb-3 sm:pb-4">
-        <div className="flex justify-between space-x-2">
-          <div className="flex-shrink-0">
-            {/* <img
-              className="w-16 h-16"
-              src={album.album.images[2].url}
-              alt={album.album.name}
-            /> */}
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-              {/* {album.album.name} Album Name */}
-            </p>
-            <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-              {/* {album.album.artists[0].name} */} artist Name
-            </p>
-          </div>
-          <div className="flex items-center gap-2 text-base font-semibold text-gray-900 dark:text-white">
-            <button className="btn btn-primary justify-end">
-              Add to party
-            </button>
-            <button
-              className="btn justify-end"
-              onClick={handleDeleteArtistButton}>
-              Delete
-            </button>
-          </div>
-        </div>
-      </li>
-    </>
-  );
-}
-export function MiniFavoriteTrackList(track) {
-  function handleDeleteTrackButton() {}
-  console.log(track);
-  return (
-    <>
-      <li className="pb-3 sm:pb-4">
-        <div className="flex justify-between space-x-2">
-          <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-              {track.track.name}
-            </p>
-            <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-              {track.track.artists[0].name}
-            </p>
-          </div>
-          <div className="flex items-center gap-2 text-base font-semibold text-gray-900 dark:text-white">
-            <button className="btn btn-primary justify-end">
-              Add to party
-            </button>
-            <button
-              className="btn justify-end"
-              onClick={handleDeleteTrackButton}>
-              Delete
-            </button>
-          </div>
-        </div>
-      </li>
-    </>
   );
 }

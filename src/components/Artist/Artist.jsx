@@ -11,15 +11,25 @@ import {getCurrentProfile} from "../Rover";
 import {ProfileContext} from "../../context/profileContext";
 import NavButtons from "../NavButtons";
 export async function loader({params}) {
-  const artistInfo = await getOne("artists", params.id, "?market=US");
-  const artistAlbums = await getOne("artists", params.id, "/albums?market=US");
-  const arrayOfAlbums = artistAlbums.items.map(album => album.id).join(",");
-  const allTracks = await getRecommendations(
-    "albums",
-    `?ids=${arrayOfAlbums}&market=US`,
-  );
-  const current = await getCurrentProfile();
-  return {artistInfo, artistAlbums, arrayOfAlbums, allTracks, current};
+  if (parseInt(localStorage.getItem("currentUser")) === 0) {
+    return redirect("/login");
+  } else {
+    const artistInfo = await getOne("artists", params.id, "?market=US");
+    const artistAlbums = await getOne(
+      "artists",
+      params.id,
+      "/albums?market=US",
+    );
+    const arrayOfAlbums = artistAlbums.items.map(album => album.id).join(",");
+    const allTracks = await getRecommendations(
+      "albums",
+      `?ids=${arrayOfAlbums}&market=US`,
+    );
+    const current = await getCurrentProfile(
+      parseInt(localStorage.getItem("currentUser")),
+    );
+    return {artistInfo, artistAlbums, arrayOfAlbums, allTracks, current};
+  }
 }
 
 function Artist() {
@@ -52,26 +62,31 @@ function Artist() {
   function handleFavoriteButtonClick() {
     // let favoriteToUpdate;
     let updatedFavorite;
-    if (state.currentProfile.favoriteArtists.includes(id)) {
-      updatedFavorite = [...state.currentProfile.favoriteArtists].filter(
-        track => track != id,
+    let userProfile = state.profiles.filter(
+      profile => profile.id === parseInt(localStorage.getItem("currentUser")),
+    )[0];
+    if (userProfile.favoriteArtists.includes(id)) {
+      console.log("already in array");
+      updatedFavorite = [...userProfile.favoriteArtists].filter(
+        artist => artist != id,
       );
     } else {
-      updatedFavorite = [...state.currentProfile.favoriteArtists, id];
+      console.log("not in array");
+      updatedFavorite = [...userProfile.favoriteArtists, id];
     }
 
     // //regularPATCH
-    fetch(`http://localhost:4000/currentProfile/`, {
+    fetch(`http://localhost:4000/profiles/${userProfile.id}/`, {
       method: "PATCH",
       body: JSON.stringify({
-        ...state.currentProfile,
+        ...userProfile,
         favoriteArtists: updatedFavorite,
       }),
       headers: {"content-type": "application/json"},
     })
       .then(resp => resp.json())
       .then(updatedProfile => {
-        dispatch({type: "UPDATECURRENT", payload: updatedProfile});
+        dispatch({type: "UPDATE", payload: updatedProfile});
       })
       .catch(error => console.log("error", error.message));
     setIsFavoriteArtist(prevFavorite => !prevFavorite);

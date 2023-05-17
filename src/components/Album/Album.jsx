@@ -1,26 +1,34 @@
 import React, {useContext, useEffect} from "react";
-import {Link, useLoaderData} from "react-router-dom";
+import {Link, useLoaderData, redirect} from "react-router-dom";
 import Tracks from "../Track/Tracks";
 import {getOne} from "../spotify";
-
+import NavButtons from "../NavButtons";
 import {Users as Followers} from "@styled-icons/fa-solid/Users";
 import {Spotify} from "@styled-icons/fa-brands/Spotify";
 import {ProfileContext} from "../../context/profileContext";
 import {getCurrentProfile} from "../Rover";
 export async function loader({params}) {
-  const albumInfo = await getOne("albums", params.id, "?market=US");
-  const current = await getCurrentProfile();
-  return {albumInfo, current};
+  if (parseInt(localStorage.getItem("currentUser")) === 0) {
+    return redirect("/login");
+  } else {
+    const albumInfo = await getOne("albums", params.id, "?market=US");
+    const current = await getCurrentProfile(
+      parseInt(localStorage.getItem("currentUser")),
+    );
+    return {albumInfo, current};
+  }
 }
 
 function Album() {
   const {state, dispatch} = useContext(ProfileContext);
   const {albumInfo, current} = useLoaderData();
+  let userProfile = state.profiles.filter(
+    profile => profile.id === parseInt(localStorage.getItem("currentUser")),
+  )[0];
   let {description, images, name, tracks, external_urls} = albumInfo;
-  let {favoriteTracks, favoriteAlbums, favoriteArtists} = current;
 
   const trackListing = tracks.items.map(track => (
-    <Tracks key={track.id} track={track} favoriteTracks={favoriteTracks} />
+    <Tracks key={track.id} track={track} />
   ));
   return (
     <>

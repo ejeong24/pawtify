@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import {Link, useLoaderData} from "react-router-dom";
+import {Link, redirect, useLoaderData} from "react-router-dom";
 import Tracks from "../Track/Tracks";
 import {getOne} from "../spotify";
 import NavButtons from "../NavButtons";
@@ -7,9 +7,15 @@ import {Users as Followers} from "@styled-icons/fa-solid/Users";
 import {Spotify} from "@styled-icons/fa-brands/Spotify";
 import {getCurrentProfile} from "../Rover";
 export async function loader({params}) {
-  const playlistInfo = await getOne("playlists", params.id, "?market=US");
-  const current = await getCurrentProfile();
-  return {playlistInfo, current};
+  if (parseInt(localStorage.getItem("currentUser")) === 0) {
+    return redirect("/login");
+  } else {
+    const playlistInfo = await getOne("playlists", params.id, "?market=US");
+    const current = await getCurrentProfile(
+      parseInt(localStorage.getItem("currentUser")),
+    );
+    return {playlistInfo, current};
+  }
 }
 function Playlist() {
   const {playlistInfo, current} = useLoaderData();

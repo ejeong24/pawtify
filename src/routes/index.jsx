@@ -1,3 +1,4 @@
+import {useState} from "react";
 import {getAll} from "../components/spotify";
 import {
   useLoaderData,
@@ -43,50 +44,144 @@ export async function loader({params}) {
 
 export default function Index() {
   const {state, dispatch} = useContext(ProfileContext);
+  const [showForm, setShowForm] = useState(false);
   const navigate = useNavigate();
-  async function handleNewUserSubmit(event) {
-    event.preventDefault();
-    const data = {
-      username: "",
-      firstName: "",
-      lastName: "",
-      favoriteAlbums: [],
-      favoriteTracks: [],
-      favoriteArtists: [],
-      avatar: `../assets/avatar${Math.ceil(Math.random()) * 6}.jpg`,
-    };
-    const profile = await createProfile(data);
+  const [formData, setFormData] = useState({
+    username: "",
+    firstName: "",
+    lastName: "",
+    favoriteAlbums: [],
+    favoriteTracks: [],
+    favoriteArtists: [],
+    followedBy: [],
+    following: [],
+    friends: [],
+    avatar: `../assets/avatar${Math.ceil(Math.random()) * 6}.jpg`,
+  });
+  // async function handleNewUserSubmit(event) {
+  //   event.preventDefault();
+  //   const data = {
+  //     username: "",
+  //     firstName: "",
+  //     lastName: "",
+  //     favoriteAlbums: [],
+  //     favoriteTracks: [],
+  //     favoriteArtists: [],
+  //     avatar: `../assets/avatar${Math.ceil(Math.random()) * 6}.jpg`,
+  //   };
+  //   const profile = await createProfile(data);
 
-    dispatch({type: "CREATE", payload: profile});
-    navigate(`/profile/${profile.id}/edit`);
+  //   dispatch({type: "CREATE", payload: profile});
+  //   navigate(`/profile/${profile.id}/edit`);
+  // }
+
+  function handleChange(event) {
+    const name = event.target.name;
+    let value =
+      event.target.type === "checkbox"
+        ? event.target.checked
+        : event.target.value;
+
+    setFormData({...formData, [name]: value});
   }
+  function toggleForm() {
+    setShowForm(prevShowForm => !prevShowForm);
+  }
+  function handleNewProfileSubmit() {}
   return (
     <main>
       {/* HERO in a GRId XS={12}*/}
       <section id="hero">
         <div className="hero min-h-screen relative" id="heroImage">
           <div className="hero-overlay bg-opacity-60"></div>
-          <div className="hero-content text-center text-neutral-content align-baseline">
-            <div className="max-w-lg">
-              <h1 className="mt-48 mb-5 text-4xl font-bold">
-                Music for every party animal
-              </h1>
-              <p className="mb-5"></p>
+          {!showForm ? (
+            <div className="hero-content text-center text-neutral-content align-baseline">
+              <div className="max-w-lg">
+                <h1 className="mt-48 mb-5 text-4xl font-bold">
+                  Music for every party animal
+                </h1>
+                <p className="mb-5"></p>
 
-              <div id="callToAction" onSubmit={handleNewUserSubmit}>
-                <Link to="/home">
-                  <button className="btn btn-primary w-[150px]">
-                    Get Started
+                <div
+                  id="callToAction"
+                  className="justify-center items-center mx-auto">
+                  <button
+                    type="button"
+                    className="btn btn-primary w-fit mx-auto"
+                    onClick={toggleForm}>
+                    Create Profile and Get Started
                   </button>
-                </Link>
-                <form method="post">
-                  <button type="submit" className="btn btn-primary w-[150px]">
-                    Create Profile
-                  </button>
-                </form>
+                </div>
               </div>
             </div>
-          </div>
+          ) : (
+            <form
+              onSubmit={handleNewProfileSubmit}
+              id="profileForm"
+              className="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md">
+              <div className="mb-4">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="firstName">
+                  First Name
+                </label>
+                <input
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+                  type="text"
+                  id="firstName"
+                  name="firstName"
+                  placeholder="John Doe"
+                  defaultValue={formData.firstName}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="mb-4">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="lastName">
+                  Last Name
+                </label>
+                <input
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+                  type="text"
+                  id="lastName"
+                  name="lastName"
+                  placeholder="Doe"
+                  defaultValue={formData.lastName}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="mb-4">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="username">
+                  Username
+                </label>
+                <input
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+                  type="text"
+                  id="username"
+                  name="username"
+                  defaultValue={formData.username}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="flex justify-around">
+                <button
+                  className="w-[125px] bg-indigo-500 text-white text-sm font-bold py-2 px-4 rounded-md hover:bg-indigo-600 transition duration-300"
+                  type="submit">
+                  Save
+                </button>
+                <button
+                  type="button"
+                  className="w-[125px] bg-indigo-500 text-white text-sm font-bold py-2 px-4 rounded-md hover:bg-indigo-600 transition duration-300"
+                  onClick={toggleForm}>
+                  Cancel
+                </button>
+              </div>
+            </form>
+          )}
         </div>
       </section>
     </main>

@@ -8,9 +8,19 @@
       "favoriteTracks": [
         "3yelVZf4p9wDpWjPav5mOn",
         "2NyWdxhlqyrt91PE6Yzf9u",
-        "2nugajeEf9KNKXrpnzamLl"
+        "2nugajeEf9KNKXrpnzamLl",
+        "2Q9pJ2YJOB6jENpyqqkqZf",
+        "556awMv4WQP0h1VXMU8rSU",
+        "5BgnL6gHauuvxe4Ok6W1aC",
+        "6gnjE8oBkosBIEZroEjq4I",
+        "0JmnkIqdlnUzPaf8sqBRs3",
+        "1YLJVmuzeM2YSUkCCaTNUB",
+        "0h3dJV8JA5oxPzSF4tkz2t"
       ],
-      "favoriteArtists": [],
+      "favoriteArtists": [
+        "1YRqgFNXqRyMDRr8ClS1NL",
+        "1Cs0zKBU1kc0i8ypK3B9ai"
+      ],
       "following": [],
       "followedBy": [],
       "avatar": "../src/assets/avatar1.jpg",
@@ -26,8 +36,12 @@
       "firstName": "Ty",
       "lastName": "Blackwell",
       "id": 2,
-      "favoriteAlbums": [],
-      "favoriteTracks": [],
+      "favoriteAlbums": [
+        "0pMuKNqI4VOoLESF5wExWY"
+      ],
+      "favoriteTracks": [
+        "7sliFe6W30tPBPh6dvZsIH"
+      ],
       "favoriteArtists": [],
       "following": [],
       "followedBy": [],
@@ -39,9 +53,17 @@
       "firstName": "Cody",
       "lastName": "Delzer",
       "id": 3,
-      "favoriteAlbums": [],
-      "favoriteTracks": [],
-      "favoriteArtists": [],
+      "favoriteAlbums": [
+        "0pMuKNqI4VOoLESF5wExWY"
+      ],
+      "favoriteTracks": [
+        "5hq7feH89FieadyB13oo5p",
+        "4Y43nu7MxbFOBJnZNfuruc",
+        "5nGITHcYH3Tt5WolBVEcrJ"
+      ],
+      "favoriteArtists": [
+        "220xv2aB3dsGxaJI1gGs7l"
+      ],
       "following": [],
       "followedBy": [],
       "avatar": "../src/assets/avatar3.jpg",
@@ -52,7 +74,9 @@
       "firstName": "Eugene",
       "lastName": "Jeong",
       "id": 4,
-      "favoriteAlbums": [],
+      "favoriteAlbums": [
+        "0pMuKNqI4VOoLESF5wExWY"
+      ],
       "favoriteTracks": [],
       "favoriteArtists": [],
       "following": [],
@@ -84,31 +108,5 @@
       "id": 6,
       "friends": []
     }
-  ],
-  "currentProfile": {
-    "username": "",
-    "firstName": "",
-    "lastName": "",
-    "favoriteTracks": [
-      "3yelVZf4p9wDpWjPav5mOn",
-      "2NyWdxhlqyrt91PE6Yzf9u",
-      "2nugajeEf9KNKXrpnzamLl",
-      "7Gm1XwQL5q72SX76nxuXtW",
-      "0qhGOjVl3uY2N6CAafVmCa",
-      "0q1EgphEnjNphQaiG1wHnw"
-    ],
-    "favoriteArtists": [
-      "0RqtSIYZmd4fiBKVFqyIqD"
-    ],
-    "following": [],
-    "followedBy": [],
-    "avatar": "../src/assets/avatar4.jpg",
-    "favoriteAlbums": [
-      "0XcHdI2ZyNADjfvo5Ubs39",
-      "4JbJCZWuB0iuCZZt8ZISih",
-      "4LPQ70q8ZU6RxDauc4ZPzC"
-    ],
-    "loggedIn": false,
-    "id": 9999
-  }
+  ]
 }

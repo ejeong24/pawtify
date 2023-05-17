@@ -27,8 +27,8 @@ export function getProfile(id) {
     .catch(error => console.log(error.message));
 }
 
-export function getCurrentProfile() {
-  return fetch(`${currentURL}`)
+export function getCurrentProfile(id) {
+  return fetch(`${baseURL}/${id}`)
     .then(response => {
       if (response.ok) {
         return response.json();

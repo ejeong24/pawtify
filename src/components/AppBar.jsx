@@ -78,11 +78,14 @@ function AppBar({onHandleUserChange}) {
         </div>
         <div className="navbar-end">
           {state.userLoggedIn !== 0 ? (
-            <Link to={`../login`}>
-              <button type="button" className="btn btn-secondary">
-                Log Out
-              </button>
-            </Link>
+            <>
+              <Link to={`../profile/${state.userLoggedIn}`}>My Profile</Link>
+              <Link to={`../login`}>
+                <button type="button" className="btn btn-secondary">
+                  Log Out
+                </button>
+              </Link>
+            </>
           ) : (
             <Link to={`../login`}>
               <button type="button" className="btn">
@@ -94,7 +97,7 @@ function AppBar({onHandleUserChange}) {
             id="currentUser"
             defaultValue={state.userLoggedIn || 0}
             onChange={handleChange}>
-            <option value="">Choose a user</option>
+            <option value="0">Choose a user</option>
             {state.profiles.map(profile => (
               <option key={profile.id} value={profile.id}>
                 {profile.firstName}

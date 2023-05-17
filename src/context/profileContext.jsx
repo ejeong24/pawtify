@@ -13,7 +13,7 @@ export const reducer = (state, action) => {
     case "GETCURRENT":
       console.log("GETCURRENT");
 
-      return {...state, currentProfile: action.payload};
+      return {...state, currentUser: action.payload};
     // POST
     case "CREATE":
       console.log("CREATE");
@@ -33,6 +33,7 @@ export const reducer = (state, action) => {
       console.log("UPDATE");
       // if id = newItem.id then newItem, else item
       return {
+        ...state,
         profiles: state.profiles.map(profile =>
           profile.id === action.payload.id ? action.payload : profile,
         ),
@@ -99,37 +100,29 @@ export const ProfilesContextProvider = ({children}) => {
   // };
   const [state, dispatch] = useReducer(reducer, {
     profiles: [],
-    currentProfile: {
-      username: "",
-      firstName: "",
-      lastName: "",
-      favoriteTracks: [],
-      favoriteArtists: [],
-      following: [],
-      followedBy: [],
-      avatar: `../src/assets/avatar${Math.ceil(Math.random() * 6)}.jpg`,
-      favoriteAlbums: [],
-      loggedIn: false,
-      id: "",
-    },
-    userLoggedIn: 0,
+    userLoggedIn: 1,
+    partyMix: {tracks: [], artists: [], genres: []},
   });
+  // localStorage.setItem("currentUser", state.userLoggedIn);
 
-  if (!initialized) {
+  useEffect(() => {
+    localStorage.setItem("currentUser", state.userLoggedIn);
+  }, [state.userLoggedIn]);
+
+  useEffect(() => {
     // GET fetch to dispatch
     fetch(`http://localhost:4000/profiles`)
       .then(resp => resp.json())
       .then(profiles => dispatch({type: "PROFILES", payload: profiles}))
       .catch(error => console.log("error", error.message));
-
+  }, []);
+  useEffect(() => {
     // GET fetch to dispatch
-    fetch(`http://localhost:4000/currentProfile`)
+    fetch(`http://localhost:4000/profiles/${state.userLoggedIn}`)
       .then(resp => resp.json())
       .then(profile => dispatch({type: "GETCURRENT", payload: profile}))
       .catch(error => console.log("error", error.message));
-    setInitialized(prevInitialized => !prevInitialized);
-  }
-
+  }, [state.userLoggedIn]);
   return (
     <ProfileContext.Provider value={{state, dispatch}}>
       {children}
