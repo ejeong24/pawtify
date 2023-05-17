@@ -23,7 +23,7 @@ function AppBar({onHandleUserChange}) {
 
   return (
     <>
-      <div className="navbar sticky top-0 z-10 bg-transparent">
+      <div className="navbar sticky top-0 z-10 bg-base-300">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">

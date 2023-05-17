@@ -37,9 +37,9 @@ export function UserCard({profile, loggedInUser}) {
       : dispatch({type: "USERLOGIN", payload: profile.id});
   }
   return (
-    <div className="card w-96 bg-base-100 shadow-xl">
+    <div className="card w-84 bg-base-100 shadow-xl">
       <figure>
-        <img src={profile.avatar} alt="Shoes" />
+        <img src={profile.avatar} alt="Shoes" className="h-[250px]" />
       </figure>
       <div className="card-body">
         <h2 className="card-title">
