@@ -160,7 +160,7 @@ function Profile() {
   //     : [];
   // }
   const displayFriends =
-    friends.length > 0
+    friends && friends.length > 0
       ? friends.map(friend => (
           <FriendsList
             key={friend.id}

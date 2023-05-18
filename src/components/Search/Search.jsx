@@ -41,11 +41,7 @@ function Searcher() {
       console.error(e);
     }
   };
-  let displayTracks;
-  if (displayTracks) {
-    let {name, id, href} = tracks;
-    displayTracks = tracks.map(track => <TracksResults key={id} name={name} />);
-  }
+  
   return (
     <>
       <div className="SearchForm mx-auto flex">
@@ -64,9 +60,11 @@ function Searcher() {
 
       <div className="grid grid-cols-4 mx-auto">
         <div className="card">
-          {displayTracks && displayTracks.length > 0
-            ? displayTracks
-            : "nothing here"}
+          {tracks && tracks.length > 0 ? (
+             tracks.map(track => (
+             <TracksResults key={track.id} track={track} />
+             ))
+            ) : ("nothing here")}
         </div>
         <div className="card">{/* <ul>{displayArtists}</ul> */}</div>
         <div className="card">{/* <ul>{displayAlbums}</ul> */}</div>
