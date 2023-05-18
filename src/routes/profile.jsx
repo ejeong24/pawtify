@@ -271,7 +271,7 @@ function Profile() {
   // handle accepting of friend requests
   function onHandleAcceptFriend(updatedProfile, friendID, pendingID) {
     const pendingFriends = async () => {
-      return getMyPending(updatedProfile.id).then(pendingRequests =>
+      await getMyPending(updatedProfile.id).then(pendingRequests =>
         setPendingDetails(pendingRequests),
       );
     };
