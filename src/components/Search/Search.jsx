@@ -1,48 +1,78 @@
-import React, {useEffect} from "react";
-import {searchSpotify} from "../spotify";
-import {useLoaderData, useNavigation, useSubmit, Form} from "react-router-dom";
-export async function loader({request}) {
-  const url = new URL(request.url);
-  const q = url.searchParams.get("q");
-  const results = await searchSpotify(q);
-  return {results, q};
+import React, {useState, useEffect, useContext} from "react";
+import {useLoaderData, redirect} from "react-router-dom";
+import {ProfileContext} from "../../context/profileContext";
+import {getCurrentProfile} from "../Rover";
+import TracksResults from "./TracksResults";
+export async function loader({params}) {
+  if (parseInt(localStorage.getItem("currentUser")) === 0) {
+    return redirect("../login");
+  }
+  const {current} = getCurrentProfile(
+    parseInt(localStorage.getItem("currentUser")),
+  );
+  return {current};
 }
-function Search() {
-  const {results, q} = useLoaderData();
-  const navigation = useNavigation();
-  const submit = useSubmit();
-  const searching =
-    navigation.location &&
-    new useEffect(() => {
-      document.getElementById("q").value = q;
-    }, [q]);
+function Searcher() {
+  const {state, dispatch} = useContext(ProfileContext);
+  const {current} = useLoaderData();
+  const [searchKey, setSearchKey] = useState("");
+  const [tracks, setTracks] = useState([]);
+  const [albums, setAlbums] = useState([]);
+  const [artists, setArtists] = useState([]);
+  const access_token = localStorage.getItem("access_token");
 
+  const searchPawtify = async () => {
+    try {
+      const response = await fetch(
+        `https://api.spotify.com/v1/search?q=${searchKey}&market=US&type=album,artist,track&limit=10`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+          },
+        },
+      );
+      const data = await response.json().then(data => {
+        setTracks(data.tracks.items);
+        setAlbums(data.albums.items);
+        setArtists(data.artists.items);
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+  let displayTracks;
+  if (displayTracks) {
+    let {name, id, href} = tracks;
+    displayTracks = tracks.map(track => <TracksResults key={id} name={name} />);
+  }
   return (
-    <Form
-      className="searchbar flex justify-center"
-      id="search-form"
-      role="search">
-      <input
-        type="search"
-        id="q"
-        className={
-          searching
-            ? "loading w-[500px] rounded-full pl-4 my-4"
-            : "w-[500px] h-10 rounded-full pl-4 my-4"
-        }
-        placeholder="not so workies yet"
-        defaultValue={q}
-        onChange={e => {
-          const isFirstSearch = q == null;
-          submit(e.currentTarget.form, {
-            replace: !isFirstSearch,
-          });
-        }}
-      />
-      <button type="submit">🔍</button>
-      <div id="search-spinner" aria-hidden hidden={!searching} />
-      <div className="sr-only" aria-live="polite"></div>
-    </Form>
+    <>
+      <div className="SearchForm mx-auto flex">
+        <input
+          className="Name w-[500px] h-12 my-4 px-4 rounded-full"
+          type="text"
+          placeholder="Search By Artist Name ..."
+          onChange={e => {
+            setSearchKey(e.target.value);
+          }}
+        />
+        <button className="btn btn-accent my-4 ml-4" onClick={searchPawtify}>
+          Search
+        </button>
+      </div>
+
+      <div className="grid grid-cols-4 mx-auto">
+        <div className="card">
+          {displayTracks && displayTracks.length > 0
+            ? displayTracks
+            : "nothing here"}
+        </div>
+        <div className="card">{/* <ul>{displayArtists}</ul> */}</div>
+        <div className="card">{/* <ul>{displayAlbums}</ul> */}</div>
+      </div>
+    </>
   );
 }
-export default Search;
+
+export default Searcher;

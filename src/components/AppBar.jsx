@@ -55,9 +55,9 @@ function AppBar({onHandleUserChange}) {
               <li>
                 <NavLink to={`../new`}></NavLink>
               </li>
-              {/* <li>
+              <li>
                 <NavLink to={`../search`}>Search [WIP]</NavLink>
-              </li> */}
+              </li>
             </ul>
           </div>
 
@@ -78,9 +78,9 @@ function AppBar({onHandleUserChange}) {
             <li>
               <NavLink to={`../new`}>New Releases</NavLink>
             </li>
-            {/* <li>
+            <li>
               <NavLink to={`../search`}>Search [WIP]</NavLink>
-            </li> */}
+            </li>
           </ul>
         </div>
         <div className="navbar-end gap-2">

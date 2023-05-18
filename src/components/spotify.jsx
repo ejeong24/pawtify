@@ -55,7 +55,7 @@ export function getOne(endpoint, id, extension = "") {
 export function searchSpotify(q) {
   let access_token = localStorage.getItem("access_token");
   return fetch(
-    `https://api.spotify.com/v1/search?q=${q}&type=album%2Ctrack%2Cplaylist%2Cartist&market=US&offset=0'`,
+    `https://api.spotify.com/v1/search?q=${q}&type=album,track,playlist,artist&market=US`,
     {
       method: "GET",
       headers: {Authorization: `Bearer ${access_token}`},

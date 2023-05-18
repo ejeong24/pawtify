@@ -36,6 +36,7 @@ import NewReleases, {
   loader as newReleaseLoader,
 } from "./components/NewReleases";
 import Search, {loader as searchLoader} from "./components/Search/Search";
+import Friends, {loader as friendsLoader} from "./components/Friends/Friends";
 // create the router
 
 const router = createBrowserRouter([
@@ -87,6 +88,11 @@ const router = createBrowserRouter([
             element: <EditProfile />,
             loader: profileLoader,
             action: editAction,
+          },
+          {
+            path: "friends",
+            element: <Friends />,
+            loader: friendsLoader,
           },
           // {
           //   path: "profile/:id/destroy",
