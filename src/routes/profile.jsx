@@ -6,7 +6,12 @@ import {
   useNavigate,
   useFetcher,
 } from "react-router-dom";
-import {getProfile, getFriends, getMyPending} from "../components/Rover";
+import {
+  getProfile,
+  getFriends,
+  getMyPending,
+  clearPending,
+} from "../components/Rover";
 import {getAllItems, getOne, getRecommendations} from "../components/spotify";
 import NavButtons from "../components/NavButtons";
 import {ProfileContext} from "../context/profileContext";
@@ -16,14 +21,30 @@ import FavoriteAlbumList from "../components/Users/FavoriteAlbumList";
 import Recommendations from "../components/Recommendations/Recommendations";
 import PartyMix from "../components/Users/PartyMix";
 import FriendsList from "../components/Profile/FriendsList";
-
+import FriendRequest from "../components/Profile/FriendRequests";
 export async function loader({params}) {
   if (parseInt(localStorage.getItem("currentUser")) !== parseInt(params.id)) {
     console.log("not matching user");
     return redirect("../login");
   }
   let profile = await getProfile(params.id);
-  let pendingFriends = await getMyPending(params.id)
+  let pendingFriends = await getMyPending(params.id);
+
+  let requestPending = pendingFriends
+    .map((pending, i) => {
+      if (i === 0) {
+        console.log("hello");
+        return `?id=${pending.initiatedBy}`;
+      } else {
+        return `&id=${pending.initiatedBy}`;
+      }
+    })
+    .join("");
+
+  console.log(requestPending);
+  // ? `?id=${pendingFriends[0].initiateBy}&id=${pendingFriends.slice(1).join("&id=")}`
+  //   : "";
+  let requestDetails = await getFriends(requestPending);
   let albumList =
     profile.favoriteAlbums.length > 0
       ? await getAllItems(
@@ -48,7 +69,7 @@ export async function loader({params}) {
   let friendsIDs = profile.friends.length > 0 ? profile.friends : false;
   let requestString = friendsIDs
     ? `?id=${friendsIDs[0]}&id=${friendsIDs.slice(1).join("&id=")}`
-    : false;
+    : "";
   let friendsDetails = await getFriends(requestString);
   return {
     profile,
@@ -58,7 +79,9 @@ export async function loader({params}) {
     friendsIDs,
     requestString,
     friendsDetails,
-    pendingFriends
+    pendingFriends,
+    requestPending,
+    requestDetails,
   };
 }
 
@@ -70,36 +93,34 @@ function Profile() {
     artistDetails,
     friendsDetails,
     requestString,
-    friendsIDs,pendingFriends
+    friendsIDs,
+    pendingFriends,
+    requestPending,
+    requestDetails,
   } = useLoaderData();
   const navigate = useNavigate();
   const [partyMix, setPartyMix] = useState([]);
   const [showRecommendations, setShowRecommendations] = useState(false);
   const [recommendations, setRecommendations] = useState([]);
-  const fetcher = useFetcher();
   const [friends, setFriends] = useState([]);
-
-  const [pending, setPending] = useState();
-  const [tracksList, setTracksList] = useState(tracksDetails.tracks);
-  const [artistList, setArtistList] = useState(artistDetails.artists);
+  const [pending, setPending] = useState([]);
+  const [pendingDetails, setPendingDetails] = useState([]);
+  const [tracksList, setTracksList] = useState([]);
+  const [artistList, setArtistList] = useState([]);
 
   // Whenever the loader gives us new data
   // (for example, after a form submission),
   // update our `data` state.
-  useEffect(() => setTracksList(tracksDetails.tracks), [tracksList]);
-  useEffect(() => setArtistList(artistDetails.artists), [artistList]);
-  useEffect(() => console.log("profile updated"), [state.profiles]);
-
+  // useEffect(() => setTracksList(tracksDetails.tracks), [tracksList]);
+  // useEffect(() => setArtistList(artistDetails.artists), [artistList]);
   useEffect(() => {
- 
-    if (fetcher.data) {
-      setFriends(fetcher.data.friendsDetails);
-    } else {
-      setFriends(friendsDetails);
-    }
-  }, [fetcher.data]);
+    setFriends(friendsDetails);
+    setPending(requestDetails);
+    setPendingDetails(pendingFriends);
+    setTracksList(tracksDetails.tracks);
+    setArtistList(artistDetails.artists);
+  }, []);
 
- 
   // let {favoriteAlbums, favoriteArtists, favoriteTracks} = profile;
   let userProfile = state.profiles.filter(
     profile => profile.id === parseInt(localStorage.getItem("currentUser")),
@@ -117,13 +138,6 @@ function Profile() {
           />
         ))
       : "No Track Favorites";
-
-  // const displayFavoriteAlbums =
-  //   profile.favoriteAlbums.length > 0
-  //     ? albumList.albums.map(album => (
-  //         <FavoriteAlbumList key={album.id} album={album} />
-  //       ))
-  //     : "No Album Favorites";
 
   const displayFavoriteArtists =
     profile.favoriteArtists.length > 0
@@ -150,23 +164,29 @@ function Profile() {
       );
     });
   }
-  // function getTrackList(tracks){
-  //   let tracksList =
-  //   profile.favoriteTracks.length > 0
-  //     ? await getAllItems(
-  //         "tracks",
-  //         `?ids=${profile.favoriteTracks.join(",")}&market=US`,
-  //       )
-  //     : [];
-  // }
+
   const displayFriends =
-    friends.length > 0
+    friends && friends.length > 0
       ? friends.map(friend => (
           <FriendsList
             key={friend.id}
             friend={friend}
-            profile={profile}
+            profile={userProfile}
             onHandleRemoveFriend={onHandleRemoveFriend}
+          />
+        ))
+      : "Loading...";
+
+  const displayPending =
+    pending && pending.length > 0
+      ? pending.map(newFriend => (
+          <FriendRequest
+            key={newFriend.id}
+            friend={newFriend}
+            profile={userProfile}
+            pendingDetails={pendingDetails}
+            onHandleAcceptFriend={onHandleAcceptFriend}
+            onHandleDeclineFriend={onHandleDeclineFriend}
           />
         ))
       : "Loading...";
@@ -217,6 +237,7 @@ function Profile() {
     setTracksList(updatedTracks);
   }
   function onDeleteArtistFromFavorites(artistID) {
+    console.log(artistID);
     const updatedArtists = [...artistList].filter(
       artist => artist.id !== artistID,
     );
@@ -237,15 +258,62 @@ function Profile() {
       .then(() => navigate("../"))
       .catch(error => console.log("error", error.message));
   }
+  function clearPendingRequests(pendingID) {
+    //regularDELETE
+    console.log(pendingID);
+    fetch(`http://localhost:4000/clearPending/${pendingID[0].id}`, {
+      method: "DELETE",
+    })
+      .then(resp => resp.json())
+      .then(() => console.log("deleted"))
+      .catch(error => console.log("error", error.message));
+  }
+  // handle accepting of friend requests
+  function onHandleAcceptFriend(updatedProfile, friendID, pendingID) {
+    const pendingFriends = async () => {
+      return getMyPending(updatedProfile.id).then(pendingRequests =>
+        setPendingDetails(pendingRequests),
+      );
+    };
+    pendingFriends();
+
+    let requestPending = pendingFriends
+      .map((pending, i) => {
+        if (i === 0) {
+          console.log("hello");
+          return `?id=${pending.initiatedBy}`;
+        } else {
+          return `&id=${pending.initiatedBy}`;
+        }
+      })
+      .join("");
+
+    console.log(requestPending);
+    const requestDetails = async () => {
+      await getFriends(requestPending).then(data => setPending(data));
+    };
+    requestDetails();
+    dispatch({type: "UPDATE", payload: requestDetails});
+  }
+  //handle decline of friend requests
+  function onHandleDeclineFriend() {}
 
   function onHandleRemoveFriend(updatedFriends, friendID) {
+    let requestString = updatedFriends.friends
+      ? `?id=${updatedFriends.friends[0]}&id=${updatedFriends.friends
+          .slice(1)
+          .join("&id=")}`
+      : false;
+    const friendsDetails = async () => {
+      await getFriends(requestString).then(data => setFriends(data));
+    };
+    console.log(updatedFriends);
+    friendsDetails();
     dispatch({type: "UPDATE", payload: updatedFriends});
     dispatch({type: "UPDATECURRENT", payload: updatedFriends});
-    fetcher.load();
   }
   return (
     <>
-      <NavButtons />
       <div className="flex flex-col justify-center items-center mt-10">
         <section className="flex justify-center gap-4 max-w-full">
           <div className="card lg:card-side bg-base-100 shadow-xl flex-shrink">
@@ -272,13 +340,22 @@ function Profile() {
               </form>
             </div>
           </div>{" "}
-          <article className="w-fit">
+          <article className="w-fit max-h-[280px] overflow-auto ">
             <div
               tabIndex={0}
-              className="collapse collapse-arrow collapse-open border border-base-300 bg-base-100 rounded-box items-start justify-start">
+              className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box items-start justify-start">
+              <input type="checkbox" />
+              <div className="collapse-title text-xl font-medium">
+                Pending Friending
+              </div>
+              <div className="collapse-content">{displayPending}</div>
+            </div>
+            <div
+              tabIndex={0}
+              className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box items-start justify-start">
               <input type="checkbox" />
               <div className="collapse-title text-xl font-medium">Friends</div>
-              <div className="collapse-content">{displayFriends} hi </div>
+              <div className="collapse-content">{displayFriends}</div>
             </div>
           </article>
         </section>

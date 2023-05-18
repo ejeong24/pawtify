@@ -18,6 +18,7 @@ function FriendsList({friend, onHandleRemoveFriend, profile}) {
       
         onHandleRemoveFriend(updatedFriends, friend.id);
       });
+
   }
   return (
     <div className="flex flex-col mb-2">

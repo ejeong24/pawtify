@@ -1,3 +1,5 @@
 {
-  "/username/:username/available": "/profiles?username=:username"
+  "/username/:username/available": "/profiles?username=:username",
+  "/friendRequests/:target": "/pending?target=:target",
+  "/clearPending/:id": "/pending/:id"
 }

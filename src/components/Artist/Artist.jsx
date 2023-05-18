@@ -1,5 +1,5 @@
 import React, {useContext, useState} from "react";
-import {Link, useLoaderData} from "react-router-dom";
+import {Link, useLoaderData, redirect} from "react-router-dom";
 import Tracks from "../Track/Tracks";
 import {getOne, getRecommendations} from "../spotify";
 import AlbumListings from "../Album/AlbumListings";
@@ -12,7 +12,7 @@ import {ProfileContext} from "../../context/profileContext";
 import NavButtons from "../NavButtons";
 export async function loader({params}) {
   if (parseInt(localStorage.getItem("currentUser")) === 0) {
-    return redirect("/login");
+    return redirect("../login");
   } else {
     const artistInfo = await getOne("artists", params.id, "?market=US");
     const artistAlbums = await getOne(
@@ -33,10 +33,11 @@ export async function loader({params}) {
 }
 
 function Artist() {
+  console.log("hello");
   const {state, dispatch} = useContext(ProfileContext);
-
   const {artistInfo, artistAlbums, arrayOfAlbums, allTracks, current} =
     useLoaderData();
+
   const [isFavoriteArtist, setIsFavoriteArtist] = useState(
     current.favoriteArtists.includes(artistInfo.id),
   );

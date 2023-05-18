@@ -24,6 +24,7 @@ function Track() {
   const {trackDetails, similarMusic} = useLoaderData();
   const [isTrackFavorite, setIsTrackFavorite] = useState(false);
   let {
+    id,
     name,
     album,
     artists,
@@ -45,28 +46,40 @@ function Track() {
   function handleFavoriteButtonClick() {
     console.log(id);
     // let favoriteToUpdate;
+    // let updatedFavorite;
+    // if (state.currentProfile.favoriteTracks.includes(id)) {
+    //   console.log("already in array");
+    //   updatedFavorite = [...state.currentProfile.favoriteTracks].filter(
+    //     track => track != id,
+    //   );
+    // } else {
+    //   updatedFavorite = [...state.currentProfile.favoriteTracks, id];
+    // }
+
     let updatedFavorite;
-    if (state.currentProfile.favoriteTracks.includes(id)) {
-      console.log("already in array");
-      updatedFavorite = [...state.currentProfile.favoriteTracks].filter(
+    let userProfile = state.profiles.filter(
+      profile => profile.id === parseInt(localStorage.getItem("currentUser")),
+    )[0];
+    if (userProfile.favoriteTracks.includes(id)) {
+      updatedFavorite = [...userProfile.favoriteTracks].filter(
         track => track != id,
       );
     } else {
-      updatedFavorite = [...state.currentProfile.favoriteTracks, id];
+      updatedFavorite = [...userProfile.favoriteTracks, id];
     }
 
-    // //regularPATCH
-    fetch(`http://localhost:4000/currentProfile/`, {
+    // regularPATCH;
+    fetch(`http://localhost:4000/profiles/${userProfile.id}`, {
       method: "PATCH",
       body: JSON.stringify({
-        ...state.currentProfile,
+        ...userProfile,
         favoriteTracks: updatedFavorite,
       }),
       headers: {"content-type": "application/json"},
     })
       .then(resp => resp.json())
       .then(updatedProfile => {
-        dispatch({type: "UPDATECURRENT", payload: updatedProfile});
+        dispatch({type: "UPDATE", payload: updatedProfile});
       })
       .catch(error => console.log("error", error.message));
     setIsTrackFavorite(prevFavorite => !prevFavorite);

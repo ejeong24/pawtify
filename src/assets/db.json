@@ -6,8 +6,6 @@
       "lastName": "Loomis",
       "id": 1,
       "favoriteTracks": [
-        "3dnP0JxCgygwQH9Gm7q7nb",
-        "0WtM2NBVQNNJLh6scP13H8",
         "1Qrg8KqiBpW07V7PNxwwwL",
         "5w40ZYhbBMAlHYNDaVJIUu",
         "0yLdNVWF3Srea0uzk55zFn",
@@ -17,7 +15,8 @@
         "6ZZf5a8oiInHDkBe9zXfLP",
         "4LRPiXqCikLlN15c3yImP7",
         "26b3oVLrRUaaybJulow9kz",
-        "7oDd86yk8itslrA9HRP2ki"
+        "7oDd86yk8itslrA9HRP2ki",
+        "6HgWWaMu31KdOpEG5l28BG"
       ],
       "favoriteArtists": [],
       "following": [],
@@ -29,7 +28,7 @@
         "4LPQ70q8ZU6RxDauc4ZPzC",
         "50MzJhO0pMjTsfpeOmZ1so"
       ],
-      "friends": [2, 6, 8, 10, 16]
+      "friends": [2, 4, 6, 12, 23]
     },
     {
       "username": "ScoobyDoo",
@@ -50,16 +49,12 @@
       "lastName": "Delzer",
       "id": 3,
       "favoriteAlbums": ["0pMuKNqI4VOoLESF5wExWY"],
-      "favoriteTracks": [
-        "6uL6HCOsEwvnmCX4cDf65g",
-        "10eBRyImhfqVvkiVEGf0N0",
-        "6gnjE8oBkosBIEZroEjq4I"
-      ],
-      "favoriteArtists": ["220xv2aB3dsGxaJI1gGs7l"],
+      "favoriteTracks": ["6uL6HCOsEwvnmCX4cDf65g", "10eBRyImhfqVvkiVEGf0N0"],
+      "favoriteArtists": [],
       "following": [],
       "followedBy": [],
       "avatar": "../src/assets/avatar3.jpg",
-      "friends": []
+      "friends": [1, 2, 6]
     },
     {
       "username": "Astro",
@@ -286,7 +281,7 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [33, 87, 16],
+      "friends": [33, 87, 16, 1, 1, 1, 1, 1, 1, 1, 1],
       "avatar": "../src/assets/avatar6.jpg",
       "username": "RenaFuller3326"
     },
@@ -1183,12 +1178,35 @@
     }
   ],
   "pending": [
-    {"id": 1, "initiatedBy": 1, "target": 9},
-    {"id": 2, "initiatedBy": 1, "target": 4},
-    {"id": 3, "initiatedBy": 4, "target": 2},
-    {"id": 4, "initiatedBy": 3, "target": 1},
-    {"id": 5, "initiatedBy": 24, "target": 1},
-    {"id": 6, "initiatedBy": 15, "target": 90},
-    {"id": 7, "initiatedBy": 17, "target": 99}
+    {
+      "id": 1,
+      "initiatedBy": 1,
+      "target": 9
+    },
+    {
+      "id": 3,
+      "initiatedBy": 4,
+      "target": 2
+    },
+    {
+      "id": 4,
+      "initiatedBy": 23,
+      "target": 1
+    },
+    {
+      "id": 5,
+      "initiatedBy": 24,
+      "target": 1
+    },
+    {
+      "id": 6,
+      "initiatedBy": 15,
+      "target": 90
+    },
+    {
+      "id": 7,
+      "initiatedBy": 17,
+      "target": 99
+    }
   ]
 }
