@@ -1,7 +1,6 @@
 import React, {useState, useContext} from "react";
 import {useLoaderData} from "react-router-dom";
 import {getAll, getOne} from "../components/spotify";
-// import {getAccessToken, redirectToAuthCodeFlow} from "../components/auth";
 import Card from "../components/Card";
 import {getProfile, getProfiles} from "../components/Rover";
 import {ProfileContext} from "../context/profileContext";

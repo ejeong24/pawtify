@@ -6,7 +6,6 @@ import Root, {
   action as rootAction,
   loader as rootLoader,
 } from "./routes/root.jsx";
-import {action as destroyAction} from "./routes/destroy";
 import Index, {loader as indexLoader} from "./routes/index";
 import ErrorPage from "./ErrorPage";
 import Profile, {loader as profileLoader} from "./routes/profile";
@@ -94,11 +93,6 @@ const router = createBrowserRouter([
             element: <Friends />,
             loader: rootLoader,
           },
-          // {
-          //   path: "profile/:id/destroy",
-          //   action: destroyAction,
-          //   errorElement: <div>Oops! There must be an error somewhere.</div>,
-          // },
           {
             path: "artists",
             element: <Artists />,

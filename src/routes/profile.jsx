@@ -101,17 +101,17 @@ function Profile() {
   }, []);
   useEffect(() => {}, [pendingFriendRequests]);
   // let {favoriteAlbums, favoriteArtists, favoriteTracks} = profile;
-  const newFriend = () =>
-    toast.info("🦄 New friend request!", {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
+  // const newFriend = () =>
+  //   toast.info("🦄 New friend request!", {
+  //     position: "top-right",
+  //     autoClose: 5000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: true,
+  //     draggable: true,
+  //     progress: undefined,
+  //     theme: "dark",
+  //   });
   //ANCHOR - displayFavoriteTracks
   const displayFavoriteTracks =
     profile.favoriteTracks.length > 0

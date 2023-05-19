@@ -1,5 +1,5 @@
 import React, {useState, useReducer, createContext, useEffect} from "react";
-import {useFetcher} from "react-router-dom";
+
 // create the context
 export const ProfileContext = createContext();
 
@@ -126,7 +126,6 @@ export const ProfilesContextProvider = ({children}) => {
     pendingRequests: [],
     partyMix: {tracks: [], artists: [], genres: []},
   });
-  // localStorage.setItem("currentUser", state.userLoggedIn);
 
   useEffect(() => {
     localStorage.setItem("currentUser", state.userLoggedIn);

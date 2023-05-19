@@ -8,7 +8,6 @@ import {
   useNavigation,
   useSubmit,
 } from "react-router-dom";
-// these are styling components
 
 //ROVER calls
 import {
