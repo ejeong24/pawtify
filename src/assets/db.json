@@ -1822,6 +1822,19 @@
       ],
       "avatar": "../src/assets/avatar4.jpg",
       "username": "GoffPacheco6400"
+    },
+    {
+      "firstName": "test",
+      "lastName": "test",
+      "username": "adsfgasffas",
+      "favoriteAlbums": [],
+      "favoriteTracks": [],
+      "favoriteArtists": [],
+      "followedBy": [],
+      "following": [],
+      "friends": [],
+      "avatar": "../assets/avatar6.jpg",
+      "id": 105
     }
   ],
   "pending": [
