@@ -1,4 +1,5 @@
 import React, {useState, useReducer, createContext, useEffect} from "react";
+import {useFetcher} from "react-router-dom";
 // create the context
 export const ProfileContext = createContext();
 
@@ -14,6 +15,10 @@ export const reducer = (state, action) => {
       console.log("GETCURRENT");
 
       return {...state, currentUser: action.payload};
+    case "GETALLPENDING":
+      console.log("GETALLPENDING");
+
+      return {...state, pendingRequests: action.payload};
     // POST
     case "CREATE":
       console.log("CREATE");
@@ -21,6 +26,13 @@ export const reducer = (state, action) => {
       return {
         ...state,
         profiles: [action.payload, ...state.profiles],
+      };
+    case "FRIENDREQUESTED":
+      console.log("FRIENDREQUESTED");
+      // return newItem into the array
+      return {
+        ...state,
+        pendingRequests: [action.payload, ...state.pendingRequests],
       };
     case "SETCURRENTPROFILE":
       console.log("SETCURRENTPROFILE");
@@ -49,6 +61,14 @@ export const reducer = (state, action) => {
         ...state,
         profiles: state.profiles.filter(
           profile => profile.id !== action.payload.id,
+        ),
+      };
+    case "FRIENDREQUESTREMOVE":
+      console.log("FRIENDREQUESTREMOVE");
+      return {
+        ...state,
+        pendingRequests: state.pendingRequests.filter(
+          request => request.id !== action.payload,
         ),
       };
     case "EDITNEWPROFILE":
@@ -98,10 +118,12 @@ export const ProfilesContextProvider = ({children}) => {
   //   loggedIn: false,
   //   id: "",
   // };
+
   const [state, dispatch] = useReducer(reducer, {
     profiles: [],
     userLoggedIn: parseInt(localStorage.getItem("currentUser")) || 0,
     currentProfile: [],
+    pendingRequests: [],
     partyMix: {tracks: [], artists: [], genres: []},
   });
   // localStorage.setItem("currentUser", state.userLoggedIn);
@@ -127,7 +149,13 @@ export const ProfilesContextProvider = ({children}) => {
         .catch(error => console.log("error", error.message));
     }
   }, [state.userLoggedIn]);
-
+  useEffect(() => {
+    // GET fetch to dispatch
+    fetch(`http://localhost:4000/pending`)
+      .then(resp => resp.json())
+      .then(profiles => dispatch({type: "GETALLPENDING", payload: profiles}))
+      .catch(error => console.log("error", error.message));
+  }, []);
   return (
     <ProfileContext.Provider value={{state, dispatch}}>
       {children}

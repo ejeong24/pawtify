@@ -92,7 +92,8 @@ export default function Index() {
                 <div
                   id="callToAction"
                   className="justify-center items-center mx-auto">
-                  {parseInt(localStorage.getItem("currentUser")) === 0 ? (
+                  {parseInt(localStorage.getItem("currentUser")) === 0 ||
+                  state.userLoggedIn === 0 ? (
                     <button
                       type="button"
                       className="btn btn-primary w-fit mx-auto"

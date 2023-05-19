@@ -1,31 +1,9 @@
-import React from "react";
+import React, {useContext} from "react";
+import {useNavigate} from "react-router-dom";
 import {Formik, useFormik} from "formik";
 import * as Yup from "yup";
+import {ProfileContext} from "../../context/profileContext";
 
-// A custom validation function. This must return an object
-// which keys are symmetrical to our values/initialValues
-// const validate = values => {
-//   const errors = {};
-//   if (!values.firstName) {
-//     errors.firstName = "Required";
-//   } else if (values.firstName.length < 2) {
-//     errors.firstName = "Must be at least 2 characters";
-//   }
-
-//   if (!values.lastName) {
-//     errors.lastName = "Required";
-//   } else if (values.lastName.length < 2) {
-//     errors.lastName = "Must be at least 2 characters";
-//   }
-
-//   if (!values.username) {
-//     errors.username = "Required";
-//   } else if (!/^[A-Za-z][A-Za-z0-9_]{5,29}$/i.test(values.username)) {
-//     errors.username = "Invalid username";
-//   }
-
-//   return errors;
-// };
 const ProfileSchema = Yup.object().shape({
   firstName: Yup.string()
     .min(2, "Too Short!")
@@ -49,6 +27,26 @@ const checkUsername = username => {
     });
 };
 export const ProfileForm = ({toggleForm}) => {
+  const {state, dispatch} = useContext(ProfileContext);
+  const navigate = useNavigate();
+  function handleNewProfileSubmit(values) {
+    // POST fetch to dispatch
+    fetch(`http://localhost:4000/profiles`, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(values),
+    })
+      .then(resp => resp.json())
+      .then(newProfile => {
+        console.log(newProfile.id);
+        // ensure we update the local cookie before sending off other data
+        localStorage.setItem("currentUser", newProfile.id);
+        dispatch({type: "CREATE", payload: newProfile});
+        navigate(`../profile/${newProfile.id}`);
+      })
+
+      .catch(error => console.log("error", error.message));
+  }
   // Pass the useFormik() hook initial form values, a validate function that will be called when
   // form values change or fields are blurred, and a submit function that will
   // be called when the form is submitted
@@ -57,11 +55,16 @@ export const ProfileForm = ({toggleForm}) => {
       firstName: "",
       lastName: "",
       username: "",
+      favoriteAlbums: [],
+      favoriteTracks: [],
+      favoriteArtists: [],
+      followedBy: [],
+      following: [],
+      friends: [],
+      avatar: `../assets/avatar${Math.ceil(Math.random()) * 6}.jpg`,
     },
     validationSchema: ProfileSchema,
-    onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
-    },
+    onSubmit: values => handleNewProfileSubmit(values),
   });
   return (
     <form

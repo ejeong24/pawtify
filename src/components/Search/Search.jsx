@@ -51,7 +51,7 @@ function Searcher() {
         <input
           className="Name w-[500px] h-12 my-4 px-4 rounded-full"
           type="text"
-          placeholder="Search By Artist Name ..."
+          placeholder="Search by song, artist, or album..."
           onChange={e => {
             setSearchKey(e.target.value);
           }}

@@ -1,6 +1,6 @@
 import React, {useContext, useState} from "react";
 import {getProfiles} from "../Rover";
-import {useLoaderData, Link} from "react-router-dom";
+import {useLoaderData, Link, useFetcher} from "react-router-dom";
 import {ProfileContext} from "../../context/profileContext";
 import NavButtons from "../NavButtons";
 export async function loader() {
@@ -12,6 +12,7 @@ export async function action() {}
 function Users() {
   const {state, dispatch} = useContext(ProfileContext);
   const {profiles} = useLoaderData();
+
   const displayProfiles = profiles.map(profile => (
     <UserCard
       key={profile.id}
@@ -31,7 +32,9 @@ export default Users;
 
 export function UserCard({profile, loggedInUser}) {
   const {state, dispatch} = useContext(ProfileContext);
+  const fetcher = useFetcher();
   function handleClick(event) {
+
     profile.id === loggedInUser
       ? dispatch({type: "USERLOGOUT", payload: 0})
       : dispatch({type: "USERLOGIN", payload: profile.id});

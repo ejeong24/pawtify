@@ -16,6 +16,7 @@ import {
   createProfile,
   updateProfile,
   deleteProfile,
+  getAllPendingFriendings,
 } from "../components/Rover";
 import {getANewToken} from "../components/auth";
 import AppBar from "../components/AppBar";
@@ -33,7 +34,8 @@ if (!expiresAt && !access_token) {
 }
 export async function loader({params}) {
   const profiles = await getProfiles();
-  return {profiles};
+  const pendingFriendRequests = await getAllPendingFriendings();
+  return {profiles, pendingFriendRequests};
 }
 export async function action() {
   const data = {

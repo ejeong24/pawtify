@@ -1,20 +1,30 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {useLoaderData, Link, NavLink} from "react-router-dom";
 import PetsIcon from "@mui/icons-material/Pets";
 const pages = ["Home", "New Releases", "Genres", "Albums"];
 const settings = ["Profile", "Dashboard", "Logout"];
-import {getProfiles} from "./Rover";
+import {getAllPendingFriendings, getProfiles} from "./Rover";
 import {ProfileContext} from "../context/profileContext";
 import NavButtons from "./NavButtons";
-import {useRouteLoaderData} from "react-router-dom";
+import {useRouteLoaderData, useFetcher} from "react-router-dom";
+import PeopleIcon from "@mui/icons-material/People";
 
-export async function loader(){
-  
-}
 function AppBar({onHandleUserChange}) {
   const {state, dispatch} = useContext(ProfileContext);
-  const {profiles} = useRouteLoaderData("root");
+  const [pendingFriends, setPendingFriends] = useState();
+
+  const {profiles, pendingFriendRequests} = useRouteLoaderData("root");
+  const fetcher = useFetcher();
   const userLoggedIn = parseInt(localStorage.getItem("currentUser"));
+
+  let myPendingRequests;
+  useEffect(() => {
+    myPendingRequests = state.pendingRequests.filter(
+      request => request.target === userLoggedIn,
+    );
+    setPendingFriends(myPendingRequests);
+  }, [userLoggedIn]);
+
   function handleChange(event) {
     if (event.target.value === 0) {
       dispatch({type: "USERLOGOUT", payload: 0});
@@ -82,20 +92,34 @@ function AppBar({onHandleUserChange}) {
             <li>
               <NavLink to={`../search`}>Search [WIP]</NavLink>
             </li>
-            <li>
-              <NavLink to={`../friends`}>Find Friends</NavLink>
-            </li>
+            {userLoggedIn !== 0 ? (
+              <li>
+                <NavLink to={`../friends`}>Find Friends</NavLink>
+              </li>
+            ) : (
+              <></>
+            )}
           </ul>
         </div>
-        <div className="navbar-end gap-2">
+        <div className="navbar-end gap-6">
           {state.userLoggedIn !== 0 ? (
             <>
-              <Link to={`../profile/${userLoggedIn}`}>
-                <button className="btn gap-2">
-                  Inbox
-                  <div className="badge badge-secondary">+99</div>
-                </button>
-              </Link>
+              {pendingFriends && pendingFriends.length > 0 ? (
+                <Link to={`../profile/${userLoggedIn}`}>
+                  <div className="my-6 indicator">
+                    <div className="indicator-item badge bg-primary text-white">
+                      {pendingFriends.length}
+                    </div>
+
+                    <button className="btn bg-transparent w-16">
+                      <PeopleIcon className="text-white" sx={{fontSize: 36}} />
+                    </button>
+                  </div>
+                </Link>
+              ) : (
+                <div></div>
+              )}
+
               <Link to={`../profile/${state.userLoggedIn}`}>
                 <button className="btn btn-accent">My Profile</button>
               </Link>

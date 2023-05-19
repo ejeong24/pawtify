@@ -32,21 +32,6 @@ export async function loader({params}) {
   let profile = await getProfile(params.id);
   let pendingFriendings = await getAllPendingFriendings();
 
-  // let requestPending = pendingFriends
-  //   .map((pending, i) => {
-  //     if (i === 0) {
-  //       console.log("hello");
-  //       return `?id=${pending.initiatedBy}`;
-  //     } else {
-  //       return `&id=${pending.initiatedBy}`;
-  //     }
-  //   })
-  //   .join("");
-
-  // console.log(requestPending);
-  // // ? `?id=${pendingFriends[0].initiateBy}&id=${pendingFriends.slice(1).join("&id=")}`
-  // //   : "";
-  // let requestDetails = await getFriends(requestPending);
   let albumList =
     profile.favoriteAlbums.length > 0
       ? await getAllItems(
@@ -94,30 +79,24 @@ function Profile() {
   const [showRecommendations, setShowRecommendations] = useState(false);
   const [recommendations, setRecommendations] = useState([]);
   const [friends, setFriends] = useState([]);
-  // const [pending, setPending] = useState([]);
-  // const [pendingDetails, setPendingDetails] = useState([]);
   const [tracksList, setTracksList] = useState([]);
   const [artistList, setArtistList] = useState([]);
   const [pendingFriendRequests, setPendingFriendRequests] = useState([]);
   let userProfile = state.profiles.filter(
     profile => profile.id === parseInt(localStorage.getItem("currentUser")),
   )[0];
-  // Whenever the loader gives us new data
-  // (for example, after a form submission),
-  // update our `data` state.
-  // useEffect(() => setTracksList(tracksDetails.tracks), [tracksList]);
-  // useEffect(() => setArtistList(artistDetails.artists), [artistList]);
+  const fetcher = useFetcher();
+
   useEffect(() => {
+    fetcher.load();
     let friendsDetails = profiles.filter(profile =>
       userProfile.friends.includes(profile.id),
     );
     console.log(friendsDetails);
     setFriends(friendsDetails);
-    // setPending(requestDetails);
-    // setPendingDetails(pendingFriends);
     setTracksList(tracksDetails.tracks);
     setArtistList(artistDetails.artists);
-    setPendingFriendRequests(pendingFriendings);
+    setPendingFriendRequests(state.pendingRequests);
   }, []);
 
   // let {favoriteAlbums, favoriteArtists, favoriteTracks} = profile;
@@ -192,6 +171,12 @@ function Profile() {
           onHandleDeclineFriend={onHandleDeclineFriend}
         />
       ));
+  }
+  let numberOfMyPendingRequests;
+  if (pendingFriendRequests && pendingFriendRequests.length > 0) {
+    numberOfMyPendingRequests = pendingFriendRequests.filter(
+      request => request.target === userProfile.id,
+    );
   }
 
   //ANCHOR - What happens when we click add to party button
@@ -283,8 +268,9 @@ function Profile() {
     let updatedPendingRequests = [...pendingFriendRequests].filter(
       request => request.id !== pendingID,
     );
-    setPendingFriendRequests(updatedPendingRequests);
     dispatch({type: "UPDATE", payload: updatedProfile});
+    fetcher.load();
+    setPendingFriendRequests(updatedPendingRequests);
   }
   //handle decline of friend requests
   function onHandleDeclineFriend(pendingRequestID) {
@@ -337,14 +323,21 @@ function Profile() {
               </form>
             </div>
           </div>{" "}
-          <article className="w-fit max-h-[280px] overflow-auto ">
+          <article className="w-fit max-h-[280px] overflow-auto">
             {displayPending && displayPending.length > 0 ? (
               <div
                 tabIndex={0}
                 className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box items-start justify-start">
                 <input type="checkbox" />
-                <div className="collapse-title text-xl font-medium">
+                <div className="collapse-title text-xl w-full font-medium flex after:ml-auto after:w-full">
                   Pending Friending
+                  <span className="stat-value text-right ml-auto text-secondary">
+                    {state.pendingRequests &&
+                    state.pendingRequests.length > 0 &&
+                    pendingFriendRequests.length > 0
+                      ? numberOfMyPendingRequests.length
+                      : ""}
+                  </span>
                 </div>
                 <div className="collapse-content">{displayPending}</div>
               </div>
@@ -354,8 +347,13 @@ function Profile() {
             <div
               tabIndex={0}
               className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box items-start justify-start">
-              <input type="checkbox" />
-              <div className="collapse-title text-xl font-medium">Friends</div>
+              <input type="checkbox" className="ml-auto w-full" />
+              <div className="collapse-title text-xl w-full font-medium flex justify-between after:ml-auto after:w-full">
+                <span>Friends</span>{" "}
+                <span className="stat-value text-right ml-auto">
+                  {friends && friends.length > 0 ? friends.length : 0}
+                </span>
+              </div>
               <div className="collapse-content">{displayFriends}</div>
             </div>
           </article>
