@@ -81,6 +81,9 @@ function AppBar({onHandleUserChange}) {
             <li>
               <NavLink to={`../search`}>Search [WIP]</NavLink>
             </li>
+            <li>
+              <NavLink to={`../friends`}>Find Friends</NavLink>
+            </li>
           </ul>
         </div>
         <div className="navbar-end gap-2">

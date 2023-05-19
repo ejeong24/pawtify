@@ -7,11 +7,25 @@ function FriendRequests({
   friend,
   onHandleAcceptFriend,
   onHandleDeclineFriend,
-  pendingDetails,
+  pendingRequestID,
   profile,
 }) {
   const {state, dispatch} = useContext(ProfileContext);
+  console.log(pendingRequestID);
   function handleAcceptFriend() {
+    // complete the request
+
+    fetch(`http://localhost:4000/clearPending/${pendingRequestID}`, {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+      .then(resp => resp.json())
+      .then(() => console.log("deleted"))
+      .catch(error => console.log("error", error.message));
+
+    // clean up the friends friends lists
     let friendFriendsList = [...friend.friends, profile.id];
     fetch(`http://localhost:4000/profiles/${friend.id}`, {
       method: "PATCH",
@@ -24,10 +38,9 @@ function FriendRequests({
       )
       .catch(error => console.log("error", error.message));
 
+    //clean up our friends list
     let updatedFriendList = [...profile.friends, friend.id];
-    let pendingID = pendingDetails.filter(
-      details => details.initiatedBy === friend.id,
-    );
+
     console.log(updatedFriendList);
     fetch(`http://localhost:4000/profiles/${profile.id}`, {
       method: "PATCH",
@@ -38,10 +51,23 @@ function FriendRequests({
     })
       .then(response => response.json())
       .then(updatedFriendList => {
-        onHandleAcceptFriend(updatedFriendList, friend.id, pendingID);
+        // console.log(updatedFriendList);
+        onHandleAcceptFriend(updatedFriendList, pendingRequestID);
       });
   }
-  function handleDeclineFriend() {}
+  function handleDeclineFriend() {
+    // complete the request
+
+    fetch(`http://localhost:4000/clearPending/${pendingRequestID}`, {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+      .then(resp => resp.json())
+      .then(() => onHandleDeclineFriend(pendingRequestID))
+      .catch(error => console.log("error", error.message));
+  }
 
   return (
     <div className="flex flex-col mb-2">

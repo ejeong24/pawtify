@@ -5,12 +5,14 @@ import {
   useLoaderData,
   useNavigate,
   useFetcher,
+  useRouteLoaderData,
 } from "react-router-dom";
 import {
   getProfile,
   getFriends,
   getMyPending,
   clearPending,
+  getAllPendingFriendings,
 } from "../components/Rover";
 import {getAllItems, getOne, getRecommendations} from "../components/spotify";
 import NavButtons from "../components/NavButtons";
@@ -28,23 +30,23 @@ export async function loader({params}) {
     return redirect("../login");
   }
   let profile = await getProfile(params.id);
-  let pendingFriends = await getMyPending(params.id);
+  let pendingFriendings = await getAllPendingFriendings();
 
-  let requestPending = pendingFriends
-    .map((pending, i) => {
-      if (i === 0) {
-        console.log("hello");
-        return `?id=${pending.initiatedBy}`;
-      } else {
-        return `&id=${pending.initiatedBy}`;
-      }
-    })
-    .join("");
+  // let requestPending = pendingFriends
+  //   .map((pending, i) => {
+  //     if (i === 0) {
+  //       console.log("hello");
+  //       return `?id=${pending.initiatedBy}`;
+  //     } else {
+  //       return `&id=${pending.initiatedBy}`;
+  //     }
+  //   })
+  //   .join("");
 
-  console.log(requestPending);
-  // ? `?id=${pendingFriends[0].initiateBy}&id=${pendingFriends.slice(1).join("&id=")}`
-  //   : "";
-  let requestDetails = await getFriends(requestPending);
+  // console.log(requestPending);
+  // // ? `?id=${pendingFriends[0].initiateBy}&id=${pendingFriends.slice(1).join("&id=")}`
+  // //   : "";
+  // let requestDetails = await getFriends(requestPending);
   let albumList =
     profile.favoriteAlbums.length > 0
       ? await getAllItems(
@@ -70,7 +72,7 @@ export async function loader({params}) {
   let requestString = friendsIDs
     ? `?id=${friendsIDs[0]}&id=${friendsIDs.slice(1).join("&id=")}`
     : "";
-  let friendsDetails = await getFriends(requestString);
+
   return {
     profile,
     artistDetails,
@@ -78,54 +80,49 @@ export async function loader({params}) {
     tracksDetails,
     friendsIDs,
     requestString,
-    friendsDetails,
-    pendingFriends,
-    requestPending,
-    requestDetails,
+    pendingFriendings,
   };
 }
 
 function Profile() {
   const {state, dispatch} = useContext(ProfileContext);
-  let {
-    profile,
-    tracksDetails,
-    artistDetails,
-    friendsDetails,
-    requestString,
-    friendsIDs,
-    pendingFriends,
-    requestPending,
-    requestDetails,
-  } = useLoaderData();
+  let {profile, tracksDetails, artistDetails, pendingFriendings} =
+    useLoaderData();
+  const {profiles} = useRouteLoaderData("root");
   const navigate = useNavigate();
   const [partyMix, setPartyMix] = useState([]);
   const [showRecommendations, setShowRecommendations] = useState(false);
   const [recommendations, setRecommendations] = useState([]);
   const [friends, setFriends] = useState([]);
-  const [pending, setPending] = useState([]);
-  const [pendingDetails, setPendingDetails] = useState([]);
+  // const [pending, setPending] = useState([]);
+  // const [pendingDetails, setPendingDetails] = useState([]);
   const [tracksList, setTracksList] = useState([]);
   const [artistList, setArtistList] = useState([]);
-
+  const [pendingFriendRequests, setPendingFriendRequests] = useState([]);
+  let userProfile = state.profiles.filter(
+    profile => profile.id === parseInt(localStorage.getItem("currentUser")),
+  )[0];
   // Whenever the loader gives us new data
   // (for example, after a form submission),
   // update our `data` state.
   // useEffect(() => setTracksList(tracksDetails.tracks), [tracksList]);
   // useEffect(() => setArtistList(artistDetails.artists), [artistList]);
   useEffect(() => {
+    let friendsDetails = profiles.filter(profile =>
+      profile.friends.includes(userProfile.id),
+    );
+    console.log(friendsDetails);
     setFriends(friendsDetails);
-    setPending(requestDetails);
-    setPendingDetails(pendingFriends);
+    // setPending(requestDetails);
+    // setPendingDetails(pendingFriends);
     setTracksList(tracksDetails.tracks);
     setArtistList(artistDetails.artists);
+    setPendingFriendRequests(pendingFriendings);
   }, []);
 
   // let {favoriteAlbums, favoriteArtists, favoriteTracks} = profile;
-  let userProfile = state.profiles.filter(
-    profile => profile.id === parseInt(localStorage.getItem("currentUser")),
-  )[0];
 
+  //ANCHOR - displayFavoriteTracks
   const displayFavoriteTracks =
     profile.favoriteTracks.length > 0
       ? tracksList.map(track => (
@@ -138,7 +135,7 @@ function Profile() {
           />
         ))
       : "No Track Favorites";
-
+  //ANCHOR - displayFavoriteArtist
   const displayFavoriteArtists =
     profile.favoriteArtists.length > 0
       ? artistList.map(artist => (
@@ -150,7 +147,7 @@ function Profile() {
           />
         ))
       : "No Artist Favorites";
-
+  //ANCHOR - displayPartyMix
   let displayPartyMix = "Nothing Selected";
   if (partyMix.length > 0) {
     displayPartyMix = partyMix.map(track => {
@@ -164,32 +161,40 @@ function Profile() {
       );
     });
   }
+  let displayFriends;
+  //ANCHOR - displayFriends
+  if (friends && friends.length > 0) {
+    displayFriends = friends.map(friend => (
+      <FriendsList
+        key={friend.id}
+        friend={friend}
+        profile={userProfile}
+        onHandleRemoveFriend={onHandleRemoveFriend}
+      />
+    ));
+  }
 
-  const displayFriends =
-    friends && friends.length > 0
-      ? friends.map(friend => (
-          <FriendsList
-            key={friend.id}
-            friend={friend}
-            profile={userProfile}
-            onHandleRemoveFriend={onHandleRemoveFriend}
-          />
-        ))
-      : "Loading...";
+  //ANCHOR - displayPending
+  let displayPending;
 
-  const displayPending =
-    pending && pending.length > 0
-      ? pending.map(newFriend => (
-          <FriendRequest
-            key={newFriend.id}
-            friend={newFriend}
-            profile={userProfile}
-            pendingDetails={pendingDetails}
-            onHandleAcceptFriend={onHandleAcceptFriend}
-            onHandleDeclineFriend={onHandleDeclineFriend}
-          />
-        ))
-      : "Loading...";
+  if (pendingFriendRequests && pendingFriendRequests.length > 0) {
+    displayPending = pendingFriendRequests
+      .filter(request => request.target === profile.id)
+      .map(newFriend => (
+        <FriendRequest
+          key={newFriend.id}
+          friend={
+            profiles.filter(profile => profile.id === newFriend.initiatedBy)[0]
+          }
+          profile={userProfile}
+          pendingRequestID={newFriend.id}
+          onHandleAcceptFriend={onHandleAcceptFriend}
+          onHandleDeclineFriend={onHandleDeclineFriend}
+        />
+      ));
+  }
+
+  //ANCHOR - What happens when we click add to party button
   function onHandleAddToPartyMix(media, type) {
     setPartyMix([...partyMix, media]);
   }
@@ -221,6 +226,7 @@ function Profile() {
       .then(recommendations => setRecommendations(recommendations.tracks))
       .catch(error => console.log(error.message));
   }
+  //ANCHOR - if we have recommendation`
   if (recommendations) {
     displayRecommendations = recommendations.map(track => (
       <Recommendations key={track.id} track={track} />
@@ -258,45 +264,36 @@ function Profile() {
       .then(() => navigate("../"))
       .catch(error => console.log("error", error.message));
   }
-  function clearPendingRequests(pendingID) {
-    //regularDELETE
+  const completeFriendRequest = async pendingID => {
     console.log(pendingID);
-    fetch(`http://localhost:4000/clearPending/${pendingID[0].id}`, {
+    await fetch(`http://localhost:4000/clearPending/${pendingID[0].id}`, {
       method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+      },
     })
       .then(resp => resp.json())
       .then(() => console.log("deleted"))
       .catch(error => console.log("error", error.message));
-  }
+  };
+
   // handle accepting of friend requests
-  function onHandleAcceptFriend(updatedProfile, friendID, pendingID) {
-    const pendingFriends = async () => {
-      await getMyPending(updatedProfile.id).then(pendingRequests =>
-        setPendingDetails(pendingRequests),
-      );
-    };
-    pendingFriends();
-
-    let requestPending = pendingFriends
-      .map((pending, i) => {
-        if (i === 0) {
-          console.log("hello");
-          return `?id=${pending.initiatedBy}`;
-        } else {
-          return `&id=${pending.initiatedBy}`;
-        }
-      })
-      .join("");
-
-    console.log(requestPending);
-    const requestDetails = async () => {
-      await getFriends(requestPending).then(data => setPending(data));
-    };
-    requestDetails();
-    dispatch({type: "UPDATE", payload: requestDetails});
+  function onHandleAcceptFriend(updatedProfile, pendingID) {
+    //regularDELETE
+    let updatedPendingRequests = [...pendingFriendRequests].filter(
+      request => request.id !== pendingID,
+    );
+    setPendingFriendRequests(updatedPendingRequests);
+    dispatch({type: "UPDATE", payload: updatedProfile});
   }
   //handle decline of friend requests
-  function onHandleDeclineFriend() {}
+  function onHandleDeclineFriend(pendingRequestID) {
+    //regularDELETE
+    let updatedPendingRequests = [...pendingFriendRequests].filter(
+      request => request.id !== pendingRequestID,
+    );
+    setPendingFriendRequests(updatedPendingRequests);
+  }
 
   function onHandleRemoveFriend(updatedFriends, friendID) {
     let requestString = updatedFriends.friends
@@ -341,15 +338,19 @@ function Profile() {
             </div>
           </div>{" "}
           <article className="w-fit max-h-[280px] overflow-auto ">
-            <div
-              tabIndex={0}
-              className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box items-start justify-start">
-              <input type="checkbox" />
-              <div className="collapse-title text-xl font-medium">
-                Pending Friending
+            {displayPending && displayPending.length > 0 ? (
+              <div
+                tabIndex={0}
+                className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box items-start justify-start">
+                <input type="checkbox" />
+                <div className="collapse-title text-xl font-medium">
+                  Pending Friending
+                </div>
+                <div className="collapse-content">{displayPending}</div>
               </div>
-              <div className="collapse-content">{displayPending}</div>
-            </div>
+            ) : (
+              ""
+            )}
             <div
               tabIndex={0}
               className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box items-start justify-start">

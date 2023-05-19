@@ -3,7 +3,7 @@ import {ProfileContext} from "../context/profileContext";
 
 export const baseURL = "http://localhost:4000/profiles";
 export const currentURL = "http://localhost:4000/currentProfile";
-export const pendingURL = `http://localhost:4000/friendRequests`;
+export const pendingURL = `http://localhost:4000/pending`;
 export function getProfiles() {
   return fetch(baseURL)
     .then(response => {
