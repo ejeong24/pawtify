@@ -38,7 +38,7 @@ function Searcher() {
         setTracks(data.tracks.items);
         setAlbums(data.albums.items);
         setArtists(data.artists.items);
-        debugger;
+        // debugger;
       });
     } catch (e) {
       console.error(e);
@@ -63,6 +63,7 @@ function Searcher() {
 
       <div className="grid grid-cols-4 mx-auto">
         <div className="card">
+        <span className="text-4xl underline text-center" >Tracks</span>
           {tracks && tracks.length > 0
             ? tracks.map(track => (
                 <TracksResults key={track.id} track={track} />
@@ -70,6 +71,7 @@ function Searcher() {
             : "No tracks found"}
         </div>
         <div className="card">
+        <span className="text-4xl underline text-center" >Artists</span>
           {artists && artists.length > 0
             ? artists.map(artist => (
                 <ArtistsResults key={artist.id} artist={artist} />
@@ -77,6 +79,7 @@ function Searcher() {
             : "No artists found"}
         </div>
         <div className="card">
+        <span className="text-4xl underline text-center" >Albums</span>
           {albums && albums.length > 0
             ? albums.map(album => (
                 <AlbumsResults key={album.id} album={album} />
