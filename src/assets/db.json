@@ -5,17 +5,7 @@
       "firstName": "Michael",
       "lastName": "Loomis",
       "id": 1,
-      "favoriteTracks": [
-        "1Qrg8KqiBpW07V7PNxwwwL",
-        "5w40ZYhbBMAlHYNDaVJIUu",
-        "0yLdNVWF3Srea0uzk55zFn",
-        "7FbrGaHYVDmfr7KoLIZnQ7",
-        "6AQbmUe0Qwf5PZnt4HmTXv",
-        "1odExI7RdWc4BT515LTAwj",
-        "6ZZf5a8oiInHDkBe9zXfLP",
-        "4LRPiXqCikLlN15c3yImP7",
-        "26b3oVLrRUaaybJulow9kz"
-      ],
+      "favoriteTracks": [],
       "favoriteArtists": [],
       "following": [],
       "followedBy": [],

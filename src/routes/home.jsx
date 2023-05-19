@@ -24,7 +24,9 @@ export default function Home({onHandleFavoriteClick}) {
           <span id="categoriesText" className="text-4xl">
             Which category are we starting with?
           </span>
-          <section id="categories" className="grid grid-cols-4 gap-10">
+          <section
+            id="categories"
+            className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-10">
             {categories.categories.items.map(category => (
               <Category key={category.id} category={category} />
             ))}
