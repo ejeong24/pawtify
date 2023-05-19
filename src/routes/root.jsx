@@ -24,6 +24,8 @@ import NavButtons from "../components/NavButtons";
 import {ProfileContext} from "../context/profileContext";
 const access_token = localStorage.getItem("access_token");
 import Drawer from "../components/Drawer/Drawer";
+import {ToastContainer, toast} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 let profile = {};
 const expiresAt = localStorage.getItem("expiresAt");
 
@@ -75,7 +77,18 @@ function Root() {
         currentUser={currentUser}
         onHandleUserChange={onHandleUserChange}
       />
-
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <Outlet />
     </React.Fragment>
   );

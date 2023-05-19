@@ -52,7 +52,7 @@ function FriendRequests({
       .then(response => response.json())
       .then(updatedFriendList => {
         // console.log(updatedFriendList);
-        onHandleAcceptFriend(updatedFriendList, pendingRequestID);
+        onHandleAcceptFriend(updatedFriendList, pendingRequestID,friend);
       });
   }
   function handleDeclineFriend() {

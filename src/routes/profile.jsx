@@ -1,4 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
+import {ToastContainer, toast} from "react-toastify";
 import {
   Form,
   redirect,
@@ -98,9 +99,19 @@ function Profile() {
     setArtistList(artistDetails.artists);
     setPendingFriendRequests(state.pendingRequests);
   }, []);
-
+  useEffect(() => {}, [pendingFriendRequests]);
   // let {favoriteAlbums, favoriteArtists, favoriteTracks} = profile;
-
+  const newFriend = () =>
+    toast.info("🦄 New friend request!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
   //ANCHOR - displayFavoriteTracks
   const displayFavoriteTracks =
     profile.favoriteTracks.length > 0
@@ -263,13 +274,17 @@ function Profile() {
   };
 
   // handle accepting of friend requests
-  function onHandleAcceptFriend(updatedProfile, pendingID) {
+  function onHandleAcceptFriend(updatedProfile, pendingID, friend) {
     //regularDELETE
     let updatedPendingRequests = [...pendingFriendRequests].filter(
       request => request.id !== pendingID,
     );
+
     dispatch({type: "UPDATE", payload: updatedProfile});
     fetcher.load();
+    let updatedFriends = [...friends, friend];
+    setFriends(updatedFriends);
+    dispatch({type: "FRIENDREQUESTREMOVE", payload: pendingID});
     setPendingFriendRequests(updatedPendingRequests);
   }
   //handle decline of friend requests
@@ -295,6 +310,7 @@ function Profile() {
     dispatch({type: "UPDATE", payload: updatedFriends});
     dispatch({type: "UPDATECURRENT", payload: updatedFriends});
   }
+
   return (
     <>
       <div className="flex flex-col justify-center items-center mt-10">
@@ -348,9 +364,9 @@ function Profile() {
               tabIndex={0}
               className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box items-start justify-start">
               <input type="checkbox" className="ml-auto w-full" />
-              <div className="collapse-title text-xl w-full font-medium flex justify-between after:ml-auto after:w-full">
+              <div className="collapse-title text-xl w-full font-medium flex justify-between after:ml-auto after:w-full gap-14">
                 <span>Friends</span>{" "}
-                <span className="stat-value text-right ml-auto">
+                <span className="stat-value text-right">
                   {friends && friends.length > 0 ? friends.length : 0}
                 </span>
               </div>
@@ -420,3 +436,19 @@ function FollowUser({profile}) {
     </Form>
   );
 }
+
+export const NewFriendRequestReady = () => {
+  return (
+    <div>
+      <Alert onClose={() => {}}>This is a success alert — check it out!</Alert>
+      <Alert
+        action={
+          <Button color="inherit" size="small">
+            UNDO
+          </Button>
+        }>
+        This is a success alert — check it out!
+      </Alert>
+    </div>
+  );
+};

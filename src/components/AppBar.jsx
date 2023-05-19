@@ -15,10 +15,11 @@ function AppBar({onHandleUserChange}) {
 
   const {profiles, pendingFriendRequests} = useRouteLoaderData("root");
   const fetcher = useFetcher();
-  const userLoggedIn = parseInt(localStorage.getItem("currentUser"));
+  let userLoggedIn = parseInt(localStorage.getItem("currentUser"));
 
   let myPendingRequests;
   useEffect(() => {
+    userLoggedIn = parseInt(localStorage.getItem("currentUser"));
     myPendingRequests = state.pendingRequests.filter(
       request => request.target === userLoggedIn,
     );
@@ -67,8 +68,15 @@ function AppBar({onHandleUserChange}) {
                 <NavLink to={`../new`}></NavLink>
               </li>
               <li>
-                <NavLink to={`../search`}>Search [WIP]</NavLink>
+                <NavLink to={`../search`}>Search</NavLink>
               </li>
+              {parseInt(localStorage.getItem("currentUser")) !== 0 ? (
+                <li>
+                  <NavLink to={`../friends`}>Find Friends</NavLink>
+                </li>
+              ) : (
+                <></>
+              )}
             </ul>
           </div>
 
@@ -90,9 +98,9 @@ function AppBar({onHandleUserChange}) {
               <NavLink to={`../new`}>New Releases</NavLink>
             </li>
             <li>
-              <NavLink to={`../search`}>Search [WIP]</NavLink>
+              <NavLink to={`../search`}>Search</NavLink>
             </li>
-            {userLoggedIn !== 0 ? (
+            {parseInt(localStorage.getItem("currentUser")) !== 0 ? (
               <li>
                 <NavLink to={`../friends`}>Find Friends</NavLink>
               </li>

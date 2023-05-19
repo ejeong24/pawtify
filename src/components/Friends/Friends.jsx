@@ -7,6 +7,7 @@ import {
   useFetcher,
   useNavigate,
   redirect,
+  Navigate,
 } from "react-router-dom";
 import {ProfileContext} from "../../context/profileContext";
 import NavButtons from "../NavButtons";
@@ -14,12 +15,17 @@ import {FriendsCard} from "./FriendsCard";
 
 export async function action() {}
 function Friends() {
+  const navigate = useNavigate();
+  if (localStorage.getItem("currentUser") === 0) {
+    return navigate("../login");
+  }
   const {state, dispatch} = useContext(ProfileContext);
   const {profiles, pendingFriendRequests} = useRouteLoaderData("root");
   const [friends, setFriends] = useState([]);
   const [search, setSearch] = useState("");
   const [pendingFriends, setPendingFriends] = useState([]);
   const fetcher = useFetcher();
+
   let userProfile = state.profiles.filter(
     profile => profile.id === parseInt(localStorage.getItem("currentUser")),
   )[0];
@@ -73,7 +79,7 @@ function Friends() {
   function handleChange(e) {
     setSearch(e.target.value);
   }
-  let filteredProfiles = displayProfiles
+  let filteredProfiles = displayProfiles;
   if (search) {
     filteredProfiles = displayProfiles.filter(
       profile =>
@@ -123,7 +129,8 @@ function Friends() {
         </div>
         <div className=" grid grid-cols-3 gap-4 mx-auto">
           {profiles && profiles.length > 0 ? (
-            (filteredProfiles.filter(profile => profile.id !== state.userLoggedIn)
+            filteredProfiles
+              .filter(profile => profile.id !== state.userLoggedIn)
               .map(profile => (
                 <FriendsCard
                   key={profile.id}
@@ -135,7 +142,7 @@ function Friends() {
                   onHandleRemoveFriend={onHandleRemoveFriend}
                   isPending={pendingFriends.includes(profile.id)}
                 />
-              )))
+              ))
           ) : (
             <p></p>
           )}

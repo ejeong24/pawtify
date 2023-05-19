@@ -27,10 +27,9 @@
         "50MzJhO0pMjTsfpeOmZ1so"
       ],
       "friends": [
-        2,
         5,
         52,
-        2
+        4
       ]
     },
     {
@@ -50,8 +49,7 @@
       "avatar": "../src/assets/avatar2.jpg",
       "friends": [
         9,
-        27,
-        1,
+        32,
         1
       ]
     },
@@ -96,7 +94,9 @@
       "following": [],
       "followedBy": [],
       "avatar": "../src/assets/avatar4.jpg",
-      "friends": []
+      "friends": [
+        1
+      ]
     },
     {
       "id": 5,
@@ -560,7 +560,8 @@
         94,
         72,
         92,
-        30
+        30,
+        2
       ],
       "avatar": "../src/assets/avatar1.jpg",
       "username": "IrisMay5552"
@@ -1835,19 +1836,9 @@
   ],
   "pending": [
     {
-      "id": 3,
-      "initiatedBy": 32,
-      "target": 2
-    },
-    {
       "id": 4,
       "initiatedBy": 42,
       "target": 3
-    },
-    {
-      "initiatedBy": 1,
-      "target": 4,
-      "id": 6
     },
     {
       "initiatedBy": 1,
@@ -1861,16 +1852,6 @@
     },
     {
       "initiatedBy": 1,
-      "target": 4,
-      "id": 9
-    },
-    {
-      "initiatedBy": 1,
-      "target": 4,
-      "id": 10
-    },
-    {
-      "initiatedBy": 1,
       "target": 3,
       "id": 11
     },
@@ -1878,11 +1859,6 @@
       "initiatedBy": 1,
       "target": 7,
       "id": 12
-    },
-    {
-      "initiatedBy": 3,
-      "target": 1,
-      "id": 13
     },
     {
       "initiatedBy": 1,
@@ -1893,6 +1869,26 @@
       "initiatedBy": 1,
       "target": 33,
       "id": 15
+    },
+    {
+      "initiatedBy": 4,
+      "target": 3,
+      "id": 16
+    },
+    {
+      "initiatedBy": 2,
+      "target": 3,
+      "id": 19
+    },
+    {
+      "initiatedBy": 2,
+      "target": 4,
+      "id": 20
+    },
+    {
+      "initiatedBy": 10,
+      "target": 1,
+      "id": 21
     }
   ]
 }
