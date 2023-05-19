@@ -79,11 +79,13 @@ function handleFavoriteButtonClick() {
         ) : (
           <>
           <div className="flex-shrink-0">
-            <img
-              className="w-16 h-16 mr-1"
-              src={artist.images[2].url}
-              alt={artist.name}
-            />
+            {artist.images && artist.images[2] && artist.images[2].url ? (
+              <img
+                className="w-16 h-16 mr-1"
+                src={artist.images[2].url}
+                alt={artist.name}
+              />
+            ) : null}
           </div>
             <span className="w-1/3">
               <Link to={`../artists/${artist.id}`}>
