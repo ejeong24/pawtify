@@ -3,8 +3,8 @@ import {useLoaderData, redirect} from "react-router-dom";
 import {ProfileContext} from "../../context/profileContext";
 import {getCurrentProfile} from "../Rover";
 import TracksResults from "./TracksResults";
-import ArtistsResults from "./ArtistsResults"
-import AlbumsResults from "./AlbumsResults"
+import ArtistsResults from "./ArtistsResults";
+import AlbumsResults from "./AlbumsResults";
 export async function loader({params}) {
   if (parseInt(localStorage.getItem("currentUser")) === 0) {
     return redirect("../login");
@@ -38,12 +38,13 @@ function Searcher() {
         setTracks(data.tracks.items);
         setAlbums(data.albums.items);
         setArtists(data.artists.items);
+        debugger;
       });
     } catch (e) {
       console.error(e);
     }
   };
-  
+
   return (
     <>
       <div className="SearchForm mx-auto flex">
@@ -62,31 +63,25 @@ function Searcher() {
 
       <div className="grid grid-cols-4 mx-auto">
         <div className="card">
-          {tracks && tracks.length > 0 ? (
-            tracks.map((track) => (
-              <TracksResults key={track.id} track={track} />
-            ))
-          ) : (
-            "No tracks found"
-          )}
+          {tracks && tracks.length > 0
+            ? tracks.map(track => (
+                <TracksResults key={track.id} track={track} />
+              ))
+            : "No tracks found"}
         </div>
         <div className="card">
-          {artists && artists.length > 0 ? (
-            artists.map((artist) => (
-              <ArtistsResults key={artist.id} artist={artist} />
-            ))
-          ) : (
-            "No artists found"
-          )}
+          {artists && artists.length > 0
+            ? artists.map(artist => (
+                <ArtistsResults key={artist.id} artist={artist} />
+              ))
+            : "No artists found"}
         </div>
         <div className="card">
-          {albums && albums.length > 0 ? (
-            albums.map((album) => (
-              <AlbumsResults key={album.id} album={album} />
-            ))
-          ) : (
-            "No albums found"
-          )}
+          {albums && albums.length > 0
+            ? albums.map(album => (
+                <AlbumsResults key={album.id} album={album} />
+              ))
+            : "No albums found"}
         </div>
       </div>
     </>

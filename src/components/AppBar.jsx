@@ -6,14 +6,15 @@ const settings = ["Profile", "Dashboard", "Logout"];
 import {getProfiles} from "./Rover";
 import {ProfileContext} from "../context/profileContext";
 import NavButtons from "./NavButtons";
-export async function loader() {
-  const profiles = await getProfiles();
-  return {profiles};
-}
+import {useRouteLoaderData} from "react-router-dom";
 
+export async function loader(){
+  
+}
 function AppBar({onHandleUserChange}) {
   const {state, dispatch} = useContext(ProfileContext);
-
+  const {profiles} = useRouteLoaderData("root");
+  const userLoggedIn = parseInt(localStorage.getItem("currentUser"));
   function handleChange(event) {
     if (event.target.value === 0) {
       dispatch({type: "USERLOGOUT", payload: 0});
@@ -89,6 +90,12 @@ function AppBar({onHandleUserChange}) {
         <div className="navbar-end gap-2">
           {state.userLoggedIn !== 0 ? (
             <>
+              <Link to={`../profile/${userLoggedIn}`}>
+                <button className="btn gap-2">
+                  Inbox
+                  <div className="badge badge-secondary">+99</div>
+                </button>
+              </Link>
               <Link to={`../profile/${state.userLoggedIn}`}>
                 <button className="btn btn-accent">My Profile</button>
               </Link>
@@ -110,17 +117,6 @@ function AppBar({onHandleUserChange}) {
               </button>
             </Link>
           )}
-          {/* <select
-            id="currentUser"
-            defaultValue={state.userLoggedIn || 0}
-            onChange={handleChange}>
-            <option value="0">Choose a user</option>
-            {state.profiles.map(profile => (
-              <option key={profile.id} value={profile.id}>
-                {profile.firstName}
-              </option>
-            ))}
-          </select> */}
         </div>
       </div>
     </>

@@ -14,9 +14,7 @@
         "1odExI7RdWc4BT515LTAwj",
         "6ZZf5a8oiInHDkBe9zXfLP",
         "4LRPiXqCikLlN15c3yImP7",
-        "26b3oVLrRUaaybJulow9kz",
-        "7oDd86yk8itslrA9HRP2ki",
-        "6HgWWaMu31KdOpEG5l28BG"
+        "26b3oVLrRUaaybJulow9kz"
       ],
       "favoriteArtists": [],
       "following": [],
@@ -28,33 +26,49 @@
         "4LPQ70q8ZU6RxDauc4ZPzC",
         "50MzJhO0pMjTsfpeOmZ1so"
       ],
-      "friends": [27, 29, 38]
+      "friends": [
+        27,
+        38,
+        2
+      ]
     },
     {
       "username": "ScoobyDoo",
       "firstName": "Ty",
       "lastName": "Blackwell",
       "id": 2,
-      "favoriteAlbums": ["0pMuKNqI4VOoLESF5wExWY"],
-      "favoriteTracks": ["7sliFe6W30tPBPh6dvZsIH"],
+      "favoriteAlbums": [
+        "0pMuKNqI4VOoLESF5wExWY"
+      ],
+      "favoriteTracks": [
+        "7sliFe6W30tPBPh6dvZsIH"
+      ],
       "favoriteArtists": [],
       "following": [],
       "followedBy": [],
       "avatar": "../src/assets/avatar2.jpg",
-      "friends": [9, 27]
+      "friends": [
+        9,
+        27,
+        1
+      ]
     },
     {
       "username": "Snoopy Dog",
       "firstName": "Cody",
       "lastName": "Delzer",
       "id": 3,
-      "favoriteAlbums": ["0pMuKNqI4VOoLESF5wExWY"],
+      "favoriteAlbums": [
+        "0pMuKNqI4VOoLESF5wExWY"
+      ],
       "favoriteTracks": [
         "6uL6HCOsEwvnmCX4cDf65g",
         "10eBRyImhfqVvkiVEGf0N0",
         "6gnjE8oBkosBIEZroEjq4I"
       ],
-      "favoriteArtists": ["220xv2aB3dsGxaJI1gGs7l"],
+      "favoriteArtists": [
+        "220xv2aB3dsGxaJI1gGs7l"
+      ],
       "following": [],
       "followedBy": [],
       "avatar": "../src/assets/avatar3.jpg",
@@ -65,7 +79,9 @@
       "firstName": "Eugene",
       "lastName": "Jeong",
       "id": 4,
-      "favoriteAlbums": ["0pMuKNqI4VOoLESF5wExWY"],
+      "favoriteAlbums": [
+        "0pMuKNqI4VOoLESF5wExWY"
+      ],
       "favoriteTracks": [
         "1Ukxccao1BlWrPhYkcXbwZ",
         "2NbsBSshscKIPRG3kwBbfo",
@@ -78,7 +94,9 @@
       "following": [],
       "followedBy": [],
       "avatar": "../src/assets/avatar4.jpg",
-      "friends": []
+      "friends": [
+        1
+      ]
     },
     {
       "id": 5,
@@ -87,7 +105,13 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [63, 45, 88, 37, 54],
+      "friends": [
+        63,
+        45,
+        88,
+        37,
+        54
+      ],
       "avatar": "../src/assets/avatar5.jpg",
       "username": "GingerDotson8841"
     },
@@ -98,7 +122,18 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [72, 11, 9, 71, 57, 28, 69, 73, 12, 9],
+      "friends": [
+        72,
+        11,
+        9,
+        71,
+        57,
+        28,
+        69,
+        73,
+        12,
+        9
+      ],
       "avatar": "../src/assets/avatar6.jpg",
       "username": "HamptonCotton7290"
     },
@@ -109,7 +144,13 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [88, 73, 48, 100, 30],
+      "friends": [
+        88,
+        73,
+        48,
+        100,
+        30
+      ],
       "avatar": "../src/assets/avatar6.jpg",
       "username": "DrakeKemp1566"
     },
@@ -120,7 +161,17 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [64, 35, 64, 31, 15, 4, 51, 9, 1],
+      "friends": [
+        64,
+        35,
+        64,
+        31,
+        15,
+        4,
+        51,
+        9,
+        1
+      ],
       "avatar": "../src/assets/avatar6.jpg",
       "username": "AlbertPearson3448"
     },
@@ -131,7 +182,10 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [34, 45],
+      "friends": [
+        34,
+        45
+      ],
       "avatar": "../src/assets/avatar3.jpg",
       "username": "JeanieTran3427"
     },
@@ -142,7 +196,13 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [13, 16, 29, 33, 1],
+      "friends": [
+        13,
+        16,
+        29,
+        33,
+        1
+      ],
       "avatar": "../src/assets/avatar4.jpg",
       "username": "MabelWong3160"
     },
@@ -153,7 +213,15 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [48, 12, 7, 39, 59, 100, 37],
+      "friends": [
+        48,
+        12,
+        7,
+        39,
+        59,
+        100,
+        37
+      ],
       "avatar": "../src/assets/avatar1.jpg",
       "username": "CamachoStark8975"
     },
@@ -164,7 +232,14 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [23, 75, 57, 20, 7, 14],
+      "friends": [
+        23,
+        75,
+        57,
+        20,
+        7,
+        14
+      ],
       "avatar": "../src/assets/avatar4.jpg",
       "username": "ArmstrongArnold9592"
     },
@@ -175,7 +250,12 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [6, 14, 20, 2],
+      "friends": [
+        6,
+        14,
+        20,
+        2
+      ],
       "avatar": "../src/assets/avatar6.jpg",
       "username": "ErikaMccullough8319"
     },
@@ -186,7 +266,11 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [42, 57, 7],
+      "friends": [
+        42,
+        57,
+        7
+      ],
       "avatar": "../src/assets/avatar6.jpg",
       "username": "EnglandCooley4526"
     },
@@ -197,7 +281,11 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [89, 15, 48],
+      "friends": [
+        89,
+        15,
+        48
+      ],
       "avatar": "../src/assets/avatar5.jpg",
       "username": "IrwinShaw1798"
     },
@@ -208,7 +296,12 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [10, 76, 56, 16],
+      "friends": [
+        10,
+        76,
+        56,
+        16
+      ],
       "avatar": "../src/assets/avatar6.jpg",
       "username": "JeanineLeon1846"
     },
@@ -219,7 +312,12 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [22, 74, 55, 27],
+      "friends": [
+        22,
+        74,
+        55,
+        27
+      ],
       "avatar": "../src/assets/avatar4.jpg",
       "username": "SteinDonaldson9363"
     },
@@ -230,7 +328,11 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [61, 88, 64],
+      "friends": [
+        61,
+        88,
+        64
+      ],
       "avatar": "../src/assets/avatar1.jpg",
       "username": "LatoyaOrtiz2622"
     },
@@ -241,7 +343,12 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [25, 92, 49, 95],
+      "friends": [
+        25,
+        92,
+        49,
+        95
+      ],
       "avatar": "../src/assets/avatar6.jpg",
       "username": "HendricksChristensen3566"
     },
@@ -252,7 +359,15 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [34, 16, 89, 15, 13, 89, 19],
+      "friends": [
+        34,
+        16,
+        89,
+        15,
+        13,
+        89,
+        19
+      ],
       "avatar": "../src/assets/avatar4.jpg",
       "username": "RoblesYork5891"
     },
@@ -263,7 +378,13 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [6, 81, 81, 76, 97],
+      "friends": [
+        6,
+        81,
+        81,
+        76,
+        97
+      ],
       "avatar": "../src/assets/avatar2.jpg",
       "username": "HortonCarr9419"
     },
@@ -274,7 +395,9 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [49],
+      "friends": [
+        49
+      ],
       "avatar": "../src/assets/avatar4.jpg",
       "username": "CollinsMiddleton1103"
     },
@@ -285,7 +408,11 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [33, 87, 16],
+      "friends": [
+        33,
+        87,
+        16
+      ],
       "avatar": "../src/assets/avatar6.jpg",
       "username": "RenaFuller3326"
     },
@@ -296,7 +423,10 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [89, 25],
+      "friends": [
+        89,
+        25
+      ],
       "avatar": "../src/assets/avatar4.jpg",
       "username": "InesGlenn6378"
     },
@@ -307,7 +437,15 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [52, 62, 44, 99, 24, 3, 17],
+      "friends": [
+        52,
+        62,
+        44,
+        99,
+        24,
+        3,
+        17
+      ],
       "avatar": "../src/assets/avatar4.jpg",
       "username": "BergGraves3082"
     },
@@ -318,7 +456,13 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [14, 65, 11, 45, 38],
+      "friends": [
+        14,
+        65,
+        11,
+        45,
+        38
+      ],
       "avatar": "../src/assets/avatar1.jpg",
       "username": "ChristianLynch1704"
     },
@@ -329,7 +473,16 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [39, 86, 45, 8, 28, 2, 95, 1],
+      "friends": [
+        39,
+        86,
+        45,
+        8,
+        28,
+        2,
+        95,
+        1
+      ],
       "avatar": "../src/assets/avatar5.jpg",
       "username": "AustinAnderson1804"
     },
@@ -340,7 +493,10 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [72, 98],
+      "friends": [
+        72,
+        98
+      ],
       "avatar": "../src/assets/avatar3.jpg",
       "username": "ParrishAnthony6236"
     },
@@ -351,7 +507,11 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [8, 79, 1],
+      "friends": [
+        8,
+        79,
+        1
+      ],
       "avatar": "../src/assets/avatar6.jpg",
       "username": "DiannBond5262"
     },
@@ -362,7 +522,15 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [28, 64, 99, 3, 13, 28, 67],
+      "friends": [
+        28,
+        64,
+        99,
+        3,
+        13,
+        28,
+        67
+      ],
       "avatar": "../src/assets/avatar3.jpg",
       "username": "KarenJimenez4772"
     },
@@ -373,7 +541,9 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [27],
+      "friends": [
+        27
+      ],
       "avatar": "../src/assets/avatar4.jpg",
       "username": "WaltonSellers9607"
     },
@@ -384,7 +554,16 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [29, 62, 40, 47, 94, 72, 92, 30],
+      "friends": [
+        29,
+        62,
+        40,
+        47,
+        94,
+        72,
+        92,
+        30
+      ],
       "avatar": "../src/assets/avatar1.jpg",
       "username": "IrisMay5552"
     },
@@ -395,7 +574,17 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [74, 42, 34, 59, 24, 40, 58, 56, 60],
+      "friends": [
+        74,
+        42,
+        34,
+        59,
+        24,
+        40,
+        58,
+        56,
+        60
+      ],
       "avatar": "../src/assets/avatar6.jpg",
       "username": "ForemanRobertson7410"
     },
@@ -406,7 +595,17 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [3, 82, 39, 21, 99, 96, 20, 71, 86],
+      "friends": [
+        3,
+        82,
+        39,
+        21,
+        99,
+        96,
+        20,
+        71,
+        86
+      ],
       "avatar": "../src/assets/avatar6.jpg",
       "username": "LelaBonner7128"
     },
@@ -417,7 +616,14 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [8, 78, 2, 43, 60, 50],
+      "friends": [
+        8,
+        78,
+        2,
+        43,
+        60,
+        50
+      ],
       "avatar": "../src/assets/avatar5.jpg",
       "username": "GoldenMolina2441"
     },
@@ -428,7 +634,10 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [73, 42],
+      "friends": [
+        73,
+        42
+      ],
       "avatar": "../src/assets/avatar6.jpg",
       "username": "CharleneBecker7655"
     },
@@ -439,7 +648,14 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [30, 20, 14, 93, 79, 43],
+      "friends": [
+        30,
+        20,
+        14,
+        93,
+        79,
+        43
+      ],
       "avatar": "../src/assets/avatar2.jpg",
       "username": "InezHowell1057"
     },
@@ -450,7 +666,17 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [51, 69, 90, 81, 8, 57, 5, 65, 90],
+      "friends": [
+        51,
+        69,
+        90,
+        81,
+        8,
+        57,
+        5,
+        65,
+        90
+      ],
       "avatar": "../src/assets/avatar1.jpg",
       "username": "KerriCurry7422"
     },
@@ -461,7 +687,18 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [13, 55, 56, 55, 99, 28, 73, 59, 73, 66],
+      "friends": [
+        13,
+        55,
+        56,
+        55,
+        99,
+        28,
+        73,
+        59,
+        73,
+        66
+      ],
       "avatar": "../src/assets/avatar3.jpg",
       "username": "PhillipsCarlson9159"
     },
@@ -472,7 +709,15 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [89, 53, 26, 84, 94, 97, 15],
+      "friends": [
+        89,
+        53,
+        26,
+        84,
+        94,
+        97,
+        15
+      ],
       "avatar": "../src/assets/avatar3.jpg",
       "username": "BartonStevenson3463"
     },
@@ -483,7 +728,12 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [56, 51, 67, 95],
+      "friends": [
+        56,
+        51,
+        67,
+        95
+      ],
       "avatar": "../src/assets/avatar4.jpg",
       "username": "KirbyShaffer3788"
     },
@@ -494,7 +744,10 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [46, 28],
+      "friends": [
+        46,
+        28
+      ],
       "avatar": "../src/assets/avatar4.jpg",
       "username": "FarrellPratt4837"
     },
@@ -505,7 +758,15 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [6, 72, 38, 72, 95, 13, 94],
+      "friends": [
+        6,
+        72,
+        38,
+        72,
+        95,
+        13,
+        94
+      ],
       "avatar": "../src/assets/avatar5.jpg",
       "username": "JaimeKent8251"
     },
@@ -516,7 +777,10 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [68, 28],
+      "friends": [
+        68,
+        28
+      ],
       "avatar": "../src/assets/avatar2.jpg",
       "username": "ComptonGood9884"
     },
@@ -527,7 +791,14 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [35, 52, 60, 34, 83, 52],
+      "friends": [
+        35,
+        52,
+        60,
+        34,
+        83,
+        52
+      ],
       "avatar": "../src/assets/avatar4.jpg",
       "username": "WattsCash3699"
     },
@@ -538,7 +809,10 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [92, 15],
+      "friends": [
+        92,
+        15
+      ],
       "avatar": "../src/assets/avatar5.jpg",
       "username": "OlgaBerry2053"
     },
@@ -549,7 +823,18 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [22, 86, 35, 25, 75, 90, 70, 76, 40, 18],
+      "friends": [
+        22,
+        86,
+        35,
+        25,
+        75,
+        90,
+        70,
+        76,
+        40,
+        18
+      ],
       "avatar": "../src/assets/avatar6.jpg",
       "username": "BeckerStout6613"
     },
@@ -560,7 +845,17 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [81, 83, 71, 17, 4, 86, 30, 86, 56],
+      "friends": [
+        81,
+        83,
+        71,
+        17,
+        4,
+        86,
+        30,
+        86,
+        56
+      ],
       "avatar": "../src/assets/avatar4.jpg",
       "username": "OdonnellWebb4766"
     },
@@ -571,7 +866,17 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [4, 76, 94, 76, 88, 88, 81, 42, 99],
+      "friends": [
+        4,
+        76,
+        94,
+        76,
+        88,
+        88,
+        81,
+        42,
+        99
+      ],
       "avatar": "../src/assets/avatar1.jpg",
       "username": "KellyCannon3687"
     },
@@ -582,7 +887,11 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [56, 80, 39],
+      "friends": [
+        56,
+        80,
+        39
+      ],
       "avatar": "../src/assets/avatar6.jpg",
       "username": "DotsonHolder2144"
     },
@@ -593,7 +902,12 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [30, 81, 79, 5],
+      "friends": [
+        30,
+        81,
+        79,
+        5
+      ],
       "avatar": "../src/assets/avatar4.jpg",
       "username": "MillsHendrix6118"
     },
@@ -604,7 +918,9 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [1],
+      "friends": [
+        1
+      ],
       "avatar": "../src/assets/avatar4.jpg",
       "username": "FlynnFinley3542"
     },
@@ -615,7 +931,13 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [23, 12, 99, 59, 5],
+      "friends": [
+        23,
+        12,
+        99,
+        59,
+        5
+      ],
       "avatar": "../src/assets/avatar4.jpg",
       "username": "RandiCollier7125"
     },
@@ -626,7 +948,14 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [72, 90, 73, 42, 32, 11],
+      "friends": [
+        72,
+        90,
+        73,
+        42,
+        32,
+        11
+      ],
       "avatar": "../src/assets/avatar3.jpg",
       "username": "MeadowsCochran7855"
     },
@@ -637,7 +966,10 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [48, 48],
+      "friends": [
+        48,
+        48
+      ],
       "avatar": "../src/assets/avatar6.jpg",
       "username": "HenryBarton5586"
     },
@@ -648,7 +980,12 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [79, 60, 70, 79],
+      "friends": [
+        79,
+        60,
+        70,
+        79
+      ],
       "avatar": "../src/assets/avatar1.jpg",
       "username": "TishaElliott7576"
     },
@@ -659,7 +996,14 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [62, 25, 16, 10, 56, 62],
+      "friends": [
+        62,
+        25,
+        16,
+        10,
+        56,
+        62
+      ],
       "avatar": "../src/assets/avatar6.jpg",
       "username": "WeeksWatson6309"
     },
@@ -670,7 +1014,14 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [100, 46, 48, 68, 36, 27],
+      "friends": [
+        100,
+        46,
+        48,
+        68,
+        36,
+        27
+      ],
       "avatar": "../src/assets/avatar1.jpg",
       "username": "TateHurley7260"
     },
@@ -681,7 +1032,18 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [90, 53, 23, 74, 55, 87, 35, 43, 20, 41],
+      "friends": [
+        90,
+        53,
+        23,
+        74,
+        55,
+        87,
+        35,
+        43,
+        20,
+        41
+      ],
       "avatar": "../src/assets/avatar5.jpg",
       "username": "GloverNicholson6755"
     },
@@ -692,7 +1054,9 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [95],
+      "friends": [
+        95
+      ],
       "avatar": "../src/assets/avatar6.jpg",
       "username": "ObrienCooke2046"
     },
@@ -703,7 +1067,17 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [60, 99, 32, 40, 45, 68, 59, 26, 52],
+      "friends": [
+        60,
+        99,
+        32,
+        40,
+        45,
+        68,
+        59,
+        26,
+        52
+      ],
       "avatar": "../src/assets/avatar1.jpg",
       "username": "BrookeSears7658"
     },
@@ -714,7 +1088,17 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [82, 86, 4, 19, 84, 48, 14, 10, 23],
+      "friends": [
+        82,
+        86,
+        4,
+        19,
+        84,
+        48,
+        14,
+        10,
+        23
+      ],
       "avatar": "../src/assets/avatar6.jpg",
       "username": "FrancineFigueroa7030"
     },
@@ -725,7 +1109,17 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [53, 3, 62, 2, 16, 71, 90, 93, 67],
+      "friends": [
+        53,
+        3,
+        62,
+        2,
+        16,
+        71,
+        90,
+        93,
+        67
+      ],
       "avatar": "../src/assets/avatar1.jpg",
       "username": "LynchCole6772"
     },
@@ -736,7 +1130,18 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [52, 26, 54, 7, 83, 89, 56, 52, 45, 66],
+      "friends": [
+        52,
+        26,
+        54,
+        7,
+        83,
+        89,
+        56,
+        52,
+        45,
+        66
+      ],
       "avatar": "../src/assets/avatar3.jpg",
       "username": "DaleWiggins6058"
     },
@@ -747,7 +1152,17 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [23, 27, 23, 13, 62, 23, 30, 23, 76],
+      "friends": [
+        23,
+        27,
+        23,
+        13,
+        62,
+        23,
+        30,
+        23,
+        76
+      ],
       "avatar": "../src/assets/avatar3.jpg",
       "username": "BonnieClay8331"
     },
@@ -758,7 +1173,15 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [17, 61, 20, 28, 7, 82, 87],
+      "friends": [
+        17,
+        61,
+        20,
+        28,
+        7,
+        82,
+        87
+      ],
       "avatar": "../src/assets/avatar5.jpg",
       "username": "SimpsonPowers9336"
     },
@@ -769,7 +1192,11 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [18, 50, 35],
+      "friends": [
+        18,
+        50,
+        35
+      ],
       "avatar": "../src/assets/avatar4.jpg",
       "username": "LottWilliam6794"
     },
@@ -780,7 +1207,17 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [36, 8, 51, 87, 17, 27, 19, 72, 10],
+      "friends": [
+        36,
+        8,
+        51,
+        87,
+        17,
+        27,
+        19,
+        72,
+        10
+      ],
       "avatar": "../src/assets/avatar2.jpg",
       "username": "RosieHopkins9325"
     },
@@ -791,7 +1228,16 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [59, 19, 6, 3, 87, 22, 92, 66],
+      "friends": [
+        59,
+        19,
+        6,
+        3,
+        87,
+        22,
+        92,
+        66
+      ],
       "avatar": "../src/assets/avatar4.jpg",
       "username": "BenderMartin3549"
     },
@@ -802,7 +1248,12 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [87, 16, 71, 100],
+      "friends": [
+        87,
+        16,
+        71,
+        100
+      ],
       "avatar": "../src/assets/avatar6.jpg",
       "username": "KaitlinRodriquez1881"
     },
@@ -813,7 +1264,15 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [83, 79, 93, 79, 77, 38, 71],
+      "friends": [
+        83,
+        79,
+        93,
+        79,
+        77,
+        38,
+        71
+      ],
       "avatar": "../src/assets/avatar3.jpg",
       "username": "MargeryPhelps1065"
     },
@@ -824,7 +1283,12 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [93, 71, 79, 78],
+      "friends": [
+        93,
+        71,
+        79,
+        78
+      ],
       "avatar": "../src/assets/avatar3.jpg",
       "username": "TerriSweet3331"
     },
@@ -835,7 +1299,14 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [88, 43, 60, 48, 19, 91],
+      "friends": [
+        88,
+        43,
+        60,
+        48,
+        19,
+        91
+      ],
       "avatar": "../src/assets/avatar4.jpg",
       "username": "MelindaPope7345"
     },
@@ -846,7 +1317,12 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [65, 51, 96, 56],
+      "friends": [
+        65,
+        51,
+        96,
+        56
+      ],
       "avatar": "../src/assets/avatar4.jpg",
       "username": "KirstenBenson7900"
     },
@@ -857,7 +1333,17 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [42, 17, 37, 28, 44, 68, 84, 50, 1],
+      "friends": [
+        42,
+        17,
+        37,
+        28,
+        44,
+        68,
+        84,
+        50,
+        1
+      ],
       "avatar": "../src/assets/avatar2.jpg",
       "username": "SavannahDodson1374"
     },
@@ -868,7 +1354,14 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [73, 26, 32, 29, 44, 39],
+      "friends": [
+        73,
+        26,
+        32,
+        29,
+        44,
+        39
+      ],
       "avatar": "../src/assets/avatar2.jpg",
       "username": "ValentineFrancis4763"
     },
@@ -879,7 +1372,11 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [11, 35, 10],
+      "friends": [
+        11,
+        35,
+        10
+      ],
       "avatar": "../src/assets/avatar4.jpg",
       "username": "KimberleyRamsey7774"
     },
@@ -890,7 +1387,13 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [34, 2, 23, 54, 51],
+      "friends": [
+        34,
+        2,
+        23,
+        54,
+        51
+      ],
       "avatar": "../src/assets/avatar6.jpg",
       "username": "MaxineSalas4998"
     },
@@ -901,7 +1404,17 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [97, 68, 81, 70, 21, 41, 33, 62, 16],
+      "friends": [
+        97,
+        68,
+        81,
+        70,
+        21,
+        41,
+        33,
+        62,
+        16
+      ],
       "avatar": "../src/assets/avatar1.jpg",
       "username": "PetraJuarez2688"
     },
@@ -912,7 +1425,11 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [58, 19, 80],
+      "friends": [
+        58,
+        19,
+        80
+      ],
       "avatar": "../src/assets/avatar2.jpg",
       "username": "EvansFranklin7387"
     },
@@ -923,7 +1440,15 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [34, 61, 9, 49, 52, 90, 55],
+      "friends": [
+        34,
+        61,
+        9,
+        49,
+        52,
+        90,
+        55
+      ],
       "avatar": "../src/assets/avatar6.jpg",
       "username": "MaloneBolton8197"
     },
@@ -934,7 +1459,12 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [56, 3, 58, 24],
+      "friends": [
+        56,
+        3,
+        58,
+        24
+      ],
       "avatar": "../src/assets/avatar2.jpg",
       "username": "TannerStrong1691"
     },
@@ -945,7 +1475,9 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [83],
+      "friends": [
+        83
+      ],
       "avatar": "../src/assets/avatar5.jpg",
       "username": "RussoKirby2900"
     },
@@ -956,7 +1488,12 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [20, 55, 94, 82],
+      "friends": [
+        20,
+        55,
+        94,
+        82
+      ],
       "avatar": "../src/assets/avatar2.jpg",
       "username": "EmilyJennings6049"
     },
@@ -967,7 +1504,11 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [30, 92, 87],
+      "friends": [
+        30,
+        92,
+        87
+      ],
       "avatar": "../src/assets/avatar2.jpg",
       "username": "HessSpencer3548"
     },
@@ -978,7 +1519,11 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [95, 55, 8],
+      "friends": [
+        95,
+        55,
+        8
+      ],
       "avatar": "../src/assets/avatar1.jpg",
       "username": "BlakeDyer6487"
     },
@@ -989,7 +1534,15 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [32, 74, 8, 6, 71, 43, 24],
+      "friends": [
+        32,
+        74,
+        8,
+        6,
+        71,
+        43,
+        24
+      ],
       "avatar": "../src/assets/avatar6.jpg",
       "username": "GarnerGuthrie2868"
     },
@@ -1000,7 +1553,10 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [69, 12],
+      "friends": [
+        69,
+        12
+      ],
       "avatar": "../src/assets/avatar2.jpg",
       "username": "McmahonMclean2223"
     },
@@ -1011,7 +1567,17 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [34, 37, 75, 3, 61, 70, 60, 4, 47],
+      "friends": [
+        34,
+        37,
+        75,
+        3,
+        61,
+        70,
+        60,
+        4,
+        47
+      ],
       "avatar": "../src/assets/avatar1.jpg",
       "username": "QuinnSawyer4627"
     },
@@ -1022,7 +1588,10 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [74, 12],
+      "friends": [
+        74,
+        12
+      ],
       "avatar": "../src/assets/avatar6.jpg",
       "username": "MartaFlowers3251"
     },
@@ -1033,7 +1602,15 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [48, 45, 20, 44, 99, 78, 35],
+      "friends": [
+        48,
+        45,
+        20,
+        44,
+        99,
+        78,
+        35
+      ],
       "avatar": "../src/assets/avatar5.jpg",
       "username": "LorrieFoley5450"
     },
@@ -1044,7 +1621,16 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [3, 89, 72, 88, 71, 62, 43, 11],
+      "friends": [
+        3,
+        89,
+        72,
+        88,
+        71,
+        62,
+        43,
+        11
+      ],
       "avatar": "../src/assets/avatar2.jpg",
       "username": "EdwardsPruitt2147"
     },
@@ -1055,7 +1641,9 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [23],
+      "friends": [
+        23
+      ],
       "avatar": "../src/assets/avatar4.jpg",
       "username": "ChandlerMorton8816"
     },
@@ -1066,7 +1654,10 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [19, 95],
+      "friends": [
+        19,
+        95
+      ],
       "avatar": "../src/assets/avatar4.jpg",
       "username": "LeliaMcknight7182"
     },
@@ -1077,7 +1668,13 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [70, 34, 54, 33, 52],
+      "friends": [
+        70,
+        34,
+        54,
+        33,
+        52
+      ],
       "avatar": "../src/assets/avatar4.jpg",
       "username": "BranchParrish6820"
     },
@@ -1088,7 +1685,12 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [64, 93, 55, 7],
+      "friends": [
+        64,
+        93,
+        55,
+        7
+      ],
       "avatar": "../src/assets/avatar6.jpg",
       "username": "HancockNichols1605"
     },
@@ -1099,7 +1701,10 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [51, 98],
+      "friends": [
+        51,
+        98
+      ],
       "avatar": "../src/assets/avatar5.jpg",
       "username": "BetteBritt7833"
     },
@@ -1110,7 +1715,16 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [55, 17, 76, 22, 66, 97, 52, 92],
+      "friends": [
+        55,
+        17,
+        76,
+        22,
+        66,
+        97,
+        52,
+        92
+      ],
       "avatar": "../src/assets/avatar2.jpg",
       "username": "KatharineMcmillan6519"
     },
@@ -1121,7 +1735,11 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [75, 72, 28],
+      "friends": [
+        75,
+        72,
+        28
+      ],
       "avatar": "../src/assets/avatar4.jpg",
       "username": "FryeThompson1796"
     },
@@ -1132,7 +1750,11 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [19, 30, 72],
+      "friends": [
+        19,
+        30,
+        72
+      ],
       "avatar": "../src/assets/avatar4.jpg",
       "username": "CardenasOsborne4080"
     },
@@ -1143,7 +1765,16 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [88, 85, 28, 45, 28, 27, 53, 85],
+      "friends": [
+        88,
+        85,
+        28,
+        45,
+        28,
+        27,
+        53,
+        85
+      ],
       "avatar": "../src/assets/avatar3.jpg",
       "username": "HilaryLloyd3227"
     },
@@ -1154,7 +1785,11 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [73, 83, 57],
+      "friends": [
+        73,
+        83,
+        57
+      ],
       "avatar": "../src/assets/avatar4.jpg",
       "username": "LeonorHead8080"
     },
@@ -1165,7 +1800,16 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [72, 55, 45, 25, 33, 82, 67, 67],
+      "friends": [
+        72,
+        55,
+        45,
+        25,
+        33,
+        82,
+        67,
+        67
+      ],
       "avatar": "../src/assets/avatar3.jpg",
       "username": "ParkerAyala5110"
     },
@@ -1176,7 +1820,16 @@
       "favoriteTracks": [],
       "favoriteAlbums": [],
       "favoriteArtists": [],
-      "friends": [30, 100, 97, 88, 54, 42, 25, 53],
+      "friends": [
+        30,
+        100,
+        97,
+        88,
+        54,
+        42,
+        25,
+        53
+      ],
       "avatar": "../src/assets/avatar4.jpg",
       "username": "GoffPacheco6400"
     }

@@ -109,7 +109,7 @@ function Profile() {
   // useEffect(() => setArtistList(artistDetails.artists), [artistList]);
   useEffect(() => {
     let friendsDetails = profiles.filter(profile =>
-      profile.friends.includes(userProfile.id),
+      userProfile.friends.includes(profile.id),
     );
     console.log(friendsDetails);
     setFriends(friendsDetails);
