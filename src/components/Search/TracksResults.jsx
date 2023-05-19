@@ -8,6 +8,7 @@ import {getCurrentProfile} from "../Rover";
 function TracksResults({track, skipArtist}) {
   const {state, dispatch} = useContext(ProfileContext);
 
+  //refers to the user that is logged in. userProfile becomes representative of whichever profile is logged in.
   let userProfile = state.profiles.filter(
     profile => profile.id === parseInt(localStorage.getItem("currentUser")),
   )[0];
@@ -16,7 +17,9 @@ function TracksResults({track, skipArtist}) {
     userProfile.favoriteTracks.includes(track.id),
   );
 
+  //these are the items that we are going to display on the page when the search comes back. For Artists we will do Artist name with small image and for Album we will do album name, artist name, and album image
   let {artists, id, name, duration_ms} = track;
+  //below is formating time from milliseconds to hours, minutes, seconds
   const seconds = Math.floor((duration_ms / 1000) % 60);
   const minutes = Math.floor((duration_ms / 1000 / 60) % 60);
   const formattedTime = [
@@ -29,10 +32,7 @@ function TracksResults({track, skipArtist}) {
     // let favoriteToUpdate;
 
     let updatedFavorite;
-    let userProfile = state.profiles.filter(
-      profile => profile.id === parseInt(localStorage.getItem("currentUser")),
-    )[0];
-    console.log(userProfile);
+    //determines if it is already a favorite or not
     if (userProfile.favoriteTracks.includes(id)) {
       console.log("already in array");
       updatedFavorite = [...userProfile.favoriteTracks].filter(
@@ -63,7 +63,7 @@ function TracksResults({track, skipArtist}) {
   return (
     <React.Fragment>
       <div className="flex w-full">
-        <div className="mr-8">
+        <div className="ml-8">
           {isTrackFavorite ? (
             <StarIcon onClick={handleFavoriteButtonClick} />
           ) : (
@@ -86,7 +86,7 @@ function TracksResults({track, skipArtist}) {
                   {artists[0].name}
                 </Link>
               </span>
-              {/* <span className="justify-end">{formattedTime}</span> */}
+              <span className="justify-end">{formattedTime}</span>
             </>
           )}
         </div>
